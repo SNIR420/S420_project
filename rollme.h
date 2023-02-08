@@ -34,5 +34,8 @@ za = A0 sin(ωt + φ - k(Y - L/2 cosθ))
 class CRollme {
 
     public:
+        void setRoulis() ;
+        void setTangage() ;
+        void setVitesseAzimut() ;
         
 } ;
