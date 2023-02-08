@@ -18,7 +18,13 @@ OD = (X + e/2 cosθ ; Y - e/2 sinθ)
 ze = A0 sin(ωt + φ - k(Y + e/2 sinθ))
 zd = A0 sin(ωt + φ - k(Y - e/2 sinθ))
 
-θ = arcsin((ze - zd)/2)
+α = arcsin((ze - zd)/e)  //roulis
+
+zc = A0 sin(ωt + φ - k(Y + L/2 cosθ))
+za = A0 sin(ωt + φ - k(Y - L/2 cosθ))
+
+β = arcsin((zc - za)/L)  //tangage
+
 
 */
 
