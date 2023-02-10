@@ -5,7 +5,7 @@ using namespace std ;
 //double t = 2.0 ;
 
 CRollme::CRollme(){
-    set_t(time(0)) ;
+    //set_t(time(0)) ;
     setRoulis() ;
     setTangage() ;
     setVitesseAzimut() ;
@@ -16,7 +16,6 @@ void CRollme::setRoulis(){
     double ze = A0 * sin(omega * get_t() + phi - k * (Y + envergure/2 ) * sin(theta)) ;
     double zd = A0 * sin(omega * get_t() + phi - k * (Y - envergure/2 ) * sin(theta)) ;
     m_roulis = asin((ze - zd)/envergure) ;
-    //cout << "temps ini : " << getTruc1() << endl ;
 }
 
 void CRollme::setTangage(){
@@ -24,7 +23,6 @@ void CRollme::setTangage(){
     double zc = A0 * sin(omega * get_t() + phi - k * (Y + Longueur/2) * cos(theta)) ;
     double za = A0 * sin(omega * get_t() + phi - k * (Y - Longueur/2) * cos(theta)) ;
     m_tangage = asin((zc - za)/Longueur) ;
-    //cout << "temps actu : " << getTruc2() << endl ;
 }
 
 void CRollme::setVitesseAzimut(){
