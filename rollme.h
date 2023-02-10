@@ -27,15 +27,49 @@ za = A0 sin(ωt + φ - k(Y - L/2 cosθ))
 
 
 */
+#include <cmath>
+#include <ctime>
 
-#define envergure e
-#define Longueur L
+#define envergure 2.0 //donnée fixe
+#define Longueur 4.0  //donnée fixe
+#define phi 0.0       //vaut 0
+#define omega 0.628  //fréquence de la vague * 2pi (liée à la distance entre deux vagues)
+#define X 0.0       //distance du bateau par rapport au centre du repère sur l'axe X
+                    //obtenu par calcul (varie en fonction du temps)
+#define Y 0.0       //distance du bateau par rapport au centre du repère sur l'axe Y
+                    //obtenu par calcul (varie en fonction du temps)
+#define A0 0.5      //hauteur de la vague (à fournir, peut varier)
+#define k 0.4       //vitesse de la vague (à fournir ?, peut varier ?)
+#define theta 0.000785  //angle du bateau par rapport au sens de la vague
+
+//#define t 2.0
 
 class CRollme {
+    double m_roulis ; // alpha α
+    double m_tangage ; // beta β
+    double m_vitesseAzimut ;
+
+    time_t m_t_ini = time(0) ;
+    time_t m_t_actu ; 
 
     public:
+        CRollme() ;
+
+        void updateTime() {}
+
         void setRoulis() ;
         void setTangage() ;
         void setVitesseAzimut() ;
+
+        double getRoulis() ;
+        double getTangage() ;
+        double getVitesseAzimut() ;
+
+        time_t get_t() { return m_t_actu - m_t_ini ; }
+        void set_t(time_t t) { m_t_actu = t ; }
+
+        /*time_t getTruc1() { return m_t_ini ; }
+        time_t getTruc2() { return m_t_actu ; }*/
+
         
 } ;
