@@ -34,7 +34,7 @@ void IHM::sendValues()
     if (!modbusDevice)
         return;
 
-    QModbusDataUnit writeUnit(QModbusDataUnit::HoldingRegisters, 16, 1);
+    QModbusDataUnit writeUnit(QModbusDataUnit::HoldingRegisters, 16, 2);
     writeUnit.setValue(0, value);
 
     auto *reply = modbusDevice->sendWriteRequest(writeUnit, 1);
@@ -62,7 +62,6 @@ void IHM::sendValues()
 
 void IHM::readValues()
 {
-    const auto startAddress = 15;
 
     if (!modbusDevice)
         return;
@@ -74,7 +73,7 @@ void IHM::readValues()
                 if (reply->error() == QModbusDevice::NoError) {
                     const auto registers = reply->result().values();
                     if (registers.size() == 1) {
-                        const auto value = registers[0];
+                        const int value = static_cast<short>(registers[0]);
                         ui->lcdNumber->display(value);
                     }
                 } else if (reply->error() == QModbusDevice::ProtocolError) {
