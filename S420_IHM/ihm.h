@@ -3,8 +3,7 @@
 
 #include <QWidget>
 #include <QtWidgets>
-#include <QModbusClient>
-#include <QModbusDevice>
+#include <QtMath>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class IHM; }
@@ -13,15 +12,13 @@ QT_END_NAMESPACE
 class IHM : public QWidget
 {
     Q_OBJECT
-
 public:
     IHM(QWidget *parent = nullptr);
     ~IHM();
 private slots:
-    void sendValues();
-    void readValues();
+    void setAngleVent(double angleDeg);
 private:
     Ui::IHM *ui;
-    QModbusClient *modbusDevice;
+    QGraphicsScene *scene;
 };
 #endif // IHM_H
