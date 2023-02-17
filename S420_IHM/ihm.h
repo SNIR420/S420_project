@@ -17,6 +17,7 @@ public:
     ~IHM();
 private slots:
     void setAngleVent(double angleDeg);
+    void setAngleBateau(double angleDeg);
 private:
     Ui::IHM *ui;
     QGraphicsScene *scene;

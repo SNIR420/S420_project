@@ -24,6 +24,9 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     QGraphicsPixmapItem *centerImageItem = new QGraphicsPixmapItem(centerImage);
     centerImageItem->setPos((ui->graphicsView->width() - centerImage.width()) / 2, (ui->graphicsView->height() - centerImage.height()) / 2);
     centerImageItem->setTransformOriginPoint(centerImage.width() / 2, centerImage.height() / 2); // Définir l'origine au centre de l'image
+    centerImageItem->setData(Qt::UserRole, "centerImage");
+
+
     scene->addItem(centerImageItem);
     ui->graphicsView->setScene(scene);
     ui->graphicsView->setFixedSize(scene->width(), scene->height());
@@ -31,6 +34,7 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     connect(ui->pushButton, &QPushButton::clicked, this, [=](){
         setAngleVent(ui->doubleSpinBox->value());
     });
+
 }
 
 
@@ -43,12 +47,12 @@ void IHM::setAngleVent(double angleDeg){
     QList<QGraphicsItem*> items = scene->items();
     for (QGraphicsItem *item : items) {
         if (item->type() == QGraphicsPixmapItem::Type && item->data(Qt::UserRole) == "topLeftImage") {
-            // If the item exists, remove it from the scene
             topLeftImageItem = qgraphicsitem_cast<QGraphicsPixmapItem*>(item);
             scene->removeItem(topLeftImageItem);
             break;
         }
     }
+
     //crée le nouvel item graphique associé à l'image
     topLeftImageItem = new QGraphicsPixmapItem(topLeftImage);
 
@@ -79,6 +83,25 @@ void IHM::setAngleVent(double angleDeg){
 
     //Réactualiser la scène pour éviter les bug visuels
     scene->update();
+}
+
+void IHM::setAngleBateau(double angleDeg){
+    QPixmap centerImage("C:/Users/ligni/Desktop/S420_project/S420_IHM/images/boat.png");
+    QGraphicsPixmapItem *centerImageItem = nullptr;
+    QList<QGraphicsItem*> items = scene->items();
+    for (QGraphicsItem *item : items) {
+        if (item->type() == QGraphicsPixmapItem::Type && item->data(Qt::UserRole) == "centerImage") {
+            centerImageItem = qgraphicsitem_cast<QGraphicsPixmapItem*>(item);
+            scene->removeItem(centerImageItem);
+            break;
+        }
+    }
+    centerImageItem = new QGraphicsPixmapItem(centerImage);
+    centerImageItem->setPos((ui->graphicsView->width() - centerImage.width()) / 2, (ui->graphicsView->height() - centerImage.height()) / 2);
+    centerImageItem->setTransformOriginPoint(centerImage.width() / 2, centerImage.height() / 2); // Définir l'origine au centre de l'image
+    centerImageItem->setData(Qt::UserRole, "centerImage");
+    centerImageItem->setRotation(angleDeg);
+    scene->addItem(centerImageItem);
 }
 
 IHM::~IHM()
