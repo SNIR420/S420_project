@@ -5,10 +5,16 @@
 #include <cmath>
 #include <QTimer>
 #include <QTime>
+
 #define PI 3.14159256
 #define envergure 2.0
 #define Longueur 4.0
 #define Y 1.0
+
+#define vagueAmplitude 0.5
+#define vaguePeriode 10.0
+#define angleAzimut 0.785
+#define interVague 4.0
 
 #include <QMainWindow>
 
@@ -16,19 +22,19 @@ class simulateur : public QMainWindow, private Ui::simulateur{
     Q_OBJECT
 
 private:
-    double angleVentJeu ; // System Wind Angle
-    double tws ;
-    int beaufort ;  // de 0 à 12
+    double m_angleVentJeu ; // System Wind Angle
+    double m_tws ;
+    int m_beaufort ;  // de 0 à 12
 
-    double roulis ;
-    double tangage ;
-    double vitesseAzimut ; // vitesse de rotation sur le lacet
+    double m_roulis ;
+    double m_tangage ;
+    double m_vitesseAzimut ; // vitesse de rotation sur le lacet
 
-    QTime t0, t1 ;
+    QTime m_t0, m_t1 ;
 
-    /*double vaguePeriode ;
-    double vagueVitesse ;
-    double angleAzimut ;*/
+    /*double m_vaguePeriode ;
+    double m_vagueVitesse ;
+    double m_angleAzimut ;*/
 
 public:
     explicit simulateur(QWidget *parent = nullptr);
