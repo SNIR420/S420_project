@@ -13,6 +13,7 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     backgroundItem->setRect(ui->graphicsView->rect());
     backgroundItem->setBrush(brush);
 
+
     scene = new QGraphicsScene(ui->graphicsView->rect(), this);
     scene->addItem(backgroundItem);
 
@@ -25,17 +26,29 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     scene->addItem(centerImageItem);
 
     QLineSeries *series = new QLineSeries();
-    for (float x = 3.0; x <= 4.0 * M_PI; x += 0.1) {
-        float y = 0*sin(x);
+    float x;
+    for (x = 4.7; x <= 10.9; x += 0.1) {
+        float y = 0 * sin(x);
         series->append(x, y);
     }
 
     QChart *chart = new QChart();
     chart->legend()->hide();
     chart->addSeries(series);
+    chart->createDefaultAxes();
+
+    QValueAxis *axisY = qobject_cast<QValueAxis*>(chart->axisY());
+    if (axisY) {
+        axisY->setRange(-1*0, 20);
+    }
 
     QChartView *chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
+
+    ui->verticalLayout->addWidget(chartView);
+    chartView->resize(ui->verticalLayout->sizeHint());
+    chart->axisX()->hide();
+    chart->axisY()->hide();
 
     ui->verticalLayout->addWidget(chartView);
     chartView->resize(ui->verticalLayout->sizeHint());
