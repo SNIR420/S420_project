@@ -1,7 +1,7 @@
 #include "simulateur.h"
 #include <QDebug>
 
-Simulateur::Simulateur(Modbus_SRV* modbusserver, QObject *parent) : QObject(parent), m_modbusServer(modbusserver) // Initialisation de m_modbusserver dans la liste d'initialisation du constructeur
+Simulateur::Simulateur(QString pol_location, Modbus_SRV* modbusserver, QObject *parent) : QObject(parent), m_modbusServer(modbusserver), m_polaire(pol_location) // Initialisation de m_modbusserver dans la liste d'initialisation du constructeur
 {
     //création de l'object de type polaire
     //connection modbus
@@ -10,6 +10,7 @@ Simulateur::Simulateur(Modbus_SRV* modbusserver, QObject *parent) : QObject(pare
     connect(timer, &QTimer::timeout, this, &Simulateur::calcul) ;    //connect le timeout() du timer à une fonction qui calcule roulis, tangage et vitesse azimut
     timer->start(100) ;
     m_t0 = m_t0.currentTime() ;
+    polaire = new Polaire(pol_location);
 }
 
 void Simulateur::setRoulis(){
