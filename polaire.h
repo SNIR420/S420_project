@@ -4,7 +4,7 @@
 
 #include <QObject>
 
-class Polaire : public QObject
+class Polaire : public QObject 
 {
 private:
     Polaire(){}
