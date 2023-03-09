@@ -8,6 +8,7 @@
 #include <QTimer>
 #include <QTime>
 #include "modbus_srv.h"
+#include "polaire.h"
 
 #define PI 3.14159256
 #define envergure 2.0
@@ -36,9 +37,11 @@ private:
 
     Modbus_SRV* m_modbusServer;  // Pointeur vers la classe Modbus_SRV
     Simulateur* simulateur;
+    Polaire* polaire;
+    QString m_polaire;
 
 public:
-    explicit Simulateur(Modbus_SRV* modbusserver, QObject *parent = nullptr); // Ajout d'un paramètre de type pointeur vers Modbus_SRV
+    explicit Simulateur(QString pol_location, Modbus_SRV* modbusserver, QObject *parent = nullptr); // Ajout d'un paramètre de type pointeur vers Modbus_SRV
     ~Simulateur();
 
     double getTwa();
