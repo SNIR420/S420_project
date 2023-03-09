@@ -6,7 +6,7 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     ui->setupUi(this);
 
     //Image de fond
-    QPixmap pixmap("C:/Users/ligni/Desktop/S420_project/images/background.png");
+    QPixmap pixmap("background.png");
     QBrush brush(pixmap);
 
     QGraphicsRectItem *backgroundItem = new QGraphicsRectItem(ui->graphicsView->rect());
@@ -18,7 +18,7 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     scene->addItem(backgroundItem);
 
     //Image Bateau
-    QPixmap centerImage("C:/Users/ligni/Desktop/S420_project/images/boat.png");
+    QPixmap centerImage("boat.png");
     QGraphicsPixmapItem *centerImageItem = new QGraphicsPixmapItem(centerImage);
     centerImageItem->setPos((ui->graphicsView->width() - centerImage.width()) / 2, (ui->graphicsView->height() - centerImage.height()) / 2);
     centerImageItem->setTransformOriginPoint(centerImage.width() / 2, centerImage.height() / 2); // Définir l'origine au centre de l'image
@@ -65,13 +65,13 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     });
 
     m_modbusserver = new Modbus_SRV(this);
-    m_simulateur = new Simulateur(m_modbusserver, this);
+    m_simulateur = new Simulateur("C:/Users/ligni/Desktop/S420_PROJET/S420_project/Class40.pol", m_modbusserver, this);
 }
 
 
 void IHM::setAngleVent(double angleDeg){
     //crée un qpixmap à partir de l'emplacement de l'image à utiliser
-    QPixmap topLeftImage("C:/Users/ligni/Desktop/S420_project/images/wind.png");
+    QPixmap topLeftImage("C:/Users/ligni/Desktop/S420_PROJET/S420_project/images/wind.png");
     QGraphicsPixmapItem *topLeftImageItem = nullptr;
 
     // Vérifie que l'image n'est pas déjà présente sur la scène et la supprime si c'est le cas
@@ -119,7 +119,7 @@ void IHM::setAngleVent(double angleDeg){
 }
 
 void IHM::setAngleBateau(double angleDeg){
-    QPixmap centerImage("C:/Users/ligni/Desktop/S420_project/images/boat.png");
+    QPixmap centerImage("C:/Users/ligni/Desktop/S420_PROJET/S420_project/images/boat.png");
     QGraphicsPixmapItem *centerImageItem = nullptr;
     QList<QGraphicsItem*> items = scene->items();
     for (QGraphicsItem *item : items) {
