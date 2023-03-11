@@ -31,5 +31,6 @@ private:
     QGraphicsScene *scene;
     Simulateur *m_simulateur;
     Modbus_SRV *m_modbusserver;
+    QGraphicsPixmapItem *centerImageItem;
 };
 #endif // IHM_H

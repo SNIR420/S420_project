@@ -6,21 +6,17 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     ui->setupUi(this);
 
     //Image de fond
-    QPixmap pixmap("background.png");
+    QPixmap pixmap("C:/Users/ligni/Desktop/S420_PROJET/S420_project/images/background.png");
     QBrush brush(pixmap);
 
-    QGraphicsRectItem *backgroundItem = new QGraphicsRectItem(ui->graphicsView->rect());
-    backgroundItem->setRect(ui->graphicsView->rect());
-    backgroundItem->setBrush(brush);
+    ui->graphicsViewYaw->setBackgroundBrush(pixmap);
 
-
-    scene = new QGraphicsScene(ui->graphicsView->rect(), this);
-    scene->addItem(backgroundItem);
+    scene = new QGraphicsScene(ui->graphicsViewYaw->rect(), this);
 
     //Image Bateau
-    QPixmap centerImage("boat.png");
-    QGraphicsPixmapItem *centerImageItem = new QGraphicsPixmapItem(centerImage);
-    centerImageItem->setPos((ui->graphicsView->width() - centerImage.width()) / 2, (ui->graphicsView->height() - centerImage.height()) / 2);
+    QPixmap centerImage("C:/Users/ligni/Desktop/S420_PROJET/S420_project/images/boat.png");
+    centerImageItem = new QGraphicsPixmapItem(centerImage);
+    centerImageItem->setPos((ui->graphicsViewYaw->width() - centerImage.width()) / 2, (ui->graphicsViewYaw->height() - centerImage.height()) / 2);
     centerImageItem->setTransformOriginPoint(centerImage.width() / 2, centerImage.height() / 2); // Définir l'origine au centre de l'image
     centerImageItem->setData(Qt::UserRole, "centerImage");
     scene->addItem(centerImageItem);
@@ -39,27 +35,24 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
 
     QValueAxis *axisY = qobject_cast<QValueAxis*>(chart->axisY());
     if (axisY) {
-        axisY->setRange(-1*0, 20);
+        axisY->setRange(0, 20);
     }
 
     QChartView *chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
 
-    ui->verticalLayout->addWidget(chartView);
-    chartView->resize(ui->verticalLayout->sizeHint());
+    ui->chartLayout->addWidget(chartView);
+    chartView->resize(ui->chartLayout->sizeHint());
+    chartView->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     chart->axisX()->hide();
     chart->axisY()->hide();
 
-    ui->verticalLayout->addWidget(chartView);
-    chartView->resize(ui->verticalLayout->sizeHint());
+    ui->graphicsViewYaw->setScene(scene);
 
-    ui->graphicsView->setScene(scene);
-    ui->graphicsView->setFixedSize(scene->width(), scene->height());
-
-    connect(ui->pushButton, &QPushButton::clicked, this, [=](){
-        setAngleVent(ui->doubleSpinBox->value());
-        setTws(ui->spinBox->value());
-        setHauteurVague(ui->doubleSpinBox_2->value());
+    connect(ui->pbuEnvoyer, &QPushButton::clicked, this, [=](){
+        setAngleVent(ui->angleSpinBox->value());
+        setTws(ui->forceSpinBox->value());
+        setHauteurVague(ui->hauteurSpinBox->value());
         qDebug() << m_modbusserver->getRoulis();
         qDebug() << m_modbusserver->getTangage();
     });
@@ -87,15 +80,14 @@ void IHM::setAngleVent(double angleDeg){
     //crée le nouvel item graphique associé à l'image
     topLeftImageItem = new QGraphicsPixmapItem(topLeftImage);
 
-    // Définir le rayon et l'angle de rotation
-    double radius = 200.0;
+    //qDebug() << "Radius X" << ui->graphicsViewYaw->width()/3;
+    //qDebug() << "Radius Y" << ui->graphicsViewYaw->height()/3;
     double angleRad = qDegreesToRadians(angleDeg);
 
     // Calcule les coordonées selon le cos/sin de l'angle en radian
-    double x, y = 250;
 
-    x = 250 - (radius * qCos(angleRad));
-    y = 250 - (radius * qSin(angleRad));
+    double x = (centerImageItem->x()-45) - (ui->graphicsViewYaw->width()/3 * qCos(angleRad));
+    double y = centerImageItem->y() - (ui->graphicsViewYaw->height()/3 * qSin(angleRad));
 
     // Définir la position de l'image et la faire pivoter autour de l'origine de backgroundItem
     topLeftImageItem->setPos(x+24, y+24);
@@ -130,7 +122,7 @@ void IHM::setAngleBateau(double angleDeg){
         }
     }
     centerImageItem = new QGraphicsPixmapItem(centerImage);
-    centerImageItem->setPos((ui->graphicsView->width() - centerImage.width()) / 2, (ui->graphicsView->height() - centerImage.height()) / 2);
+    centerImageItem->setPos((ui->graphicsViewYaw->width() - centerImage.width()) / 2, (ui->graphicsViewYaw->height() - centerImage.height()) / 2);
     centerImageItem->setTransformOriginPoint(centerImage.width() / 2, centerImage.height() / 2); // Définir l'origine au centre de l'image
     centerImageItem->setData(Qt::UserRole, "centerImage");
     centerImageItem->setRotation(angleDeg);
@@ -144,10 +136,10 @@ void IHM::setTws(int tws){
 
 void IHM::setHauteurVague(float hauteur){
     // Obtenir l'objet contenu à la position i
-    auto item = ui->verticalLayout->itemAt(0);
+    auto item = ui->chartLayout->itemAt(0);
     // Vérifier si l'objet est un graphique
     if (auto plot = qobject_cast<QChartView *>(item->widget())) {
-        ui->verticalLayout->removeItem(item);
+        ui->chartLayout->removeItem(item);
         delete plot;
     }
     QLineSeries *series = new QLineSeries();
@@ -170,8 +162,9 @@ void IHM::setHauteurVague(float hauteur){
     QChartView *chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
 
-    ui->verticalLayout->addWidget(chartView);
-    chartView->resize(ui->verticalLayout->sizeHint());
+    ui->chartLayout->addWidget(chartView);
+    chartView->resize(ui->chartLayout->sizeHint());
+    chartView->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     chart->axisX()->hide();
     chart->axisY()->hide();
 

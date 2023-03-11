@@ -9,8 +9,5 @@ int main(int argc, char *argv[])
     IHM w;
     w.show();
 
-    QRect availableScreenGeometry = QGuiApplication::primaryScreen()->availableGeometry();
-    w.setGeometry(0, 0, availableScreenGeometry.width(), availableScreenGeometry.height());
-
     return a.exec();
 }
