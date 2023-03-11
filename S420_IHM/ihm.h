@@ -21,5 +21,11 @@ private slots:
 private:
     Ui::IHM *ui;
     QGraphicsScene *scene;
+<<<<<<< Updated upstream:S420_IHM/ihm.h
+=======
+    Simulateur *m_simulateur;
+    Modbus_SRV *m_modbusserver;
+    QGraphicsPixmapItem *centerImageItem;
+>>>>>>> Stashed changes:ihm.h
 };
 #endif // IHM_H

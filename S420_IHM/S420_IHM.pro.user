@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
+<<<<<<< Updated upstream:S420_IHM/S420_IHM.pro.user
 <!-- Written by QtCreator 9.0.1, 2023-02-17T09:11:15. -->
+=======
+<!-- Written by QtCreator 9.0.1, 2023-03-10T17:17:21. -->
+>>>>>>> Stashed changes:S420_projet.pro.user
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -453,8 +457,14 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">0</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
+<<<<<<< Updated upstream:S420_IHM/S420_IHM.pro.user
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.AndroidRunConfiguration:C:/Users/ligni/Desktop/S420_project/S420_IHM/S420_IHM.pro</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/ligni/Desktop/S420_project/S420_IHM/S420_IHM.pro</value>
+=======
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">S420_projet</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.AndroidRunConfiguration:C:/Users/ligni/Desktop/S420_PROJET/S420_project/S420_projet.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/ligni/Desktop/S420_PROJET/S420_project/S420_projet.pro</value>
+>>>>>>> Stashed changes:S420_projet.pro.user
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
