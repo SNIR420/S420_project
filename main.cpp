@@ -1,20 +1,10 @@
 #include <QCoreApplication>
 #include <QLocale>
 #include <QTranslator>
-
+#include "polaire.h"
 int main(int argc, char *argv[])
 {
-    QCoreApplication a(argc, argv);
+    Polaire polaire_test("/home/projetbateau/Documents/GitHub/S420_project/Class40.pol");
+    qDebug() << polaire_test.getMaxSpeed(140, 4);
 
-    QTranslator translator;
-    const QStringList uiLanguages = QLocale::system().uiLanguages();
-    for (const QString &locale : uiLanguages) {
-        const QString baseName = "ProjetBateau_" + QLocale(locale).name();
-        if (translator.load(":/i18n/" + baseName)) {
-            a.installTranslator(&translator);
-            break;
-        }
-    }
-
-    return a.exec();
 }

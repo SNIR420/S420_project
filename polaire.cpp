@@ -39,4 +39,35 @@ Polaire::Polaire(QString polFilePath)
             qDebug() << "m_polaireData[" << i << "][" << j << "] = " << row[j];
         }
     }
+
+}
+double Polaire::getMaxSpeed(double twa, double tws) {
+    int x, y = 0;
+    int j, k = 0;
+
+    for(int i = 0; i < m_polaireData.size(); i++) {
+        if(m_polaireData[i][0] == twa) { // Trouver la ligne correspondant à l'angle d'attaque (twa)
+           x = i;
+        }
+        for(int j = 0; j < m_polaireData[j].size(); j++){
+            if(m_polaireData[0][j] == tws) { // Trouver la ligne correspondant à l'angle d'attaque (tws)
+               y = j;
+            }
+        }
+    }
+        /*else
+        {
+            for(j = 0; m_polaireData[j][0] < twa; j++);
+            qDebug() << "x1" << m_polaireData[j][0];
+            qDebug() << "x2" << m_polaireData[j-1][0];
+            x = 0;
+        }*/
+    /*else
+        {
+            for(k = 0; m_polaireData[0][k] < tws; k++);
+            qDebug() << "y1" << m_polaireData[0][k];
+            qDebug() << "y2" << m_polaireData[0][k-1];
+            y = 0;
+        }*/
+    return m_polaireData[x][y];
 }
