@@ -5,6 +5,6 @@
 int main(int argc, char *argv[])
 {
     Polaire polaire_test("/home/projetbateau/Documents/GitHub/S420_project/Class40.pol");
-    qDebug() << polaire_test.getMaxSpeed(140, 4);
+    qDebug() << polaire_test.getMaxSpeed(122, 17);
 
 }
