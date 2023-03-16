@@ -14,10 +14,7 @@
 
 #define vagueAmplitude 3.0 // mètres
 #define vaguePeriode 10.0  // secondes
-#define angleAzimut 0.785398163 // radians
-// 0    correspond à un roulis nul     et à un tangage maximum
-// pi/2 correspond à un roulis maximum et à un tangage nul (environ 1.57)
-// pi/4 (environ 0.785398163)
+//#define angleAzimut 0.785398163
 
 //#define interVague 30
 #define vagueVitesse 3 // mètres par secondes
@@ -50,8 +47,11 @@ private:
     double m_speed ;
 
     /*double m_vaguePeriode ;
-    double m_vagueVitesse ;
-    double m_angleAzimut ;*/
+    double m_vagueVitesse ;*/
+    double m_angleAzimut ; // radians
+    // 0    correspond à un roulis nul     et à un tangage maximum
+    // pi/2 correspond à un roulis maximum et à un tangage nul (environ 1.57)
+    // pi/4 (environ 0.785398163)
 
 public:
     explicit simulateur(QWidget *parent = nullptr, QString cheminPolaire = "Class404.pol");

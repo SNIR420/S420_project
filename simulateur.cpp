@@ -8,6 +8,7 @@ simulateur::simulateur(QWidget *parent, QString cheminPolaire /* adresse modbus 
     setupUi(this);
     m_x = 0 ;
     m_y = 0 ;
+    m_angleAzimut = 0.785398163 ;
     m_polaire = Polaire(cheminPolaire) ;
 
     cout << "Polaire Data Size (outside) : " << m_polaire.getPolaireData()[30][17] << endl ;
@@ -82,7 +83,7 @@ void simulateur::setSpeed(){ // utilise la classe polaire pour obtenir la vitess
 }
 
 double simulateur::getAngleAzimut(){
-    return angleAzimut ;
+    return m_angleAzimut ;
 }
 
 double simulateur::getInterVague(){
@@ -110,6 +111,7 @@ void simulateur::calcul(){
          << "vitesse   : " << m_speed << " nd" << endl ;
     cout << "delta thé : " << round(m_t0.msecsTo(m_t1)/100.0)/10.0 << "s  \t" << m_t0.msecsTo(m_t1) << "ms" << endl ;
     cout << "x = " << m_x << "  y = " << m_y << endl ;
+    cout << "angle azimut : " << m_angleAzimut*180/PI << "°" << endl ;
 }
 
 void simulateur::setWave(int force){
