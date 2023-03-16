@@ -2,11 +2,16 @@
 #include "iostream"
 using namespace std ;
 
-simulateur::simulateur(QWidget *parent /* fichier .pol ; adresse modbus */)
+simulateur::simulateur(QWidget *parent, QString cheminPolaire /* adresse modbus */)
     : QMainWindow(parent)
 {
     setupUi(this);
-    //création de l'object de type polaire
+    m_x = 0 ;
+    m_y = 0 ;
+    m_polaire = Polaire(cheminPolaire) ;
+
+    cout << "Polaire Data Size (outside) : " << m_polaire.getPolaireData()[30][17] << endl ;
+
     //connection modbus
 
     QTimer *timer = new QTimer(this) ;
@@ -23,10 +28,10 @@ void simulateur::setRoulis(){
     cout << "\tdeltaT : " << t0.secsTo(t1) << endl ;*/
 
     double ze = getVagueAmplitude() * sin(2.0*PI/getVaguePeriode() * (m_t0.msecsTo(m_t1)/1000.0)
-        - (2.0*PI / getInterVague()) * (Y + envergure/2.0) * sin(getAngleAzimut())) ;
+        - (2.0*PI / getInterVague()) * (cos(getAngleAzimut()) * m_speed * 1852.0 / 3600.0 * m_t0.msecsTo(m_t1)/1000.0 + envergure/2.0 * sin(getAngleAzimut()))) ;
 
     double zd = getVagueAmplitude() * sin(2.0*PI/getVaguePeriode() * (m_t0.msecsTo(m_t1)/1000.0)
-        - (2.0*PI / getInterVague()) * (Y - envergure/2.0) * sin(getAngleAzimut())) ;
+        - (2.0*PI / getInterVague()) * (cos(getAngleAzimut()) * m_speed * 1852.0 / 3600.0 * m_t0.msecsTo(m_t1)/1000.0 - envergure/2.0 * sin(getAngleAzimut()))) ;
 
     if ((ze - zd)/envergure <= 1 && (ze - zd)/envergure >= -1)
     m_roulis = asin((ze - zd)/envergure) ;
@@ -37,10 +42,10 @@ void simulateur::setTangage(){
     m_t1 = m_t1.currentTime() ;
 
     double zc = getVagueAmplitude() * sin(2.0*PI/getVaguePeriode() * (m_t0.msecsTo(m_t1)/1000.0)
-        - (2.0*PI / getInterVague()) * (Y + Longueur/2.0) * cos(getAngleAzimut())) ;
+        - (2.0*PI / getInterVague()) * (cos(getAngleAzimut()) * m_speed * 1852.0 / 3600.0 * m_t0.msecsTo(m_t1)/1000.0 + Longueur/2.0 * cos(getAngleAzimut()))) ;
 
     double za = getVagueAmplitude() * sin(2.0*PI/getVaguePeriode() * (m_t0.msecsTo(m_t1)/1000.0)
-        - (2.0*PI / getInterVague()) * (Y - Longueur/2.0) * cos(getAngleAzimut())) ;
+        - (2.0*PI / getInterVague()) * (cos(getAngleAzimut()) * m_speed * 1852.0 / 3600.0 * m_t0.msecsTo(m_t1)/1000.0 - Longueur/2.0 * cos(getAngleAzimut()))) ;
 
     if ((zc - za)/Longueur <= 1 && (zc - za)/Longueur >= -1)
     m_tangage = asin((zc - za)/Longueur) ;
@@ -48,7 +53,7 @@ void simulateur::setTangage(){
 }
 
 void simulateur::setVitesseAzimut(){
-    m_vitesseAzimut = 0.0 ;
+
 }
 
 double simulateur::getVagueAmplitude(){
@@ -59,25 +64,52 @@ double simulateur::getVaguePeriode(){
     return vaguePeriode ;
 }
 
-/*double simulateur::getVagueVitesse(){
-    return 4.0 ;
-}*/
+double simulateur::getVagueVitesse(){
+    return vagueVitesse ;
+}
+
+void simulateur::setSpeed(){ // utilise la classe polaire pour obtenir la vitesse
+    int i = 0, j = 0 ;
+    while(m_polaire.getPolaireData()[0][i] <= getTws()){
+        i++ ;
+    }
+    while(m_polaire.getPolaireData()[j][0] <= getTwa()){
+        j++ ;
+    }
+    m_speed = m_polaire.getPolaireData()[j][i] ;
+    //m_speed = 0.0 ;
+    //m_speed = -m_speed ; // pour l'instant, à enlever plus tard
+}
 
 double simulateur::getAngleAzimut(){
     return angleAzimut ;
 }
 
 double simulateur::getInterVague(){
-    return interVague ;
+    return getVaguePeriode()*getVagueVitesse() ;
+}
+
+double simulateur::getTws(){
+    return TWS ;
+}
+
+double simulateur::getTwa(){
+    return TWA ;
 }
 
 void simulateur::calcul(){
+    m_x += sin(getAngleAzimut()) * m_speed * 1852 / 3600 * 0.1 ; // 1852 et 3600 pour conversion noeuds/mètres
+    m_y += cos(getAngleAzimut()) * m_speed * 1852 / 3600 * 0.1 ; // 0.1s soit l'intervalle du timer
     setRoulis();
     setTangage();
-    setVitesseAzimut();
-    cout << "roulis    : " << round(m_roulis*180.0/PI) << "°" << endl
-         << "tangage   : " << round(m_tangage*180.0/PI) << "°" << endl ;
-    cout << "delta thé : " << round(m_t0.msecsTo(m_t1)/100.0)/10.0 << "s\t" << m_t0.msecsTo(m_t1) << "ms" << endl ;
+    setVitesseAzimut(); // inutile pour l'instant
+    setSpeed();
+    cout << endl ;
+    cout << "roulis    : " << round(m_roulis*180.0/PI*10.0)/10.0 << "°" << endl
+         << "tangage   : " << round(m_tangage*180.0/PI*10.0)/10.0 << "°" << endl
+         << "vitesse   : " << m_speed << " nd" << endl ;
+    cout << "delta thé : " << round(m_t0.msecsTo(m_t1)/100.0)/10.0 << "s  \t" << m_t0.msecsTo(m_t1) << "ms" << endl ;
+    cout << "x = " << m_x << "  y = " << m_y << endl ;
 }
 
 void simulateur::setWave(int force){
