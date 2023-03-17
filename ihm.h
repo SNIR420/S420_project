@@ -10,6 +10,8 @@
 #include "simulateur.h"
 #include "modbus_srv.h"
 #include <QDebug>
+#include <QTimer>
+#include <QPropertyAnimation>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class IHM; }
@@ -25,12 +27,18 @@ private slots:
     void setAngleVent(double angleDeg);
     void setAngleBateau(double angleDeg);
     void setHauteurVague(float hauteur);
+    void setVitesseVague(double vitesse);
     void setTws(int tws);
+    void updateBoatRowPitch();
 private:
     Ui::IHM *ui;
     QGraphicsScene *scene;
+    QGraphicsScene *sceneRow;
+    QGraphicsScene *scenePitch;
     Simulateur *m_simulateur;
     Modbus_SRV *m_modbusserver;
     QGraphicsPixmapItem *centerImageItem;
+    QGraphicsPixmapItem *rowImageItem;
+    QGraphicsPixmapItem *pitchImageItem;
 };
 #endif // IHM_H

@@ -5,23 +5,46 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
 {
     ui->setupUi(this);
 
-    //Image de fond
+    //Init YAW
     QPixmap pixmap("C:/Users/ligni/Desktop/S420_PROJET/S420_project/images/background.png");
-    QBrush brush(pixmap);
-
     ui->graphicsViewYaw->setBackgroundBrush(pixmap);
-
     scene = new QGraphicsScene(ui->graphicsViewYaw->rect(), this);
+    QPixmap centerImage("C:/Users/ligni/Desktop/S420_PROJET/S420_project/images/Vue_top_boat.png");
 
-    //Image Bateau
-    QPixmap centerImage("C:/Users/ligni/Desktop/S420_PROJET/S420_project/images/boat.png");
     centerImageItem = new QGraphicsPixmapItem(centerImage);
     centerImageItem->setPos((ui->graphicsViewYaw->width() - centerImage.width()) / 2, (ui->graphicsViewYaw->height() - centerImage.height()) / 2);
     centerImageItem->setTransformOriginPoint(centerImage.width() / 2, centerImage.height() / 2); // Définir l'origine au centre de l'image
     centerImageItem->setData(Qt::UserRole, "centerImage");
     scene->addItem(centerImageItem);
+    ui->graphicsViewYaw->setScene(scene);
 
-    QLineSeries *series = new QLineSeries();
+    //Init ROW
+    QPixmap pixmap2("C:/Users/ligni/Desktop/S420_PROJET/S420_project/images/background.png");
+    ui->graphicsViewRow->setBackgroundBrush(pixmap2); // Utiliser setForegroundBrush() au lieu de setBackgroundBrush()
+    sceneRow = new QGraphicsScene(ui->graphicsViewRow->rect(), this);
+    QPixmap rowImage("C:/Users/ligni/Desktop/S420_PROJET/S420_project/images/Vue_cote_boat.png");
+
+    rowImageItem = new QGraphicsPixmapItem(rowImage);
+    rowImageItem->setPos((ui->graphicsViewRow->width() - rowImage.width()) / 2, (ui->graphicsViewRow->height() - rowImage.height()) / 2);
+    rowImageItem->setTransformOriginPoint(rowImage.width()/2, rowImage.height()-5); // Définir l'origine au centre de l'image
+    rowImageItem->setData(Qt::UserRole, "rowImage");
+    sceneRow->addItem(rowImageItem);
+    ui->graphicsViewRow->setScene(sceneRow);
+
+    //Init PITCH
+    QPixmap pixmap3("C:/Users/ligni/Desktop/S420_PROJET/S420_project/images/background.png");
+    ui->graphicsViewPitch->setBackgroundBrush(pixmap3);
+    scenePitch = new QGraphicsScene(ui->graphicsViewPitch->rect(), this);
+    QPixmap pitchImage("C:/Users/ligni/Desktop/S420_PROJET/S420_project/images/Vue_back_boat.png");
+
+    pitchImageItem = new QGraphicsPixmapItem(pitchImage);
+    pitchImageItem->setPos((ui->graphicsViewRow->width() - pitchImage.width()) / 2, (ui->graphicsViewPitch->height() - pitchImage.height()) / 2);
+    pitchImageItem->setTransformOriginPoint(pitchImage.width()/2, pitchImage.height()-20); // Définir l'origine au centre de l'image
+    pitchImageItem->setData(Qt::UserRole, "pitchImage");
+    scenePitch->addItem(pitchImageItem);
+    ui->graphicsViewPitch->setScene(scenePitch);
+
+    /*QLineSeries *series = new QLineSeries();
     float x;
     for (x = 4.7; x <= 10.9; x += 0.1) {
         float y = 0 * sin(x);
@@ -45,20 +68,22 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     chartView->resize(ui->chartLayout->sizeHint());
     chartView->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     chart->axisX()->hide();
-    chart->axisY()->hide();
+    chart->axisY()->hide();*/
 
-    ui->graphicsViewYaw->setScene(scene);
+    m_modbusserver = new Modbus_SRV(this);
+    m_simulateur = new Simulateur("C:/Users/ligni/Desktop/S420_PROJET/S420_project/Class40.pol", m_modbusserver, this);
+
+    QTimer *timer = new QTimer(this) ;
+    connect(timer, &QTimer::timeout, this, &IHM::updateBoatRowPitch) ;    //connect le timeout() du timer à une fonction qui calcule roulis, tangage et vitesse azimut
+    timer->start(20) ;
+    setHauteurVague(0);
 
     connect(ui->pbuEnvoyer, &QPushButton::clicked, this, [=](){
         setAngleVent(ui->angleSpinBox->value());
         setTws(ui->forceSpinBox->value());
         setHauteurVague(ui->hauteurSpinBox->value());
-        qDebug() << m_modbusserver->getRoulis();
-        qDebug() << m_modbusserver->getTangage();
+        setVitesseVague(ui->vitesseSpinBox->value());
     });
-
-    m_modbusserver = new Modbus_SRV(this);
-    m_simulateur = new Simulateur("C:/Users/ligni/Desktop/S420_PROJET/S420_project/Class40.pol", m_modbusserver, this);
 }
 
 
@@ -135,8 +160,7 @@ void IHM::setTws(int tws){
 }
 
 void IHM::setHauteurVague(float hauteur){
-    // Obtenir l'objet contenu à la position i
-    auto item = ui->chartLayout->itemAt(0);
+    /*auto item = ui->chartLayout->itemAt(0);
     // Vérifier si l'objet est un graphique
     if (auto plot = qobject_cast<QChartView *>(item->widget())) {
         ui->chartLayout->removeItem(item);
@@ -166,9 +190,21 @@ void IHM::setHauteurVague(float hauteur){
     chartView->resize(ui->chartLayout->sizeHint());
     chartView->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     chart->axisX()->hide();
-    chart->axisY()->hide();
+    chart->axisY()->hide();*/
 
     m_modbusserver->setHautvague(hauteur);
+}
+
+void IHM::setVitesseVague(double vitesse){
+    m_modbusserver->setVitvague(vitesse);
+}
+
+void IHM::updateBoatRowPitch()
+{
+    pitchImageItem->setRotation(m_modbusserver->getRoulis());
+    rowImageItem->setRotation(m_modbusserver->getTangage());
+    sceneRow->update();
+    scenePitch->update();
 }
 
 IHM::~IHM()
