@@ -53,4 +53,8 @@ contains(ANDROID_TARGET_ARCH,arm64-v8a) {
 }
 
 RESOURCES += \
-    Class40.pol
+    Class40.pol \
+    images/icon_minus.png \
+    images/icon_plus.png \
+    images/background.png \
+    images/Vue_cote_boat.png
