@@ -14,18 +14,16 @@
 
 #define vagueAmplitude 3.0 // mètres
 #define vaguePeriode 10.0  // secondes
-//#define angleAzimut 0.785398163
 
-//#define interVague 30
 #define vagueVitesse 3 // mètres par secondes
-
 
 #define TWS 0.1   //noeuds
 #define TWA 1.1  //degrés
 
-class simulateur : public QObject
+class Simulateur : public QObject
 {
     Q_OBJECT
+
 private:
     double m_angleVentJeu ; // System Wind Angle
     double m_tws ;
@@ -44,15 +42,14 @@ private:
 
     double m_speed ;
 
-    /*double m_vaguePeriode ;
-    double m_vagueVitesse ;*/
-    double m_angleAzimut ; // radians
-    // 0    correspond à un roulis nul     et à un tangage maximum
-    // pi/2 correspond à un roulis maximum et à un tangage nul (environ 1.57)
-    // pi/4 (environ 0.785398163)
+    double m_vagueAmplitude ;
+    double m_vagueVitesse ;
+    double m_angleAzimut ;
+
+
 public:
-    explicit simulateur(QObject *parent = nullptr, QString cheminPolaire = "Class404.pol");
-    ~simulateur();
+    explicit Simulateur(QObject *parent = nullptr, QString cheminPolaire = "Class404.pol");
+    ~Simulateur();
 
     double getTwa();
     double getTws();
@@ -76,10 +73,10 @@ public:
 
     void setSpeed() ;
 
-//signals:
+
+signals:
 private slots:
     void calcul() ;
-
 };
 
 #endif // SIMULATEUR_H

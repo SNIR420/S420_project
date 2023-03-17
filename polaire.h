@@ -6,7 +6,7 @@
 #include <QTextStream>
 #include <QDebug>
 #include <QRegularExpression>
-#include <iostream>
+//#include <iostream>
 
 class Polaire : public QObject
 {

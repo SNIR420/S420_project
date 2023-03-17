@@ -41,5 +41,4 @@ Polaire::Polaire(QString polFilePath)
             qDebug() << "m_polaireData[" << i << "][" << j << "] = " << row[j];
         }
     }
-    //std::cout << "Polaire Data Size (inside) : " << m_polaireData.size() << std::endl ;
 }
