@@ -2,10 +2,9 @@
 #include "iostream"
 using namespace std ;
 
-simulateur::simulateur(QWidget *parent, QString cheminPolaire /* adresse modbus */)
-    : QMainWindow(parent)
+simulateur::simulateur(QObject *parent, QString cheminPolaire /* adresse modbus */)
+    : QObject{parent}
 {
-    setupUi(this);
     m_x = 0 ;
     m_y = 0 ;
     m_angleAzimut = 0.785398163 ;
@@ -79,7 +78,6 @@ void simulateur::setSpeed(){ // utilise la classe polaire pour obtenir la vitess
     }
     m_speed = m_polaire.getPolaireData()[j][i] ;
     //m_speed = 0.0 ;
-    //m_speed = -m_speed ; // pour l'instant, à enlever plus tard
 }
 
 double simulateur::getAngleAzimut(){

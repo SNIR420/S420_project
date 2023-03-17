@@ -1,11 +1,11 @@
 #ifndef SIMULATEUR_H
 #define SIMULATEUR_H
 
-#include "ui_simulateur.h"
 #include "polaire.h"
 #include <cmath>
 #include <QTimer>
 #include <QTime>
+#include <QObject>
 
 #define PI 3.14159256
 #define envergure 2.0 // mètres
@@ -23,11 +23,9 @@
 #define TWS 0.1   //noeuds
 #define TWA 1.1  //degrés
 
-#include <QMainWindow>
-
-class simulateur : public QMainWindow, private Ui::simulateur{
+class simulateur : public QObject
+{
     Q_OBJECT
-
 private:
     double m_angleVentJeu ; // System Wind Angle
     double m_tws ;
@@ -52,9 +50,8 @@ private:
     // 0    correspond à un roulis nul     et à un tangage maximum
     // pi/2 correspond à un roulis maximum et à un tangage nul (environ 1.57)
     // pi/4 (environ 0.785398163)
-
 public:
-    explicit simulateur(QWidget *parent = nullptr, QString cheminPolaire = "Class404.pol");
+    explicit simulateur(QObject *parent = nullptr, QString cheminPolaire = "Class404.pol");
     ~simulateur();
 
     double getTwa();
@@ -79,10 +76,10 @@ public:
 
     void setSpeed() ;
 
-public slots:
-    //void info(const QString& src, const QString& msg ) ;
-
+//signals:
 private slots:
     void calcul() ;
+
 };
+
 #endif // SIMULATEUR_H
