@@ -22,10 +22,7 @@ simulateur::simulateur(QObject *parent, QString cheminPolaire /* adresse modbus 
 
 void simulateur::setRoulis(){
     m_t1 = m_t1.currentTime() ;
-
-    /*cout << "result sin : " << sin(2.0*PI*getVaguePeriode() * m_t0.secsTo(t1)
-                                   - (2.0*PI / getInterVague()) * (Y + envergure/2.0) * sin(getAngleAzimut())) ;
-    cout << "\tdeltaT : " << t0.secsTo(t1) << endl ;*/
+    if (getVagueVitesse() == 0) { m_roulis = 0 ; return ; }
 
     double ze = getVagueAmplitude() * sin(2.0*PI/getVaguePeriode() * (m_t0.msecsTo(m_t1)/1000.0)
         - (2.0*PI / getInterVague()) * (cos(getAngleAzimut()) * m_speed * 1852.0 / 3600.0 * m_t0.msecsTo(m_t1)/1000.0 + envergure/2.0 * sin(getAngleAzimut()))) ;
@@ -40,6 +37,7 @@ void simulateur::setRoulis(){
 
 void simulateur::setTangage(){
     m_t1 = m_t1.currentTime() ;
+    if (getVagueVitesse() == 0) { m_tangage = 0 ; return ; }
 
     double zc = getVagueAmplitude() * sin(2.0*PI/getVaguePeriode() * (m_t0.msecsTo(m_t1)/1000.0)
         - (2.0*PI / getInterVague()) * (cos(getAngleAzimut()) * m_speed * 1852.0 / 3600.0 * m_t0.msecsTo(m_t1)/1000.0 + Longueur/2.0 * cos(getAngleAzimut()))) ;
