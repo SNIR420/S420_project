@@ -19,6 +19,11 @@
   <property name="windowTitle">
    <string>IHM</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget{
+	background-color: #252525;
+}</string>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0" rowspan="2">
     <layout class="QVBoxLayout" name="inputLayout">
@@ -38,6 +43,11 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: white;
+}</string>
+         </property>
          <property name="text">
           <string>Angle Vent</string>
          </property>
@@ -47,7 +57,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QDoubleSpinBox" name="angleSpinBox">
+        <widget class="QSpinBox" name="angleSpinBox">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -83,21 +93,21 @@
           <bool>false</bool>
          </property>
          <property name="styleSheet">
-          <string notr="true">QDoubleSpinBox{
+          <string notr="true">QSpinBox{
     border-radius: 20px;
     font-family: &quot;Roboto Mono&quot;;
 	background-color: #ffffff;
 	color: black;
 }
 
-QDoubleSpinBox:up-button {
+QSpinBox:up-button {
     subcontrol-position: left;
 	height: 45px;
 	width: 45px;
 	image: url(:/images/icon_plus.png);
 }
 
-QDoubleSpinBox:down-button {
+QSpinBox:down-button {
     subcontrol-position: right;
 	height: 45px;
 	width: 45px;
@@ -121,24 +131,11 @@ QDoubleSpinBox:down-button {
           <bool>true</bool>
          </property>
          <property name="maximum">
-          <double>360.000000000000000</double>
+          <number>360</number>
          </property>
         </widget>
        </item>
       </layout>
-     </item>
-     <item>
-      <spacer name="verticalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
      </item>
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -149,6 +146,11 @@ QDoubleSpinBox:down-button {
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: white;
+}</string>
          </property>
          <property name="text">
           <string>Force Vent</string>
@@ -222,19 +224,6 @@ QSpinBox:down-button {
       </layout>
      </item>
      <item>
-      <spacer name="verticalSpacer_3">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
         <widget class="QLabel" name="hauteurText">
@@ -243,6 +232,11 @@ QSpinBox:down-button {
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: white;
+}</string>
          </property>
          <property name="text">
           <string>Hauteur Vague</string>
@@ -320,6 +314,9 @@ QDoubleSpinBox:down-button {
        <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Preferred</enum>
+       </property>
        <property name="sizeHint" stdset="0">
         <size>
          <width>20</width>
@@ -337,6 +334,11 @@ QDoubleSpinBox:down-button {
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: white;
+}</string>
          </property>
          <property name="text">
           <string>Vitesse Vague</string>
@@ -415,7 +417,7 @@ QDoubleSpinBox:down-button {
         <enum>Qt::Vertical</enum>
        </property>
        <property name="sizeType">
-        <enum>QSizePolicy::Expanding</enum>
+        <enum>QSizePolicy::Preferred</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
@@ -497,12 +499,12 @@ QPushButton:pressed {
           </size>
          </property>
          <property name="autoFillBackground">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
          <property name="styleSheet">
           <string notr="true">QGraphicsView{
 	border-radius: 20px;
-	background-color: white;
+	background: url(&quot;:/images/background.png&quot;);
 }</string>
          </property>
          <property name="verticalScrollBarPolicy">
@@ -515,6 +517,22 @@ QPushButton:pressed {
           <set>QPainter::Antialiasing|QPainter::LosslessImageRendering|QPainter::SmoothPixmapTransform|QPainter::TextAntialiasing|QPainter::VerticalSubpixelPositioning</set>
          </property>
         </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Preferred</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
        <item>
         <widget class="QGraphicsView" name="graphicsViewPitch">
@@ -533,7 +551,7 @@ QPushButton:pressed {
          <property name="styleSheet">
           <string notr="true">QGraphicsView{
 	border-radius: 20px;
-	background-color: white;
+	background: url(&quot;:/images/background.png&quot;);
 }</string>
          </property>
          <property name="verticalScrollBarPolicy">
@@ -548,6 +566,22 @@ QPushButton:pressed {
         </widget>
        </item>
       </layout>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Preferred</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
      <item>
       <layout class="QVBoxLayout" name="mainGraphicsLayout">
@@ -572,12 +606,12 @@ QPushButton:pressed {
           </size>
          </property>
          <property name="autoFillBackground">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
          <property name="styleSheet">
           <string notr="true">QGraphicsView{
 	border-radius: 20px;
-	background-color: white;
+	background: url(&quot;:/images/background.png&quot;);
 }</string>
          </property>
          <property name="verticalScrollBarPolicy">
