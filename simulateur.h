@@ -13,12 +13,12 @@
 #define Y 0.0         // mètres
 
 #define vagueAmplitude 3.0 // mètres
-#define vaguePeriode 10.0  // secondes
+#define vaguePeriode 3.0  // secondes
 
-#define vagueVitesse 3 // mètres par secondes
+#define vagueVitesse 3.0 // mètres par secondes
 
-#define TWS 0.1   //noeuds
-#define TWA 1.1  //degrés
+#define TWS 0.2   //noeuds
+#define TWA 1.02  //degrés
 
 class Simulateur : public QObject
 {
@@ -44,6 +44,8 @@ private:
 
     double m_vagueAmplitude ;
     double m_vagueVitesse ;
+    double m_vaguePeriode ;
+
     double m_angleAzimut ;
 
 

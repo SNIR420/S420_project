@@ -9,7 +9,8 @@ Simulateur::Simulateur(QObject *parent, QString cheminPolaire)
     m_polaire = Polaire(cheminPolaire) ;
     m_vagueAmplitude = vagueAmplitude ;
     m_vagueVitesse = vagueVitesse ;
-    m_tws = getTws() ;
+    m_vaguePeriode = vaguePeriode ;
+    m_tws = TWS ;
 
     QTimer *timer = new QTimer(this) ;
     connect(timer, &QTimer::timeout, this, &Simulateur::calcul) ;    //connect le timeout() du timer à une fonction qui calcule roulis, tangage et vitesse azimut
@@ -56,22 +57,32 @@ double Simulateur::getVagueAmplitude(){
 }
 
 double Simulateur::getVaguePeriode(){
-    return vaguePeriode ;
+    if (m_vaguePeriode < 2.0){
+        m_vagueVitesse = m_vaguePeriode * 7.5 ;
+        m_vaguePeriode = 2.0 ;
+    }
+    if (m_vagueVitesse * m_vaguePeriode < 30.0){
+        m_vagueVitesse = m_vagueVitesse / m_vaguePeriode * 30.0 ;
+    }
+    return m_vaguePeriode ;
 }
 
 double Simulateur::getVagueVitesse(){
+    if (m_vagueVitesse == 0){
+        m_vagueAmplitude = 0.0 ;
+        m_vagueVitesse = 0.1 ;
+    }
+    if (m_vagueVitesse < 1.0){
+        m_vagueVitesse = 1.0 ;
+    }
+    if (m_vagueVitesse * m_vaguePeriode < 30.0){
+        m_vaguePeriode = m_vaguePeriode / m_vagueVitesse * 30.0 ;
+    }
     return m_vagueVitesse ;
 }
 
 void Simulateur::setSpeed(){ // utilise la classe polaire pour obtenir la vitesse
-    int i = 0, j = 0 ;
-    while(m_polaire.getPolaireData()[0][i] <= getTws()){
-        i++ ;
-    }
-    while(m_polaire.getPolaireData()[j][0] <= getTwa()){
-        j++ ;
-    }
-    m_speed = m_polaire.getPolaireData()[j][i] ;
+    m_speed = m_polaire.getMaxSpeed(getTwa(), getTws()) ;
     //m_speed = 0.0 ;
 }
 
@@ -99,12 +110,12 @@ void Simulateur::calcul(){
     setVitesseAzimut(); // inutile pour l'instant
     setSpeed();
     qDebug() << "";
-    qDebug() << "roulis    : " << round(m_roulis*180.0/PI*10.0)/10.0 << "°" ;
-    qDebug() << "tangage   : " << round(m_tangage*180.0/PI*10.0)/10.0 << "°" ;
-    qDebug() << "vitesse   : " << m_speed << " nd" ;
-    qDebug() << "temps     : " << round(m_t0.msecsTo(m_t1)/100.0)/10.0 << "s  \t" << m_t0.msecsTo(m_t1) << "ms" ;
-    qDebug() << "x = " << m_x << "  y = " << m_y ;
-    qDebug() << "angle azimut : " << m_angleAzimut*180/PI << "°" ;
+    qDebug() << "roulis    :" << round(m_roulis*180.0/PI*10.0)/10.0 << "°" ;
+    qDebug() << "tangage   :" << round(m_tangage*180.0/PI*10.0)/10.0 << "°" ;
+    qDebug() << "vitesse   :" << m_speed << "nd" ;
+    qDebug() << "temps     :" << round(m_t0.msecsTo(m_t1)/100.0)/10.0 << "s  \t" << m_t0.msecsTo(m_t1) << "ms" ;
+    qDebug() << "x =" << m_x << "  y =" << m_y ;
+    qDebug() << "angle azimut :" << m_angleAzimut*180/PI << "°" ;
 }
 
 void Simulateur::setWave(int force){

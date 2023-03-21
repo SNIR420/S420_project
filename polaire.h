@@ -6,7 +6,6 @@
 #include <QTextStream>
 #include <QDebug>
 #include <QRegularExpression>
-//#include <iostream>
 
 class Polaire : public QObject
 {
@@ -15,7 +14,6 @@ private:
     QString m_polFilePath;
     QVector<QVector<double>> m_polaireData;
     Q_OBJECT
-
 public:
     explicit Polaire(QObject *parent = nullptr);
     Polaire(QString polFilePath);
