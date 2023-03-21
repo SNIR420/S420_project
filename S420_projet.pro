@@ -57,4 +57,7 @@ RESOURCES += \
     images/icon_minus.png \
     images/icon_plus.png \
     images/background.png \
-    images/Vue_cote_boat.png
+    images/Vue_cote_boat.png \
+    images/Vue_top_boat.png \
+    images/Vue_back_boat.png \
+    images/wind.png
