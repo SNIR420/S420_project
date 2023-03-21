@@ -59,20 +59,17 @@ double Simulateur::getVaguePeriode(){
 }
 
 double Simulateur::getVagueVitesse(){
-    if(m_modbusServer->getVitvague() == 0)  return 0.01;
-    else return m_modbusServer->getVitvague();
+    return m_modbusServer->getVitvague() ;
 }
 
 void Simulateur::setSpeed(){ // utilise la classe polaire pour obtenir la vitesse
-    int i = 0, j = 0 ;
-    while(polaire->getPolaireData()[0][i] <= getTws()){
-        i++ ;
+    if(m_modbusServer->getSwa() <= 180){
+        m_speed = polaire->getMaxSpeed(getTwa(), m_modbusServer->getTws()) ;
     }
-    while(polaire->getPolaireData()[j][0] <= getTwa()){
-        j++ ;
+    else{
+        m_speed = polaire->getMaxSpeed(180-(getTwa()%180), m_modbusServer->getTws()) ;
     }
-    m_speed = polaire->getPolaireData()[j][i] ;
-    //m_speed = 0.0 ;
+    qDebug() << "Speed :" << m_speed;
 }
 
 double Simulateur::getAngleAzimut(){
@@ -84,11 +81,11 @@ double Simulateur::getInterVague(){
 }
 
 double Simulateur::getTws(){
-    return TWS ;
+    return m_modbusServer->getTws() ;
 }
 
-double Simulateur::getTwa(){
-    return TWA ;
+int Simulateur::getTwa(){
+    return m_modbusServer->getSwa();
 }
 
 void Simulateur::calcul(){
@@ -106,18 +103,6 @@ void Simulateur::calcul(){
     qDebug() << "delta thé : " << round(m_t0.msecsTo(m_t1)/100.0)/10.0 << "s  \t" << m_t0.msecsTo(m_t1) << "ms";
     qDebug() << "x = " << m_x << "  y = " << m_y;
     qDebug() << "angle azimut : " << m_angleAzimut*180/PI << "°";*/
-}
-
-void Simulateur::setWave(int force){
-    m_beaufort = force ;
-}
-
-void Simulateur::setAngleVentJeu(double twa){
-    m_angleVentJeu = twa ;
-}
-
-void Simulateur::setTws(double tws){
-    m_tws = tws ;
 }
 
 Simulateur::~Simulateur(){}
