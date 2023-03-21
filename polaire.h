@@ -21,12 +21,6 @@ public:
     double getMaxSpeed(double twa, double tws);
     double getGiteRatio(double twa, double tws, double ratio);
     double getMaxRatio(double twa, double tws);
-
-    QVector<QVector<double>> getPolaireData() { return m_polaireData ; }
-    Polaire& operator =(Polaire pol) { m_polaireData += pol.getPolaireData() ; return pol ; }
-
-signals:
-
 };
 
 #endif // POLAIRE_H

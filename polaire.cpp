@@ -29,15 +29,7 @@ Polaire::Polaire(QString polFilePath)
             m_polaireData.append(data);
         }
     }
-
     file.close();
-
-    /*for (int i = 0; i < m_polaireData.size(); ++i) {
-        QVector<double> row = m_polaireData[i];
-        for (int j = 0; j < row.size(); ++j) {
-            qDebug() << "m_polaireData[" << i << "][" << j << "] = " << row[j];
-        }
-    }*/
 }
 
 double Polaire::getMaxSpeed(double twa, double tws) {
