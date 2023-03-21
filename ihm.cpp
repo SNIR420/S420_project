@@ -6,10 +6,8 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     ui->setupUi(this);
 
     //Init YAW
-    QPixmap pixmap("C:/Users/ligni/Desktop/S420_PROJET/S420_project/images/background.png");
-    ui->graphicsViewYaw->setBackgroundBrush(pixmap);
     scene = new QGraphicsScene(ui->graphicsViewYaw->rect(), this);
-    QPixmap centerImage("C:/Users/ligni/Desktop/S420_PROJET/S420_project/images/Vue_top_boat.png");
+    QPixmap centerImage(":/images/Vue_top_boat.png");
 
     centerImageItem = new QGraphicsPixmapItem(centerImage);
     centerImageItem->setPos((ui->graphicsViewYaw->width() - centerImage.width()) / 2, (ui->graphicsViewYaw->height() - centerImage.height()) / 2);
@@ -19,10 +17,8 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     ui->graphicsViewYaw->setScene(scene);
 
     //Init ROW
-    QPixmap pixmap2("C:/Users/ligni/Desktop/S420_PROJET/S420_project/images/background.png");
-    ui->graphicsViewRow->setBackgroundBrush(pixmap2); // Utiliser setForegroundBrush() au lieu de setBackgroundBrush()
     sceneRow = new QGraphicsScene(ui->graphicsViewRow->rect(), this);
-    QPixmap rowImage("C:/Users/ligni/Desktop/S420_PROJET/S420_project/images/Vue_cote_boat.png");
+    QPixmap rowImage(":/images/Vue_cote_boat.png");
 
     rowImageItem = new QGraphicsPixmapItem(rowImage);
     rowImageItem->setPos((ui->graphicsViewRow->width() - rowImage.width()) / 2, (ui->graphicsViewRow->height() - rowImage.height()) / 2);
@@ -32,10 +28,8 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     ui->graphicsViewRow->setScene(sceneRow);
 
     //Init PITCH
-    QPixmap pixmap3("C:/Users/ligni/Desktop/S420_PROJET/S420_project/images/background.png");
-    ui->graphicsViewPitch->setBackgroundBrush(pixmap3);
     scenePitch = new QGraphicsScene(ui->graphicsViewPitch->rect(), this);
-    QPixmap pitchImage("C:/Users/ligni/Desktop/S420_PROJET/S420_project/images/Vue_back_boat.png");
+    QPixmap pitchImage(":/images/Vue_back_boat.png");
 
     pitchImageItem = new QGraphicsPixmapItem(pitchImage);
     pitchImageItem->setPos((ui->graphicsViewRow->width() - pitchImage.width()) / 2, (ui->graphicsViewPitch->height() - pitchImage.height()) / 2);
@@ -71,12 +65,14 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     chart->axisY()->hide();*/
 
     m_modbusserver = new Modbus_SRV(this);
-    m_simulateur = new Simulateur("C:/Users/ligni/Desktop/S420_PROJET/S420_project/Class40.pol", m_modbusserver, this);
+    m_simulateur = new Simulateur(":/Class40.pol", m_modbusserver, this);
 
     QTimer *timer = new QTimer(this) ;
     connect(timer, &QTimer::timeout, this, &IHM::updateBoatRowPitch) ;    //connect le timeout() du timer à une fonction qui calcule roulis, tangage et vitesse azimut
     timer->start(20) ;
     setHauteurVague(0);
+    m_modbusserver->setTws(0.01);
+    m_modbusserver->setSwa(1.1);
 
     connect(ui->pbuEnvoyer, &QPushButton::clicked, this, [=](){
         setAngleVent(ui->angleSpinBox->value());
@@ -89,7 +85,7 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
 
 void IHM::setAngleVent(double angleDeg){
     //crée un qpixmap à partir de l'emplacement de l'image à utiliser
-    QPixmap topLeftImage("C:/Users/ligni/Desktop/S420_PROJET/S420_project/images/wind.png");
+    QPixmap topLeftImage(":/images/wind.png");
     QGraphicsPixmapItem *topLeftImageItem = nullptr;
 
     // Vérifie que l'image n'est pas déjà présente sur la scène et la supprime si c'est le cas
@@ -136,7 +132,7 @@ void IHM::setAngleVent(double angleDeg){
 }
 
 void IHM::setAngleBateau(double angleDeg){
-    QPixmap centerImage("C:/Users/ligni/Desktop/S420_PROJET/S420_project/images/boat.png");
+    QPixmap centerImage(":/images/boat.png");
     QGraphicsPixmapItem *centerImageItem = nullptr;
     QList<QGraphicsItem*> items = scene->items();
     for (QGraphicsItem *item : items) {
@@ -156,6 +152,7 @@ void IHM::setAngleBateau(double angleDeg){
 
 void IHM::setTws(int tws){
     ui->progressBar->setValue(tws);
+    m_modbusserver->setTws(tws);
     //TODO: style css pour la barre parce que le vert est moche ui->progressBar->setStyleSpeed();
 }
 
@@ -196,7 +193,8 @@ void IHM::setHauteurVague(float hauteur){
 }
 
 void IHM::setVitesseVague(double vitesse){
-    m_modbusserver->setVitvague(vitesse);
+    if(vitesse <= 1)    m_modbusserver->setVitvague(1);
+    else    m_modbusserver->setVitvague(vitesse);
 }
 
 void IHM::updateBoatRowPitch()
