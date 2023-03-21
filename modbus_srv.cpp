@@ -45,7 +45,7 @@ float Modbus_SRV::getVitvague()
 return GVitvague;
 }
 
-float Modbus_SRV::getSwa()
+int Modbus_SRV::getSwa()
 {
 return GSwa;
 }

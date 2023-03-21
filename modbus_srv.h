@@ -17,7 +17,7 @@ public:
     float getVitvague();
     float getIntervague();
     float getTws();
-    float getSwa();
+    int getSwa();
     void setHautvague( float SHautvague);
     void setVitvague(float SVitvague);
     void setIntervague(float SIntervague);
@@ -38,7 +38,7 @@ private:
     float GVitvague;
     float GIntervague;
     float GTws;
-    float GSwa;
+    int GSwa;
 };
 
 #endif // MODBUS_SRV_H
