@@ -28,9 +28,6 @@ class Simulateur : public QObject
     Q_OBJECT
 
 private:
-    double m_angleVentJeu ; // System Wind Angle
-    double m_tws ;
-    int m_beaufort ;  // de 0 à 12
     double m_roulis ;
     double m_tangage ;
     double m_vitesseAzimut ; // vitesse de rotation sur le lacet
@@ -57,7 +54,7 @@ public:
     explicit Simulateur(QString pol_location, Modbus_SRV* modbusserver, QObject *parent = nullptr); // Ajout d'un paramètre de type pointeur vers Modbus_SRV
     ~Simulateur();
 
-    double getTwa();
+    int getTwa();
     double getTws();
     double getAngleBome();
     double getSpeed(); //du bateau
@@ -68,10 +65,6 @@ public:
     double getAngleAzimut() ; // theta
 
     double getVagueVitesse() ;
-
-    void setAngleVentJeu(double twa); // System Wind Angle
-    void setTws(double tws);
-    void setWave(int force); // échelle de beaufort
 
     void setRoulis() ;
     void setTangage() ;
