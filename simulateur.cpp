@@ -95,11 +95,15 @@ double Simulateur::getInterVague(){
 }
 
 double Simulateur::getTws(){
+    if (TWS >= 70) return 69 ;
     return TWS ;
 }
 
 double Simulateur::getTwa(){
-    return TWA ;
+    int twa = TWA ;
+    if (twa > 360) twa = twa % 360 ;
+    if (twa > 180) twa = 360 - twa ;
+    return twa ;
 }
 
 void Simulateur::calcul(){
