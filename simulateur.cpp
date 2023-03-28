@@ -64,12 +64,14 @@ double Simulateur::getVagueVitesse(){
 
 void Simulateur::setSpeed(){ // utilise la classe polaire pour obtenir la vitesse
     if(m_modbusServer->getSwa() <= 180){
-        m_speed = polaire->getMaxSpeed(getTwa(), m_modbusServer->getTws()) ;
+        m_speed = polaire->getMaxSpeed(getTwa(), getTws()) ;
     }
     else{
-        m_speed = polaire->getMaxSpeed(180-(getTwa()%180), m_modbusServer->getTws()) ;
+        m_speed = polaire->getMaxSpeed(180-(getTwa()%180), getTws()) ;
     }
-    qDebug() << "Speed :" << m_speed;
+    /*qDebug() << "Speed :" << m_speed;
+    qDebug() << "TWS :" << m_modbusServer->getTws();
+    qDebug() << "TWA :" << m_modbusServer->getSwa();*/
 }
 
 double Simulateur::getAngleAzimut(){
@@ -81,7 +83,8 @@ double Simulateur::getInterVague(){
 }
 
 double Simulateur::getTws(){
-    return m_modbusServer->getTws() ;
+    if(m_modbusServer->getTws() >= 70)    return 69.9;
+    else return m_modbusServer->getTws() ;
 }
 
 int Simulateur::getTwa(){
