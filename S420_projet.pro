@@ -32,20 +32,29 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
     android/AndroidManifest.xml \
     android/AndroidManifest.xml \
+    android/AndroidManifest.xml \
+    android/build.gradle \
     android/build.gradle \
     android/build.gradle \
     android/gradle.properties \
     android/gradle.properties \
+    android/gradle.properties \
+    android/gradle/wrapper/gradle-wrapper.jar \
     android/gradle/wrapper/gradle-wrapper.jar \
     android/gradle/wrapper/gradle-wrapper.jar \
     android/gradle/wrapper/gradle-wrapper.properties \
     android/gradle/wrapper/gradle-wrapper.properties \
+    android/gradle/wrapper/gradle-wrapper.properties \
     android/gradlew \
     android/gradlew \
+    android/gradlew \
+    android/gradlew.bat \
     android/gradlew.bat \
     android/gradlew.bat \
     android/res/values/libs.xml \
-    android/res/values/libs.xml
+    android/res/values/libs.xml \
+    android/res/values/libs.xml \
+    s420_uml.qmodel
 
 contains(ANDROID_TARGET_ARCH,arm64-v8a) {
     ANDROID_PACKAGE_SOURCE_DIR = \
@@ -60,4 +69,6 @@ RESOURCES += \
     images/Vue_cote_boat.png \
     images/Vue_top_boat.png \
     images/Vue_back_boat.png \
-    images/wind.png
+    images/wind.png \
+    font/RobotoMono.ttf \
+    font/Poppins.ttf
