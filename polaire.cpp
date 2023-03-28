@@ -47,10 +47,10 @@ double Polaire::getMaxSpeed(double twa, double tws) {
         }
     }
     if(x == -1 || y == -1){
-        for(j = 0; m_polaireData[j][0] < twa; j++);
+        for(j = 0; m_polaireData[j][0] <= twa; j++);
         double x1 = m_polaireData[j][0];
         double x2 = m_polaireData[j-1][0];
-        for(k = 0; m_polaireData[0][k] < tws; k++);
+        for(k = 0; m_polaireData[0][k] <= tws; k++);
         double y2 = m_polaireData[0][k];
         double y1 = m_polaireData[0][k-1];
 
