@@ -12,6 +12,7 @@
 #include <QDebug>
 #include <QTimer>
 #include <QPropertyAnimation>
+#include <QObject>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class IHM; }
@@ -24,12 +25,11 @@ public:
     IHM(QWidget *parent = nullptr);
     ~IHM();
 private slots:
-    void setAngleVent(double angleDeg);
-    void setAngleBateau(double angleDeg);
     void setHauteurVague(float hauteur);
     void setVitesseVague(double vitesse);
     void setTws(int tws);
     void updateBoatRowPitch();
+    void setAngleVent(int angleDeg);
 private:
     Ui::IHM *ui;
     QGraphicsScene *scene;
@@ -40,5 +40,11 @@ private:
     QGraphicsPixmapItem *centerImageItem;
     QGraphicsPixmapItem *rowImageItem;
     QGraphicsPixmapItem *pitchImageItem;
+    QPixmap centerImage;
+    QPixmap rowImage;
+    QPixmap pitchImage;
+    QPixmap windImage;
+protected:
+    void resizeEvent(QResizeEvent *event)   override;
 };
 #endif // IHM_H
