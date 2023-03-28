@@ -13,15 +13,7 @@
 #define envergure 2.0 // mètres
 #define Longueur 4.0  // mètres
 #define Y 0.0         // mètres
-
-#define vagueAmplitude 3.0 // mètres
 #define vaguePeriode 10.0  // secondes
-//#define angleAzimut 0.785398163
-
-//#define interVague 30
-
-#define TWS 0.1   //noeuds
-#define TWA 1.1  //degrés
 
 class Simulateur : public QObject
 {
@@ -42,13 +34,7 @@ private:
     double m_x ;
     double m_y ;
     double m_speed ;
-
-    /*double m_vaguePeriode ;
-        double m_vagueVitesse ;*/
     double m_angleAzimut ; // radians
-    // 0    correspond à un roulis nul     et à un tangage maximum
-    // pi/2 correspond à un roulis maximum et à un tangage nul (environ 1.57)
-    // pi/4 (environ 0.785398163)
 
 public:
     explicit Simulateur(QString pol_location, Modbus_SRV* modbusserver, QObject *parent = nullptr); // Ajout d'un paramètre de type pointeur vers Modbus_SRV
