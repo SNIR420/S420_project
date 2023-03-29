@@ -931,140 +931,140 @@
                  <qlist>
                   <item>
                    <MClassMember>
-                    <uid>{74b33e69-6b4a-42cd-89a8-f18158cda958}</uid>
+                    <uid>{efb9617d-8f1b-4390-beeb-3e1f8ef5b3a2}</uid>
                     <type>1</type>
                     <declaration>- QGraphicsScene *scene</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{943130bd-af11-467a-936c-cd1ac46284b5}</uid>
+                    <uid>{6bd6438b-e55f-4312-b9c8-17bd4d124b27}</uid>
                     <type>1</type>
                     <declaration>- QGraphicsScene *sceneRow</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{5422f8df-780e-47ed-a875-ac6069595074}</uid>
+                    <uid>{8b4685b6-22ac-4f56-9182-8f761aed7499}</uid>
                     <type>1</type>
                     <declaration>- QGraphicsScene *scenePitch</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{e78774cc-2b1d-44ac-b1dc-99f8b792d4d5}</uid>
+                    <uid>{70681184-b8ff-4621-bb9d-7eff31abdf4e}</uid>
                     <type>1</type>
                     <declaration>- Simulateur *m_simulateur</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{54833768-683d-4792-ab33-addb411367f9}</uid>
+                    <uid>{b8be1971-9f06-4f44-8272-015c6292b65b}</uid>
                     <type>1</type>
                     <declaration>- Modbus_SRV *m_modbusserver</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{4ae7d3ae-3cab-42fc-a491-89a1f4ef5e6a}</uid>
+                    <uid>{b7c4d1d5-4ffb-493a-8839-a2b860ca1606}</uid>
                     <type>1</type>
                     <declaration>- QGraphicsPixmapItem *centerImageItem</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{16a86c02-947a-465c-8a3f-2b60304d8f64}</uid>
+                    <uid>{e861ea90-814d-49eb-ac25-35cc3c97f9f0}</uid>
                     <type>1</type>
                     <declaration>- QGraphicsPixmapItem *rowImageItem</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{4a8b140e-431d-4123-a038-a30520aa1e06}</uid>
+                    <uid>{ed1ef2b4-b538-4d22-8347-5e7b54ce4aac}</uid>
                     <type>1</type>
                     <declaration>- QGraphicsPixmapItem *pitchImageItem</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{db6b98a9-2a5c-4883-ac51-8215af83ab96}</uid>
+                    <uid>{b05546a5-e390-4462-bd72-b00c189dd443}</uid>
                     <type>1</type>
                     <declaration>- QPixmap centerImage</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{76cbf4d3-3fb6-4cd1-938e-93694a8c59b8}</uid>
+                    <uid>{c712fc6d-a7b5-495b-a2de-d6dda611d1a6}</uid>
                     <type>1</type>
                     <declaration>- QPixmap rowImage</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{b8d971ef-bea5-4705-aaa5-402b1e8d3b3e}</uid>
+                    <uid>{d1590394-7aa7-4fa2-87f3-3dde7ecfad82}</uid>
                     <type>1</type>
                     <declaration>- QPixmap pitchImage</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{9dd174e1-c62b-4358-bbd9-6a0b53af5928}</uid>
+                    <uid>{bf348487-ba72-4c65-ad91-d2cc100443b5}</uid>
                     <type>1</type>
                     <declaration>- QPixmap windImage</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{17311bea-55c1-4cac-b755-c8f79fff6f99}</uid>
+                    <uid>{bc50f97d-27a3-422a-b3a3-e56f43320ae3}</uid>
                     <type>2</type>
                     <declaration>-$ void setHauteurVague(float hauteur)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{4fce5b26-df9b-4ae1-8687-9d2eef032901}</uid>
+                    <uid>{b011fb2b-25ec-458e-a121-a9cdf3df3016}</uid>
                     <type>2</type>
                     <declaration>-$ void setVitesseVague(double vitesse)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{7218c04c-507b-4b54-9f5a-d87b608f828c}</uid>
+                    <uid>{b8fc5bd9-7f2d-442a-b046-2545f2c24b24}</uid>
                     <type>2</type>
                     <declaration>-$ void setTws(int tws)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{9e0ab07e-0250-4da0-8e90-f4d2336e8dd5}</uid>
+                    <uid>{f37ed7f7-9bea-4266-a983-59f95deab3f6}</uid>
                     <type>2</type>
                     <declaration>-$ void updateBoatRowPitch()</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{01f2e20d-76e9-4c8a-bca0-d000542bb7e0}</uid>
+                    <uid>{4ae6d525-d71a-4196-9edb-a1fffe90e911}</uid>
                     <type>2</type>
                     <declaration>-$ void setAngleVent(int angleDeg)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{0aab7f00-d31f-47a8-88b5-32539f055767}</uid>
+                    <uid>{bbc81021-1230-4b5b-99de-ea35d0aa1aea}</uid>
                     <type>2</type>
                     <declaration>+IHM(QWidget *parent = nullptr)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{d702692d-9603-43f7-9b94-7bcaf7e4add7}</uid>
+                    <uid>{c2aad371-68e7-45be-a394-4026971053be}</uid>
                     <type>2</type>
                     <declaration>+~IHM()</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{e0bc63e3-7f23-4879-842c-8fa14a5e0e96}</uid>
+                    <uid>{8ad08756-8e13-4032-8b43-b14299902b92}</uid>
                     <type>2</type>
                     <declaration>#void resizeEvent(QResizeEvent *event)</declaration>
                    </MClassMember>
@@ -2619,7 +2619,7 @@
                          <object>{72e2f8f1-a739-4d7e-8f5d-ab17e47839fe}</object>
                          <a>{df211a91-8c74-4bd6-bf05-22537ff50216}</a>
                          <b>{32e0c6f0-2140-4d33-a654-d4b40952907a}</b>
-                         <name>setRemotevalue(PrimaryTable, &amp;QString const, &amp;QString const)</name>
+                         <name>setRemotValue(PrimaryTable, &amp;QString const, &amp;QString const)</name>
                         </DRelation>
                        </base-DRelation>
                        <custom-relation>Message</custom-relation>
@@ -3915,7 +3915,7 @@
                     </item>
                    </qlist>
                   </elements>
-                  <last-modified>1680015184716</last-modified>
+                  <last-modified>1680075505898</last-modified>
                   <toolbarid>Sequences</toolbarid>
                  </MDiagram>
                 </base-MDiagram>
@@ -4531,7 +4531,7 @@
                                <uid>{72e2f8f1-a739-4d7e-8f5d-ab17e47839fe}</uid>
                               </MElement>
                              </base-MElement>
-                             <name>setRemotevalue(PrimaryTable, &amp;QString const, &amp;QString const)</name>
+                             <name>setRemotValue(PrimaryTable, &amp;QString const, &amp;QString const)</name>
                              <a>{c1fbcb19-8ecf-4f6a-8bec-0faec66ff6a7}</a>
                              <b>{f290a5e1-4aec-4aca-9aec-888c41d46b89}</b>
                             </MRelation>
@@ -5932,6 +5932,50 @@
                 <variety-editable>false</variety-editable>
                 <variety>endlifeline</variety>
                </MItem>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{115afe6b-e4a1-4210-b5ed-c01f9b150dec}</uid>
+             <target>
+              <instance type="MItem">
+               <MItem>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{115afe6b-e4a1-4210-b5ed-c01f9b150dec}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>@ du simulateur + CSV</name>
+                 </MObject>
+                </base-MObject>
+                <variety-editable>false</variety-editable>
+                <variety>usecase</variety>
+               </MItem>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{5f3eed81-7c35-47f7-b6f4-6ccae5f928b5}</uid>
+             <target>
+              <instance type="MPackage">
+               <MPackage>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{5f3eed81-7c35-47f7-b6f4-6ccae5f928b5}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>New Package</name>
+                 </MObject>
+                </base-MObject>
+               </MPackage>
               </instance>
              </target>
             </handle>
