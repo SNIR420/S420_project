@@ -2,12 +2,14 @@
 #define MODBUS_SRV_H
 
 #include <QObject>
+#include <QamModbusMap.h>
+#include <qamtcpserver.h>
 
 class Modbus_SRV : public QObject
 {
     Q_OBJECT
 public:
-    explicit Modbus_SRV(QObject *parent = nullptr);
+   explicit Modbus_SRV(const QString& configFile, QObject* parent = 0 ) ;
     void stopServer();
     float getVitazimut( );
     float getRoulis();
@@ -17,7 +19,6 @@ public:
     float getVitvague();
     float getIntervague();
     float getTws();
-    int getSwa();
     void setHautvague( float SHautvague);
     void setVitvague(float SVitvague);
     void setIntervague(float SIntervague);
@@ -26,7 +27,11 @@ public:
     void setVitazimut(float SVitazimut);
     void setTws(float STws);
     void setPosazimut(float SPosazimut);
-    void setSwa(float SSwa);
+
+public slots:
+void info(const QString& src, const QString& msg ) ;
+
+
 signals:
 
 private:
@@ -38,7 +43,21 @@ private:
     float GVitvague;
     float GIntervague;
     float GTws;
-    int GSwa;
+    float SHautvague;
+    float SVitvague;
+    float SIntervague;
+    float SRoulis;
+    float STangage;
+    float SVitazimut;
+    float STws;
+    float SPosazimut;
+    QamModbusMap*				m_map ;
+    QamModbusMap::PrimaryTable	m_table ;
+    QamTcpServer*				m_server ;
+    QString m_configfile;
+
+
+
 };
 
 #endif // MODBUS_SRV_H
