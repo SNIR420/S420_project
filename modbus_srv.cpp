@@ -4,9 +4,9 @@
 
 Modbus_SRV::Modbus_SRV(const QString& configFile, QObject* parent )
     : QObject{parent}
+    , m_configFile(configFile)
 {
     // cartographie Modbus
-    m_configfile = configFile;
     m_map    = new QamModbusMap( QamModbusMap::ServerMode, this ) ;
     m_map->setVerbose( false ) ;
     connect( m_map, SIGNAL(info(QString,QString)), this, SLOT(info(QString,QString)) ) ;
@@ -112,83 +112,94 @@ Modbus_SRV::Modbus_SRV(const QString& configFile, QObject* parent )
 
 float Modbus_SRV::getPosazimut()
 {
-return GPosazimut;
+    return GPosazimut;
 }
 
 float Modbus_SRV::getRoulis()
 {
-return GRoulis;
+    return GRoulis;
 }
 
 float Modbus_SRV::getTangage()
 {
-return GTangage;
+    return GTangage;
 }
 
 float Modbus_SRV::getVitazimut()
 {
-return GVitAzimut;
+    return GVitAzimut;
 }
 
 float Modbus_SRV::getHautvague()
 {
-return GHautvague;
+    return GHautvague;
 }
 
 float Modbus_SRV::getIntervague()
 {
-return GIntervague;
+    return GIntervague;
 }
 
 float Modbus_SRV::getTws()
 {
-return GTws;
+    return GTws;
 }
 
 float Modbus_SRV::getVitvague()
 {
-return GVitvague;
+    return GVitvague;
+}
+
+float Modbus_SRV::getSwa()
+{
+    return GSwa;
 }
 
 void Modbus_SRV::setHautvague( float SHautVague)
 {
-GHautvague=SHautVague;
+    GHautvague=SHautVague;
 }
 
 void Modbus_SRV::setIntervague(float SInterVague)
 {
-GIntervague=SInterVague;
+    GIntervague=SInterVague;
 }
 
 void Modbus_SRV::setPosazimut(float SPosAzimut)
 {
-GPosazimut=SPosAzimut;
+    GPosazimut=SPosAzimut;
 }
 
 void Modbus_SRV::setRoulis(float SRouLis)
 {
- GRoulis = SRouLis;
+    GRoulis = SRouLis;
 }
 
 void Modbus_SRV::setTangage(float STanGage)
 {
-GTangage=STanGage;
+    GTangage=STanGage;
 }
 
 void Modbus_SRV::setTws(float STws)
 {
-GTws=STws;
+    GTws=STws;
 }
 
 void Modbus_SRV::setVitazimut(float SVitAzimut)
 {
-GVitAzimut=SVitAzimut;
+    GVitAzimut=SVitAzimut;
 }
 
 void Modbus_SRV::setVitvague(float SVitVague)
 {
-GVitvague=SVitVague;
+    GVitvague=SVitVague;
 }
+
+void Modbus_SRV::setSwa(int SSwa)
+{
+    GSwa=SSwa;
+}
+
 void Modbus_SRV::info(const QString& src, const QString& msg )
 {
     qDebug() << qPrintable( src ) << ": " << qPrintable( msg )  ;

@@ -9,7 +9,7 @@ class Modbus_SRV : public QObject
 {
     Q_OBJECT
 public:
-   explicit Modbus_SRV(const QString& configFile, QObject* parent = 0 ) ;
+    explicit Modbus_SRV(const QString& configFile, QObject* parent = nullptr) ;
     void stopServer();
     float getVitazimut( );
     float getRoulis();
@@ -19,6 +19,7 @@ public:
     float getVitvague();
     float getIntervague();
     float getTws();
+    float getSwa();
     void setHautvague( float SHautvague);
     void setVitvague(float SVitvague);
     void setIntervague(float SIntervague);
@@ -27,12 +28,10 @@ public:
     void setVitazimut(float SVitazimut);
     void setTws(float STws);
     void setPosazimut(float SPosazimut);
+    void setSwa(int SSwa);
 
 public slots:
-void info(const QString& src, const QString& msg ) ;
-
-
-signals:
+    void info(const QString& src, const QString& msg ) ;
 
 private:
     float GVitAzimut;
@@ -43,6 +42,7 @@ private:
     float GVitvague;
     float GIntervague;
     float GTws;
+    int GSwa;
     float SHautvague;
     float SVitvague;
     float SIntervague;
@@ -51,12 +51,11 @@ private:
     float SVitazimut;
     float STws;
     float SPosazimut;
+    int SSwa;
     QamModbusMap*				m_map ;
     QamModbusMap::PrimaryTable	m_table ;
     QamTcpServer*				m_server ;
-    QString m_configfile;
-
-
+    QString m_configFile;
 
 };
 
