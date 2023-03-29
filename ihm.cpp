@@ -122,7 +122,7 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     chart->axisX()->hide();
     chart->axisY()->hide();*/
 
-    m_modbusserver = new Modbus_SRV(this);
+    m_modbusserver = new Modbus_SRV(":/S420-6-API.csv", this);
     m_simulateur = new Simulateur(":/Class40.pol", m_modbusserver, this);
 
     QTimer *timer = new QTimer(this) ;
