@@ -38,11 +38,11 @@ double Polaire::getMaxSpeed(double twa, double tws) {
 
     for(i = 0; i < m_polaireData.size(); i++) {
         if(m_polaireData[i][0] == twa) { // Trouver la ligne correspondant à l'angle d'attaque (twa)
-           x = i;
+            x = i;
         }
         for(j = 0; j < m_polaireData[j].size(); j++){
             if(m_polaireData[0][j] == tws) { // Trouver la ligne correspondant à l'angle d'attaque (tws)
-               y = j;
+                y = j;
             }
         }
     }
