@@ -1,4 +1,4 @@
-QT       += core gui serialbus charts
+QT       += core gui network serialbus charts
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -13,13 +13,24 @@ SOURCES += \
     ihm.cpp \
     simulateur.cpp \
     modbus_srv.cpp \
-    polaire.cpp
+    polaire.cpp \
+    qamabstractserver.cpp \
+    qammodbusmap.cpp \
+    qammodbusdata.cpp \
+    qamtcpserver.cpp \
+    qamtcpconnection.cpp
+
 
 HEADERS += \
     ihm.h \
     simulateur.h \
     modbus_srv.h \
-    polaire.h
+    polaire.h \
+    qamabstractserver.h \
+    qammodbusmap.h \
+    qammodbusdata.h \
+    qamtcpserver.h \
+    qamtcpconnection.h
 
 FORMS += \
     ihm.ui
@@ -63,6 +74,7 @@ contains(ANDROID_TARGET_ARCH,arm64-v8a) {
 
 RESOURCES += \
     Class40.pol \
+    S420-6-API.csv \
     images/icon_minus.png \
     images/icon_plus.png \
     images/background.png \
