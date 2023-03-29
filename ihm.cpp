@@ -41,11 +41,18 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     QFontDatabase::addApplicationFont(":/font/RobotoMono.ttf");
     QFontDatabase::addApplicationFont(":/font/Poppins.ttf");
     QFont roboto("Roboto Mono", 14, QFont::Bold);
+    QFont poppins("Poppins", 12, QFont::Bold);
     roboto.setStyleStrategy(QFont::PreferAntialias);
+    poppins.setStyleStrategy(QFont::PreferAntialias);
     ui->angleSpinBox->setFont(roboto);
     ui->forceSpinBox->setFont(roboto);
     ui->hauteurSpinBox->setFont(roboto);
     ui->vitesseSpinBox->setFont(roboto);
+
+    ui->angleText->setFont(poppins);
+    ui->forceText->setFont(poppins);
+    ui->hauteurText->setFont(poppins);
+    ui->vitesseText->setFont(poppins);
 
     auto lineEditAngle = ui->angleSpinBox->findChild<QLineEdit*>();
     auto lineEditForce = ui->forceSpinBox->findChild<QLineEdit*>();
