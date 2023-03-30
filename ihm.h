@@ -10,9 +10,9 @@
 #include "simulateur.h"
 #include "modbus_srv.h"
 #include <QDebug>
-#include <QTimer>
 #include <QPropertyAnimation>
 #include <QObject>
+#include <QMouseEvent>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class IHM; }
@@ -44,6 +44,7 @@ private:
     QPixmap rowImage;
     QPixmap pitchImage;
     QPixmap windImage;
+    QTimer *timeChange;
 protected:
     void resizeEvent(QResizeEvent *event)   override;
 };
