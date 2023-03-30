@@ -239,7 +239,7 @@ QProgressBar::chunk {
       <enum>QLayout::SetMinimumSize</enum>
      </property>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout">
+      <layout class="QVBoxLayout" name="angleLayout">
        <property name="sizeConstraint">
         <enum>QLayout::SetDefaultConstraint</enum>
        </property>
@@ -270,10 +270,13 @@ QProgressBar::chunk {
          <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
+         <property name="textInteractionFlags">
+          <set>Qt::NoTextInteraction</set>
+         </property>
         </widget>
        </item>
        <item>
-        <widget class="QSpinBox" name="angleSpinBox">
+        <widget class="MySpinBox" name="angleSpinBox">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -282,13 +285,13 @@ QProgressBar::chunk {
          </property>
          <property name="minimumSize">
           <size>
-           <width>170</width>
+           <width>175</width>
            <height>42</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>107</width>
+           <width>175</width>
            <height>42</height>
           </size>
          </property>
@@ -345,6 +348,9 @@ QSpinBox:down-button {
          <property name="accelerated">
           <bool>true</bool>
          </property>
+         <property name="keyboardTracking">
+          <bool>true</bool>
+         </property>
          <property name="suffix">
           <string>°</string>
          </property>
@@ -359,7 +365,7 @@ QSpinBox:down-button {
       </layout>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
+      <layout class="QVBoxLayout" name="forceLayout">
        <item>
         <widget class="QLabel" name="forceText">
          <property name="sizePolicy">
@@ -373,6 +379,7 @@ QSpinBox:down-button {
            <family>Poppins</family>
            <pointsize>12</pointsize>
            <bold>true</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
           </font>
          </property>
          <property name="styleSheet">
@@ -386,10 +393,13 @@ QSpinBox:down-button {
          <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
+         <property name="textInteractionFlags">
+          <set>Qt::NoTextInteraction</set>
+         </property>
         </widget>
        </item>
        <item>
-        <widget class="QSpinBox" name="forceSpinBox">
+        <widget class="MySpinBox" name="forceSpinBox">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -398,13 +408,13 @@ QSpinBox:down-button {
          </property>
          <property name="minimumSize">
           <size>
-           <width>170</width>
+           <width>175</width>
            <height>42</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>170</width>
+           <width>175</width>
            <height>42</height>
           </size>
          </property>
@@ -455,7 +465,7 @@ QSpinBox:down-button {
       </layout>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
+      <layout class="QVBoxLayout" name="hauteurLayout">
        <item>
         <widget class="QLabel" name="hauteurText">
          <property name="sizePolicy">
@@ -469,6 +479,7 @@ QSpinBox:down-button {
            <family>Poppins</family>
            <pointsize>12</pointsize>
            <bold>true</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
           </font>
          </property>
          <property name="styleSheet">
@@ -482,10 +493,13 @@ QSpinBox:down-button {
          <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
+         <property name="textInteractionFlags">
+          <set>Qt::NoTextInteraction</set>
+         </property>
         </widget>
        </item>
        <item>
-        <widget class="QDoubleSpinBox" name="hauteurSpinBox">
+        <widget class="MyDoubleSpinBox" name="hauteurSpinBox">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -494,13 +508,13 @@ QSpinBox:down-button {
          </property>
          <property name="minimumSize">
           <size>
-           <width>170</width>
+           <width>175</width>
            <height>42</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>170</width>
+           <width>175</width>
            <height>42</height>
           </size>
          </property>
@@ -561,7 +575,7 @@ QDoubleSpinBox:down-button {
       </layout>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_4">
+      <layout class="QVBoxLayout" name="vitesseLayout">
        <item>
         <widget class="QLabel" name="vitesseText">
          <property name="sizePolicy">
@@ -581,6 +595,7 @@ QDoubleSpinBox:down-button {
            <family>Poppins</family>
            <pointsize>12</pointsize>
            <bold>true</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
           </font>
          </property>
          <property name="styleSheet">
@@ -594,10 +609,13 @@ QDoubleSpinBox:down-button {
          <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
+         <property name="textInteractionFlags">
+          <set>Qt::NoTextInteraction</set>
+         </property>
         </widget>
        </item>
        <item>
-        <widget class="QDoubleSpinBox" name="vitesseSpinBox">
+        <widget class="MyDoubleSpinBox" name="vitesseSpinBox">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -623,6 +641,12 @@ QDoubleSpinBox:down-button {
            <bold>true</bold>
            <stylestrategy>PreferAntialias</stylestrategy>
           </font>
+         </property>
+         <property name="acceptDrops">
+          <bool>false</bool>
+         </property>
+         <property name="autoFillBackground">
+          <bool>false</bool>
          </property>
          <property name="styleSheet">
           <string notr="true">QDoubleSpinBox{
@@ -663,19 +687,19 @@ QDoubleSpinBox:down-button {
           <bool>true</bool>
          </property>
          <property name="suffix">
-          <string> m/s</string>
+          <string>m/s</string>
          </property>
          <property name="decimals">
           <number>1</number>
          </property>
          <property name="minimum">
-          <double>2.000000000000000</double>
+          <double>-20.000000000000000</double>
          </property>
          <property name="maximum">
           <double>20.000000000000000</double>
          </property>
          <property name="singleStep">
-          <double>0.100000000000000</double>
+          <double>1.000000000000000</double>
          </property>
          <property name="value">
           <double>2.000000000000000</double>
@@ -688,6 +712,18 @@ QDoubleSpinBox:down-button {
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MySpinBox</class>
+   <extends>QSpinBox</extends>
+   <header location="global">myspinbox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>MyDoubleSpinBox</class>
+   <extends>QDoubleSpinBox</extends>
+   <header>mydoublespinbox.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
