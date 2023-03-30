@@ -23,6 +23,8 @@ SOURCES += \
 
 HEADERS += \
     ihm.h \
+    mydoublespinbox.h \
+    myspinbox.h \
     simulateur.h \
     modbus_srv.h \
     polaire.h \
