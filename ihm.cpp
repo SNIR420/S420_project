@@ -8,7 +8,6 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     //Init YAW
     scene = new QGraphicsScene(ui->graphicsViewYaw->rect(), this);
     centerImage = QPixmap(":/images/Vue_top_boat.png");
-
     centerImageItem = new QGraphicsPixmapItem(centerImage);
     centerImageItem->setPos((ui->graphicsViewYaw->width() - centerImage.width()) / 2, (ui->graphicsViewYaw->height() - centerImage.height()) / 2);
     centerImageItem->setTransformOriginPoint(centerImage.width() / 2, centerImage.height() / 2); // Définir l'origine au centre de l'image
@@ -84,43 +83,18 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
         if (lineEditVitesse->hasSelectedText())    lineEditVitesse->deselect();
     });
 
-    connect(ui->angleSpinBox, &QSpinBox::valueChanged, [=](){
+    connect(ui->angleSpinBox, &MySpinBox::ButtonReleased, [=]() {
         setAngleVent(ui->angleSpinBox->value());
     });
-    connect(ui->forceSpinBox, &QSpinBox::valueChanged, [=](){
+    connect(ui->forceSpinBox, &MySpinBox::ButtonReleased, [=]() {
         setTws(ui->forceSpinBox->value());
     });
-    connect(ui->hauteurSpinBox, &QDoubleSpinBox::valueChanged, [=](){
+    connect(ui->hauteurSpinBox, &MyDoubleSpinBox::ButtonReleased, [=]() {
         setHauteurVague(ui->hauteurSpinBox->value());
     });
-    connect(ui->vitesseSpinBox, &QDoubleSpinBox::valueChanged, [=](){
+    connect(ui->vitesseSpinBox, &MyDoubleSpinBox::ButtonReleased, [=]() {
         setVitesseVague(ui->vitesseSpinBox->value());
     });
-    /*QLineSeries *series = new QLineSeries();
-    float x;
-    for (x = 4.7; x <= 10.9; x += 0.1) {
-        float y = 0 * sin(x);
-        series->append(x, y);
-    }
-
-    QChart *chart = new QChart();
-    chart->legend()->hide();
-    chart->addSeries(series);
-    chart->createDefaultAxes();
-
-    QValueAxis *axisY = qobject_cast<QValueAxis*>(chart->axisY());
-    if (axisY) {
-        axisY->setRange(0, 20);
-    }
-
-    QChartView *chartView = new QChartView(chart);
-    chartView->setRenderHint(QPainter::Antialiasing);
-
-    ui->chartLayout->addWidget(chartView);
-    chartView->resize(ui->chartLayout->sizeHint());
-    chartView->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-    chart->axisX()->hide();
-    chart->axisY()->hide();*/
 
     m_modbusserver = new Modbus_SRV(":/S420-6-API.csv", this);
     m_simulateur = new Simulateur(":/Class40.pol", m_modbusserver, this);
@@ -157,8 +131,6 @@ void IHM::setAngleVent(int angleDeg){
     QPixmap scaledWindImage = windImage.scaled(QSize(windImage.height() * scaleFactor, windImage.width() * scaleFactor), Qt::KeepAspectRatio, Qt::SmoothTransformation);    // Redimensionnement de l'item pixmap
     topLeftImageItem = new QGraphicsPixmapItem(scaledWindImage);
 
-    //qDebug() << "Radius X" << ui->graphicsViewYaw->width()/3;
-    //qDebug() << "Radius Y" << ui->graphicsViewYaw->height()/3;
     double angleRad = qDegreesToRadians(angleDeg);
 
     // Calcule les coordonées selon le cos/sin de l'angle en radian
@@ -168,7 +140,7 @@ void IHM::setAngleVent(int angleDeg){
 
     // Définir la position de l'image et la faire pivoter autour de l'origine de backgroundItem
     topLeftImageItem->setPos(x, y+(80*scaleFactor));
-    //qDebug() << "Scale :" << (80*scaleFactor);
+
     //ajoute l'image à la scene
     scene->addItem(topLeftImageItem);
 
@@ -205,42 +177,9 @@ void IHM::setTws(int tws){
     }
     ui->progressBar->setValue(tws);
     m_modbusserver->setTws(tws);
-    //TODO: style css pour la barre parce que le vert est moche ui->progressBar->setStyleSpeed();
 }
 
 void IHM::setHauteurVague(float hauteur){
-    /*auto item = ui->chartLayout->itemAt(0);
-    // Vérifier si l'objet est un graphique
-    if (auto plot = qobject_cast<QChartView *>(item->widget())) {
-        ui->chartLayout->removeItem(item);
-        delete plot;
-    }
-    QLineSeries *series = new QLineSeries();
-    float x;
-    for (x = 4.7; x <= 10.9; x += 0.1) {
-        float y = hauteur * sin(x);
-        series->append(x, y);
-    }
-
-    QChart *chart = new QChart();
-    chart->legend()->hide();
-    chart->addSeries(series);
-    chart->createDefaultAxes();
-
-    QValueAxis *axisY = qobject_cast<QValueAxis*>(chart->axisY());
-    if (axisY) {
-        axisY->setRange(-1*hauteur, 20);
-    }
-
-    QChartView *chartView = new QChartView(chart);
-    chartView->setRenderHint(QPainter::Antialiasing);
-
-    ui->chartLayout->addWidget(chartView);
-    chartView->resize(ui->chartLayout->sizeHint());
-    chartView->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-    chart->axisX()->hide();
-    chart->axisY()->hide();*/
-
     m_modbusserver->setHautvague(hauteur);
 }
 
