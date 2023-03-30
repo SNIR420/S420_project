@@ -11,9 +11,9 @@ class Modbus_SRV : public QObject
 public:
     explicit Modbus_SRV(const QString& configFile, QObject* parent = nullptr) ;
     void stopServer();
-    float getVitazimut( );
+    float getVitazimut();
     float getRoulis();
-    float getTangage( );
+    float getTangage();
     float getPosazimut();
     float getHautvague();
     float getVitvague();
