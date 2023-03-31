@@ -12,6 +12,7 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     centerImageItem->setPos((ui->graphicsViewYaw->width() - centerImage.width()) / 2, (ui->graphicsViewYaw->height() - centerImage.height()) / 2);
     centerImageItem->setTransformOriginPoint(centerImage.width() / 2, centerImage.height() / 2); // Définir l'origine au centre de l'image
     centerImageItem->setData(Qt::UserRole, "centerImage");
+    centerImageItem->setTransformationMode(Qt::SmoothTransformation);
     scene->addItem(centerImageItem);
     ui->graphicsViewYaw->setScene(scene);
 
@@ -23,6 +24,7 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     rowImageItem->setPos((ui->graphicsViewRow->width() - rowImage.width()) / 2, (ui->graphicsViewRow->height() - rowImage.height()) / 2);
     rowImageItem->setTransformOriginPoint(rowImage.width()/2, rowImage.height()-5); // Définir l'origine au centre de l'image
     rowImageItem->setData(Qt::UserRole, "rowImage");
+    rowImageItem->setTransformationMode(Qt::SmoothTransformation);
     sceneRow->addItem(rowImageItem);
     ui->graphicsViewRow->setScene(sceneRow);
 
@@ -34,6 +36,7 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     pitchImageItem->setPos((ui->graphicsViewRow->width() - pitchImage.width()) / 2, (ui->graphicsViewPitch->height() - pitchImage.height()) / 2);
     pitchImageItem->setTransformOriginPoint(pitchImage.width()/2, pitchImage.height()-20); // Définir l'origine au centre de l'image
     pitchImageItem->setData(Qt::UserRole, "pitchImage");
+    pitchImageItem->setTransformationMode(Qt::SmoothTransformation);
     scenePitch->addItem(pitchImageItem);
     ui->graphicsViewPitch->setScene(scenePitch);
 
@@ -82,9 +85,11 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     connect(lineEditVitesse, &QLineEdit::selectionChanged, [=](){
         if (lineEditVitesse->hasSelectedText())    lineEditVitesse->deselect();
     });
-
+    connect(ui->angleSpinBox, &QSpinBox::valueChanged, [=]() {
+        setUiAngleVent(ui->angleSpinBox->value());
+    });
     connect(ui->angleSpinBox, &MySpinBox::ButtonReleased, [=]() {
-        setAngleVent(ui->angleSpinBox->value());
+        sendSwa();
     });
     connect(ui->forceSpinBox, &MySpinBox::ButtonReleased, [=]() {
         setTws(ui->forceSpinBox->value());
@@ -96,6 +101,8 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
         setVitesseVague(ui->vitesseSpinBox->value());
     });
 
+    connect(ui->graphicsViewYaw, &MyGraphicsView::pressed, this, &IHM::onGraphicsViewPressed);
+    connect(ui->graphicsViewYaw, &MyGraphicsView::pressReleased, this, &IHM::sendSwa);
     m_modbusserver = new Modbus_SRV(":/S420-6-API.csv", this);
     m_simulateur = new Simulateur(":/Class40.pol", m_modbusserver, this);
 
@@ -108,8 +115,20 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     setVitesseVague(ui->vitesseSpinBox->value());
 }
 
+void IHM::onGraphicsViewPressed(const QPoint& pos){
+    MyGraphicsView* view = ui->graphicsViewYaw;
+    QPointF center = view->mapToScene(view->rect().center());
+    QPointF clickPos = view->mapToScene(pos);
+    QPointF vector = clickPos - center;
+    int angle = 1;
+    angle = atan2(vector.y(), vector.x()) * 180 / M_PI + 90;
+    if (angle < 0) {
+        angle += 360;
+    }
+    ui->angleSpinBox->setValue(angle);
+}
 
-void IHM::setAngleVent(int angleDeg){
+void IHM::setUiAngleVent(int angleDeg){
     //crée un qpixmap à partir de l'emplacement de l'image à utiliser
     windImage = QPixmap(":/images/wind.png");
     angleDeg = (angleDeg+90)%360;
@@ -150,13 +169,17 @@ void IHM::setAngleVent(int angleDeg){
     // Faire tourner l'image selon l'angle donné
     topLeftImageItem->setRotation(angleDeg);
 
+    topLeftImageItem->setTransformationMode(Qt::SmoothTransformation);
+
     // Attribuer la donné topLeftImage pour identifier l'image lors de la création de la prochaine et pouvoir la supprimer
     topLeftImageItem->setData(Qt::UserRole, "topLeftImage");
 
     //Réactualiser la scène pour éviter les bug visuels
     scene->update();
+}
 
-    m_modbusserver->setSwa(angleDeg);
+void IHM::sendSwa(){
+    m_modbusserver->setSwa(ui->angleSpinBox->value());
 }
 
 void IHM::setTws(int tws){

@@ -24,6 +24,7 @@ SOURCES += \
 HEADERS += \
     ihm.h \
     mydoublespinbox.h \
+    mygraphicsview.h \
     myspinbox.h \
     simulateur.h \
     modbus_srv.h \

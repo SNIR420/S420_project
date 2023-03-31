@@ -29,7 +29,9 @@ private slots:
     void setVitesseVague(double vitesse);
     void setTws(int tws);
     void updateBoatRowPitch();
-    void setAngleVent(int angleDeg);
+    void setUiAngleVent(int angleDeg);
+    void onGraphicsViewPressed(const QPoint& pos);
+    void sendSwa();
 private:
     Ui::IHM *ui;
     QGraphicsScene *scene;

@@ -15,99 +15,7 @@ Modbus_SRV::Modbus_SRV(const QString& configFile, QObject* parent )
     // server TCP
 
     m_server = new QamTcpServer( m_map, this ) ;
-    m_server->start(502);
-
-    // exemples de lecture de registres
-
-    QString res ;
-
-    qDebug() << "lecture de : lect-roulis,  type : Float <-- " ;
-    m_table = QamModbusMap::HoldingRegister ;
-    res = m_map->remoteValue(m_table, "lect-roulis" ) ;
-    qDebug() << res.toFloat()  ;
-
-    qDebug() << "lecture de : lect-tangage,  type : Float <-- " ;
-    m_table = QamModbusMap::HoldingRegister ;
-    res = m_map->remoteValue(m_table, "lect-tangage" ) ;
-    qDebug() << res.toFloat()  ;
-
-    qDebug() << "lecture de : lect-bome,  type : Float <-- " ;
-    m_table = QamModbusMap::HoldingRegister ;
-    res = m_map->remoteValue(m_table, "lect-bome" ) ;
-    qDebug() << res.toFloat()  ;
-
-    qDebug() << "lecture de : lect-vitazimut,  type : Float <-- " ;
-    m_table = QamModbusMap::HoldingRegister ;
-    res = m_map->remoteValue(m_table, "lect-vitazimut" ) ;
-    qDebug() << res.toFloat()  ;
-
-    qDebug() << "lecture de : cons-hautvague,  type : Float <-- " ;
-    m_table = QamModbusMap::HoldingRegister ;
-    res = m_map->remoteValue(m_table, "cons-hautvague" ) ;
-    qDebug() << res.toFloat()  ;
-
-    qDebug() << "lecture de : cons-intervague,  type : Float <-- " ;
-    m_table = QamModbusMap::HoldingRegister ;
-    res = m_map->remoteValue(m_table, "cons-intervague" ) ;
-    qDebug() << res.toFloat()  ;
-
-    qDebug() << "lecture de : cons-vitvague,  type : Float <-- " ;
-    m_table = QamModbusMap::HoldingRegister ;
-    res = m_map->remoteValue(m_table, "cons-vitvague" ) ;
-    qDebug() << res.toFloat()  ;
-
-    qDebug() << "lecture de : cons-tws,  type : Float <-- " ;
-    m_table = QamModbusMap::HoldingRegister ;
-    res = m_map->remoteValue(m_table, "cons-tws" ) ;
-    qDebug() << res.toFloat()  ;
-    // exemples d'écriture de registres
-
-
-    qDebug() << "écriture de : cons-hautvague,  type : Float --> " ;
-    m_table = QamModbusMap::HoldingRegister ;
-    res.setNum(3) ;
-    m_map->setRemoteValue(m_table, "cons-hautvague", res ) ;
-    qDebug() << m_map->localValue(m_table, "cons-hautvague").toFloat()  ;
-
-    qDebug() << "écriture de : cons-vitvague,  type : Float --> " ;
-    m_table = QamModbusMap::HoldingRegister ;
-    res.setNum(3) ;
-    m_map->setRemoteValue(m_table, "cons-vitvague", res ) ;
-    qDebug() << m_map->localValue(m_table, "cons-vitvague").toFloat() ;
-
-    qDebug() << "écriture de : cons-intervague,  type : Float --> " ;
-    m_table = QamModbusMap::HoldingRegister ;
-    res.setNum(6) ;
-    m_map->setRemoteValue(m_table, "cons-intervague", res ) ;
-    qDebug() << m_map->localValue(m_table, "cons-intervague").toFloat()  ;
-
-    qDebug() << "écriture de : cons-roulis,  type : Float --> " ;
-    m_table = QamModbusMap::HoldingRegister ;
-    res.setNum(3) ;
-    m_map->setRemoteValue(m_table, "cons-roulis", res ) ;
-    qDebug() << m_map->localValue(m_table, "cons-roulis").toFloat()  ;
-
-    qDebug() << "écriture de : cons-tangage,  type : Float --> " ;
-    m_table = QamModbusMap::HoldingRegister ;
-    res.setNum(3) ;
-    m_map->setRemoteValue(m_table, "cons-tangage", res ) ;
-    qDebug() << m_map->localValue(m_table, "cons-tangage").toFloat()  ;
-
-    qDebug() << "écriture de : cons-vitazimut,  type : Float --> " ;
-    m_table = QamModbusMap::HoldingRegister ;
-    res.setNum(3) ;
-    m_map->setRemoteValue(m_table, "cons-vitazimut", res ) ;
-    qDebug() << m_map->localValue(m_table, "cons-vitazimut").toFloat()  ;
-
-    qDebug() << "écriture de : cons-tws,  type : Float --> " ;
-    m_table = QamModbusMap::HoldingRegister ;
-    res.setNum(3) ;
-    m_map->setRemoteValue(m_table, "cons-tws", res ) ;
-    qDebug() << m_map->localValue(m_table, "cons-tws").toFloat()  ;
-
-
-    qDebug() << "Ctrl-C to quit..."  ;
-
+    m_server->start(4000);
 }
 
 float Modbus_SRV::getPosazimut()
@@ -115,9 +23,9 @@ float Modbus_SRV::getPosazimut()
     return GPosazimut;
 }
 
-float Modbus_SRV::getRoulis()
-{
-    return GRoulis;
+float Modbus_SRV::getRoulis(){
+    m_table = QamModbusMap::HoldingRegister ;
+    return m_map->value(m_table, "cons-roulis").toFloat();
 }
 
 float Modbus_SRV::getTangage()
@@ -172,7 +80,9 @@ void Modbus_SRV::setPosazimut(float SPosAzimut)
 
 void Modbus_SRV::setRoulis(float SRouLis)
 {
-    GRoulis = SRouLis;
+    m_table = QamModbusMap::HoldingRegister ;
+    QString value = QString::number(SRouLis);
+    m_map->setValue(m_table, "cons-roulis", value);
 }
 
 void Modbus_SRV::setTangage(float STanGage)
