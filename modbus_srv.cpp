@@ -117,7 +117,8 @@ return GPosazimut;
 
 float Modbus_SRV::getRoulis()
 {
-return GRoulis;
+    m_table = QamModbusMap::HoldingRegister ;
+    return m_map->value(m_table, "cons-roulis").toFloat();
 }
 
 float Modbus_SRV::getTangage()
@@ -167,7 +168,9 @@ GPosazimut=SPosAzimut;
 
 void Modbus_SRV::setRoulis(float SRouLis)
 {
- GRoulis = SRouLis;
+    m_table = QamModbusMap::HoldingRegister ;
+    QString value = QString::number(SRouLis);
+    m_map->setValue(m_table, "cons-roulis", value);
 }
 
 void Modbus_SRV::setTangage(float STanGage)

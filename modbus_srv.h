@@ -36,7 +36,7 @@ signals:
 
 private:
     float GVitAzimut;
-    float GRoulis;
+    //float GRoulis;
     float GTangage;
     float GPosazimut;
     float GHautvague;
@@ -46,7 +46,7 @@ private:
     float SHautvague;
     float SVitvague;
     float SIntervague;
-    float SRoulis;
+    //float SRoulis;
     float STangage;
     float SVitazimut;
     float STws;
