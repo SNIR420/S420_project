@@ -50,7 +50,7 @@
                          <object>{1eb718cc-8aca-46d1-894e-ac6760b601ae}</object>
                          <name>IHM</name>
                          <pos>x:-240;y:325</pos>
-                         <rect>x:-115;y:-185;w:230;h:370</rect>
+                         <rect>x:-40;y:-30;w:80;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
@@ -70,8 +70,8 @@
                          </base-DElement>
                          <object>{b639a996-18f1-46c1-b259-58cd309430b9}</object>
                          <name>Modbus_SRV</name>
-                         <pos>x:215;y:325</pos>
-                         <rect>x:-140;y:-255;w:280;h:510</rect>
+                         <pos>x:-20;y:325</pos>
+                         <rect>x:-45;y:-30;w:90;h:60</rect>
                          <visual-role>8</visual-role>
                         </DObject>
                        </base-DObject>
@@ -91,8 +91,8 @@
                          </base-DElement>
                          <object>{a49c8b15-3ed9-4567-bfbf-632ef6950f68}</object>
                          <name>Simulateur</name>
-                         <pos>x:760;y:325</pos>
-                         <rect>x:-265;y:-255;w:530;h:510</rect>
+                         <pos>x:145;y:325</pos>
+                         <rect>x:-40;y:-30;w:80;h:60</rect>
                          <visual-role>9</visual-role>
                         </DObject>
                        </base-DObject>
@@ -112,8 +112,8 @@
                          </base-DElement>
                          <object>{081faab9-af33-43cb-8853-b204942e8be0}</object>
                          <name>Polaire</name>
-                         <pos>x:1405;y:325</pos>
-                         <rect>x:-175;y:-100;w:350;h:200</rect>
+                         <pos>x:310;y:325</pos>
+                         <rect>x:-40;y:-30;w:80;h:60</rect>
                          <visual-role>7</visual-role>
                         </DObject>
                        </base-DObject>
@@ -138,16 +138,10 @@
                        </base-DRelation>
                        <a>
                         <DAssociationEnd>
-                         <cradinality>1</cradinality>
                          <navigable>true</navigable>
                          <kind>2</kind>
                         </DAssociationEnd>
                        </a>
-                       <b>
-                        <DAssociationEnd>
-                         <cradinality>- m_mobbusserver</cradinality>
-                        </DAssociationEnd>
-                       </b>
                       </DAssociation>
                      </instance>
                     </item>
@@ -204,16 +198,10 @@
                        </base-DRelation>
                        <a>
                         <DAssociationEnd>
-                         <cradinality>1</cradinality>
                          <navigable>true</navigable>
                          <kind>2</kind>
                         </DAssociationEnd>
                        </a>
-                       <b>
-                        <DAssociationEnd>
-                         <cradinality>- polaire</cradinality>
-                        </DAssociationEnd>
-                       </b>
                       </DAssociation>
                      </instance>
                     </item>
@@ -247,8 +235,8 @@
                          </base-DElement>
                          <object>{e5c64291-5d31-4a85-9e14-61fc9ed27de4}</object>
                          <name>IHM</name>
-                         <pos>x:-325;y:-70</pos>
-                         <rect>x:-40;y:-45;w:80;h:90</rect>
+                         <pos>x:-330;y:-75</pos>
+                         <rect>x:-40;y:-30;w:80;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
@@ -390,7 +378,7 @@
                          </base-DElement>
                          <object>{c82e4575-413b-42a3-9cd9-8b0f68d11893}</object>
                          <name>QThread</name>
-                         <pos>x:300;y:-85</pos>
+                         <pos>x:35;y:150</pos>
                          <rect>x:-40;y:-30;w:80;h:60</rect>
                          <visual-role>6</visual-role>
                         </DObject>
@@ -410,7 +398,7 @@
                          </base-DElement>
                          <object>{d2952442-d055-4dc9-be0c-e704c015f773}</object>
                          <name>QObject</name>
-                         <pos>x:590;y:-265</pos>
+                         <pos>x:320;y:5</pos>
                          <rect>x:-40;y:-30;w:80;h:60</rect>
                          <visual-role>6</visual-role>
                         </DObject>
@@ -435,7 +423,7 @@
                           <qlist>
                            <item>
                             <DRelation--IntermediatePoint>
-                             <pos>x:305;y:30</pos>
+                             <pos>x:10;y:225</pos>
                             </DRelation--IntermediatePoint>
                            </item>
                           </qlist>
@@ -457,7 +445,7 @@
                          </base-DElement>
                          <object>{37226c86-bed5-40bb-920c-ac9f2bac7040}</object>
                          <name>QTimer</name>
-                         <pos>x:815;y:-85</pos>
+                         <pos>x:200;y:200</pos>
                          <rect>x:-40;y:-30;w:80;h:60</rect>
                          <visual-role>6</visual-role>
                         </DObject>
@@ -482,7 +470,7 @@
                           <qlist>
                            <item>
                             <DRelation--IntermediatePoint>
-                             <pos>x:820;y:10</pos>
+                             <pos>x:170;y:240</pos>
                             </DRelation--IntermediatePoint>
                            </item>
                           </qlist>
@@ -509,12 +497,12 @@
                           <qlist>
                            <item>
                             <DRelation--IntermediatePoint>
-                             <pos>x:1415;y:-175</pos>
+                             <pos>x:315;y:215</pos>
                             </DRelation--IntermediatePoint>
                            </item>
                            <item>
                             <DRelation--IntermediatePoint>
-                             <pos>x:615;y:-175</pos>
+                             <pos>x:315;y:140</pos>
                             </DRelation--IntermediatePoint>
                            </item>
                           </qlist>
@@ -541,7 +529,7 @@
                           <qlist>
                            <item>
                             <DRelation--IntermediatePoint>
-                             <pos>x:590;y:-30</pos>
+                             <pos>x:135;y:160</pos>
                             </DRelation--IntermediatePoint>
                            </item>
                           </qlist>
@@ -568,12 +556,12 @@
                           <qlist>
                            <item>
                             <DRelation--IntermediatePoint>
-                             <pos>x:200;y:-175</pos>
+                             <pos>x:-35;y:75</pos>
                             </DRelation--IntermediatePoint>
                            </item>
                            <item>
                             <DRelation--IntermediatePoint>
-                             <pos>x:565;y:-175</pos>
+                             <pos>x:35;y:15</pos>
                             </DRelation--IntermediatePoint>
                            </item>
                           </qlist>
@@ -600,12 +588,12 @@
                           <qlist>
                            <item>
                             <DRelation--IntermediatePoint>
-                             <pos>x:-250;y:760</pos>
+                             <pos>x:-250;y:495</pos>
                             </DRelation--IntermediatePoint>
                            </item>
                            <item>
                             <DRelation--IntermediatePoint>
-                             <pos>x:730;y:755</pos>
+                             <pos>x:145;y:500</pos>
                             </DRelation--IntermediatePoint>
                            </item>
                           </qlist>
@@ -614,16 +602,10 @@
                        </base-DRelation>
                        <a>
                         <DAssociationEnd>
-                         <cradinality>1</cradinality>
                          <navigable>true</navigable>
                          <kind>2</kind>
                         </DAssociationEnd>
                        </a>
-                       <b>
-                        <DAssociationEnd>
-                         <cradinality>- m_simulateur</cradinality>
-                        </DAssociationEnd>
-                       </b>
                       </DAssociation>
                      </instance>
                     </item>
@@ -644,12 +626,12 @@
                           <qlist>
                            <item>
                             <DRelation--IntermediatePoint>
-                             <pos>x:-250;y:760</pos>
+                             <pos>x:-250;y:495</pos>
                             </DRelation--IntermediatePoint>
                            </item>
                            <item>
                             <DRelation--IntermediatePoint>
-                             <pos>x:730;y:755</pos>
+                             <pos>x:145;y:500</pos>
                             </DRelation--IntermediatePoint>
                            </item>
                           </qlist>
@@ -661,7 +643,7 @@
                     </item>
                    </qlist>
                   </elements>
-                  <last-modified>1680004667614</last-modified>
+                  <last-modified>1680553578274</last-modified>
                   <toolbarid>General</toolbarid>
                  </MDiagram>
                 </base-MDiagram>
@@ -707,16 +689,10 @@
                            </base-MRelation>
                            <a>
                             <MAssociationEnd>
-                             <cardinality>1</cardinality>
                              <navigable>true</navigable>
                              <kind>2</kind>
                             </MAssociationEnd>
                            </a>
-                           <b>
-                            <MAssociationEnd>
-                             <cardinality>- m_mobbusserver</cardinality>
-                            </MAssociationEnd>
-                           </b>
                           </MAssociation>
                          </instance>
                         </target>
@@ -884,16 +860,10 @@
                            </base-MRelation>
                            <a>
                             <MAssociationEnd>
-                             <cardinality>1</cardinality>
                              <navigable>true</navigable>
                              <kind>2</kind>
                             </MAssociationEnd>
                            </a>
-                           <b>
-                            <MAssociationEnd>
-                             <cardinality>- m_simulateur</cardinality>
-                            </MAssociationEnd>
-                           </b>
                           </MAssociation>
                          </instance>
                         </target>
@@ -927,150 +897,6 @@
                   </relations>
                  </MObject>
                 </base-MObject>
-                <members>
-                 <qlist>
-                  <item>
-                   <MClassMember>
-                    <uid>{efb9617d-8f1b-4390-beeb-3e1f8ef5b3a2}</uid>
-                    <type>1</type>
-                    <declaration>- QGraphicsScene *scene</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{6bd6438b-e55f-4312-b9c8-17bd4d124b27}</uid>
-                    <type>1</type>
-                    <declaration>- QGraphicsScene *sceneRow</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{8b4685b6-22ac-4f56-9182-8f761aed7499}</uid>
-                    <type>1</type>
-                    <declaration>- QGraphicsScene *scenePitch</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{70681184-b8ff-4621-bb9d-7eff31abdf4e}</uid>
-                    <type>1</type>
-                    <declaration>- Simulateur *m_simulateur</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{b8be1971-9f06-4f44-8272-015c6292b65b}</uid>
-                    <type>1</type>
-                    <declaration>- Modbus_SRV *m_modbusserver</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{b7c4d1d5-4ffb-493a-8839-a2b860ca1606}</uid>
-                    <type>1</type>
-                    <declaration>- QGraphicsPixmapItem *centerImageItem</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{e861ea90-814d-49eb-ac25-35cc3c97f9f0}</uid>
-                    <type>1</type>
-                    <declaration>- QGraphicsPixmapItem *rowImageItem</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{ed1ef2b4-b538-4d22-8347-5e7b54ce4aac}</uid>
-                    <type>1</type>
-                    <declaration>- QGraphicsPixmapItem *pitchImageItem</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{b05546a5-e390-4462-bd72-b00c189dd443}</uid>
-                    <type>1</type>
-                    <declaration>- QPixmap centerImage</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{c712fc6d-a7b5-495b-a2de-d6dda611d1a6}</uid>
-                    <type>1</type>
-                    <declaration>- QPixmap rowImage</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{d1590394-7aa7-4fa2-87f3-3dde7ecfad82}</uid>
-                    <type>1</type>
-                    <declaration>- QPixmap pitchImage</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{bf348487-ba72-4c65-ad91-d2cc100443b5}</uid>
-                    <type>1</type>
-                    <declaration>- QPixmap windImage</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{bc50f97d-27a3-422a-b3a3-e56f43320ae3}</uid>
-                    <type>2</type>
-                    <declaration>-$ void setHauteurVague(float hauteur)</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{b011fb2b-25ec-458e-a121-a9cdf3df3016}</uid>
-                    <type>2</type>
-                    <declaration>-$ void setVitesseVague(double vitesse)</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{b8fc5bd9-7f2d-442a-b046-2545f2c24b24}</uid>
-                    <type>2</type>
-                    <declaration>-$ void setTws(int tws)</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{f37ed7f7-9bea-4266-a983-59f95deab3f6}</uid>
-                    <type>2</type>
-                    <declaration>-$ void updateBoatRowPitch()</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{4ae6d525-d71a-4196-9edb-a1fffe90e911}</uid>
-                    <type>2</type>
-                    <declaration>-$ void setAngleVent(int angleDeg)</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{bbc81021-1230-4b5b-99de-ea35d0aa1aea}</uid>
-                    <type>2</type>
-                    <declaration>+IHM(QWidget *parent = nullptr)</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{c2aad371-68e7-45be-a394-4026971053be}</uid>
-                    <type>2</type>
-                    <declaration>+~IHM()</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{8ad08756-8e13-4032-8b43-b14299902b92}</uid>
-                    <type>2</type>
-                    <declaration>#void resizeEvent(QResizeEvent *event)</declaration>
-                   </MClassMember>
-                  </item>
-                 </qlist>
-                </members>
                </MClass>
               </instance>
              </target>
@@ -1166,213 +992,6 @@
                   </relations>
                  </MObject>
                 </base-MObject>
-                <members>
-                 <qlist>
-                  <item>
-                   <MClassMember>
-                    <uid>{61804461-1ced-4cd2-a34b-2568f3db8507}</uid>
-                    <type>1</type>
-                    <declaration>- float GVitAzimut</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{cfc32eae-93e6-4b64-8220-690ac2bfe549}</uid>
-                    <type>1</type>
-                    <declaration>- float GRoulis</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{d0814d0c-d2a7-4417-801d-73a4f2c0bacc}</uid>
-                    <type>1</type>
-                    <declaration>- float GTangage</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{8e1d841f-098c-48a6-9c9a-e8765e2714db}</uid>
-                    <type>1</type>
-                    <declaration>- float GPosazimut</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{b3b6cbec-33f5-4b79-911c-23d032217c47}</uid>
-                    <type>1</type>
-                    <declaration>- float GHautvague</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{e76238b9-7c57-46d7-9aee-14945e0f2ba9}</uid>
-                    <type>1</type>
-                    <declaration>- float GVitvague</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{c2de066c-0728-44bd-add6-d9da1beeab61}</uid>
-                    <type>1</type>
-                    <declaration>- float GIntervague</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{c7cc3ded-afb5-4612-89ed-2a1f1175abd7}</uid>
-                    <type>1</type>
-                    <declaration>- float GTws</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{d8181839-c1eb-485c-9db0-db867ee39922}</uid>
-                    <type>1</type>
-                    <declaration>- int GSwa</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{aa063e03-1c2f-4022-9b6e-907896c8124f}</uid>
-                    <type>2</type>
-                    <declaration>+ explicit Modbus_SRV(QObject *parent = nullptr)</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{be6e8bda-d19e-49ee-89e8-8db0286aa3e5}</uid>
-                    <type>2</type>
-                    <declaration>+ void stopServer()</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{231f608f-9c08-4891-9627-4629293c1517}</uid>
-                    <type>2</type>
-                    <declaration>+ float getVitazimut( )</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{385c0e32-9242-4f3a-8a71-9ac234c8d64a}</uid>
-                    <type>2</type>
-                    <declaration>+ float getRoulis()</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{4f6b05bd-96f8-4ab0-9a8f-865e4a6bf6c8}</uid>
-                    <type>2</type>
-                    <declaration>+ float getTangage( )</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{512f0592-37a9-4776-a669-9df8aae6435e}</uid>
-                    <type>2</type>
-                    <declaration>+ float getPosazimut()</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{be170714-af0d-4e0b-be1e-7a0bbaf374c7}</uid>
-                    <type>2</type>
-                    <declaration>+ float getHautvague()</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{ea1d57ed-21a1-49b2-8f4a-1ce023f6ecaf}</uid>
-                    <type>2</type>
-                    <declaration>+ float getVitvague()</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{f31ed915-f8e6-4045-8b1d-3c17263ffc6e}</uid>
-                    <type>2</type>
-                    <declaration>+ float getIntervague()</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{e74da111-f062-430c-9748-5d3cceb0ba71}</uid>
-                    <type>2</type>
-                    <declaration>+ float getTws()</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{068c301f-499b-4cd5-b37c-1562ca23fac6}</uid>
-                    <type>2</type>
-                    <declaration>+ int getSwa()</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{b9eccdcd-8e39-4fcd-9ee9-a00b60ac1d02}</uid>
-                    <type>2</type>
-                    <declaration>+ void setHautvague( float SHautvague)</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{df2e78c8-b260-4285-8725-2128fa8f95fa}</uid>
-                    <type>2</type>
-                    <declaration>+ void setVitvague(float SVitvague)</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{372bf561-9e30-4fad-89c8-928a3fa09931}</uid>
-                    <type>2</type>
-                    <declaration>+ void setIntervague(float SIntervague)</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{9f572aab-a9bd-4418-86b5-e410615d0d4b}</uid>
-                    <type>2</type>
-                    <declaration>+ void setRoulis(float SRoulis)</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{b6d52bb3-5108-46ae-99a7-29e5cb55b221}</uid>
-                    <type>2</type>
-                    <declaration>+ void setTangage(float STangage)</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{88c29d45-8751-4bcf-b1f4-a3b12940fdb1}</uid>
-                    <type>2</type>
-                    <declaration>+ void setVitazimut(float SVitazimut)</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{d3955d98-100f-450c-aa87-ec83e5c27e49}</uid>
-                    <type>2</type>
-                    <declaration>+ void setTws(float STws)</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{76ace965-e490-4896-8de9-9a58ed79e85a}</uid>
-                    <type>2</type>
-                    <declaration>+ void setPosazimut(float SPosazimut)</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{21dc5068-9c36-43fb-a67d-6ed30c7db069}</uid>
-                    <type>2</type>
-                    <declaration>+ void setSwa(float SSwa)</declaration>
-                   </MClassMember>
-                  </item>
-                 </qlist>
-                </members>
                </MClass>
               </instance>
              </target>
@@ -1437,16 +1056,10 @@
                            </base-MRelation>
                            <a>
                             <MAssociationEnd>
-                             <cardinality>1</cardinality>
                              <navigable>true</navigable>
                              <kind>2</kind>
                             </MAssociationEnd>
                            </a>
-                           <b>
-                            <MAssociationEnd>
-                             <cardinality>- polaire</cardinality>
-                            </MAssociationEnd>
-                           </b>
                           </MAssociation>
                          </instance>
                         </target>
@@ -1601,213 +1214,6 @@
                   </relations>
                  </MObject>
                 </base-MObject>
-                <members>
-                 <qlist>
-                  <item>
-                   <MClassMember>
-                    <uid>{419d6120-6a5d-47a4-a5c6-faea4131f515}</uid>
-                    <type>1</type>
-                    <declaration>- double m_roulis</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{dce487d4-521d-4bd3-b7c1-931e4f19a226}</uid>
-                    <type>1</type>
-                    <declaration>- double m_tangage</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{d3ec2eb7-75e4-4f62-bc95-60d6be610bf2}</uid>
-                    <type>1</type>
-                    <declaration>- double m_vitesseAzimut</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{784fc9ce-e434-4706-ae3f-a9ba5657fa09}</uid>
-                    <type>1</type>
-                    <declaration>- QTime m_t0</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{ba0a70e3-c422-49f5-97c5-b2ee2fa54c54}</uid>
-                    <type>1</type>
-                    <declaration>- QTime m_t1</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{974abeb6-7c6d-436d-9b30-595a3c0641b0}</uid>
-                    <type>1</type>
-                    <declaration>- Modbus_SRV* m_modbusServer</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{a9ada8ab-d0c7-4e10-ae31-9e6a6e27753d}</uid>
-                    <type>1</type>
-                    <declaration>- Simulateur* simulateur</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{cc6465f1-11f3-4065-8c25-d35ebe85c6b2}</uid>
-                    <type>1</type>
-                    <declaration>- Polaire* polaire</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{fb40ad3f-0235-43f6-b2cb-2bcc7c411001}</uid>
-                    <type>1</type>
-                    <declaration>- QString m_polaire</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{579910af-0a07-4b17-b883-4d20ac76dae0}</uid>
-                    <type>1</type>
-                    <declaration>- double m_x</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{3413d04e-31bd-40ba-92ce-f446115dda28}</uid>
-                    <type>1</type>
-                    <declaration>- double m_y</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{19bd3c66-dd66-45dd-8a52-047256db60dc}</uid>
-                    <type>1</type>
-                    <declaration>- double m_speed</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{02f811b5-18eb-46d6-8a76-8c2ca2b7e712}</uid>
-                    <type>1</type>
-                    <declaration>- double m_angleAzimut</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{e11de535-84b3-4e6a-b365-ead703b71ab4}</uid>
-                    <type>2</type>
-                    <declaration>+ explicit Simulateur(QString pol_location, Modbus_SRV* modbusserver, QObject *parent = nullptr)</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{6da0f19b-7823-4959-a23c-4fa4161c0ee2}</uid>
-                    <type>2</type>
-                    <declaration>+ ~Simulateur()</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{17782421-3fc3-4222-8274-822e547cca67}</uid>
-                    <type>2</type>
-                    <declaration>+ int getTwa()</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{fff993e9-988a-4f2b-874b-efd1d927b1d9}</uid>
-                    <type>2</type>
-                    <declaration>+ double getTws()</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{3450712a-664a-4709-b6aa-23ba48c22e84}</uid>
-                    <type>2</type>
-                    <declaration>+ double getAngleBome()</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{4e110ae1-07c5-4b15-818c-fe5c694e7ccc}</uid>
-                    <type>2</type>
-                    <declaration>+ double getSpeed()</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{f4d17609-f3ef-4ca1-ae93-f0aef6daed20}</uid>
-                    <type>2</type>
-                    <declaration>+ double getVaguePeriode()</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{77043102-5662-4c0a-b01d-e4a8d802c2cf}</uid>
-                    <type>2</type>
-                    <declaration>+ double getInterVague()</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{e180fc0c-7306-412e-a1a8-6ad45ce16c41}</uid>
-                    <type>2</type>
-                    <declaration>+ double getVagueAmplitude()</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{3887e5bc-3b51-4eb5-9c83-b67fa5bf0294}</uid>
-                    <type>2</type>
-                    <declaration>+ double getAngleAzimut()</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{8b6b865b-9045-4e5e-864c-e79c760ccbbe}</uid>
-                    <type>2</type>
-                    <declaration>-$ calcul()</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{0c743527-5ad5-4178-9449-6d75f501c753}</uid>
-                    <type>2</type>
-                    <declaration>+ double getVagueVitesse()</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{c022d708-c695-4273-b632-07fce3a57ec0}</uid>
-                    <type>2</type>
-                    <declaration>+ void setRoulis()</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{403685d5-1a75-45f5-8635-fc8443020910}</uid>
-                    <type>2</type>
-                    <declaration>+ void setTangage()</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{8b446441-306d-4bb2-b395-2e272489934c}</uid>
-                    <type>2</type>
-                    <declaration>+ void setVitesseAzimut()</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{8759873e-78a3-4345-a4cd-526581377359}</uid>
-                    <type>2</type>
-                    <declaration>+ void setSpeed()</declaration>
-                   </MClassMember>
-                  </item>
-                 </qlist>
-                </members>
                </MClass>
               </instance>
              </target>
@@ -1859,73 +1265,6 @@
                   </relations>
                  </MObject>
                 </base-MObject>
-                <members>
-                 <qlist>
-                  <item>
-                   <MClassMember>
-                    <uid>{f6f5b10c-b6ef-4c20-8cdb-28421c8323ca}</uid>
-                    <type>1</type>
-                    <declaration>- Polaire(){}</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{c0dda738-7b4c-467d-88a2-7bc04d70123a}</uid>
-                    <type>1</type>
-                    <declaration>- QString m_polFilePath</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{8b098cbe-b8b8-449b-b3cd-0a0cebdf280b}</uid>
-                    <type>1</type>
-                    <declaration>- QVector&lt;QVector&lt;double&gt;&gt; m_polaireData</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{a6f1b3b8-036f-4814-85c3-ef8ce423113e}</uid>
-                    <type>2</type>
-                    <declaration>+ explicit Polaire(QObject *parent = nullptr)</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{8eb1f8cf-d115-4f3e-b35f-d25e8a8ce0ef}</uid>
-                    <type>2</type>
-                    <declaration>+ Polaire(QString polFilePath)</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{a0d3c17d-8435-4068-ac3b-edff7405f516}</uid>
-                    <type>2</type>
-                    <declaration>+ double getSpeedRatio(double twa, double tws, double ratio)</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{6ed451c6-4873-4e5f-b14a-55c49759ceca}</uid>
-                    <type>2</type>
-                    <declaration>+ double getMaxSpeed(double twa, double tws)</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{97a760be-3340-470d-99a1-cf4414e77436}</uid>
-                    <type>2</type>
-                    <declaration>+ double getGiteRatio(double twa, double tws, double ratio)</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{d732e4a8-16c3-4434-9cb8-375c961b723c}</uid>
-                    <type>2</type>
-                    <declaration>+ double getMaxRatio(double twa, double tws)</declaration>
-                   </MClassMember>
-                  </item>
-                 </qlist>
-                </members>
                </MClass>
               </instance>
              </target>
@@ -2011,17 +1350,6 @@
                  </MObject>
                 </base-MObject>
                 <namespace>Ui</namespace>
-                <members>
-                 <qlist>
-                  <item>
-                   <MClassMember>
-                    <uid>{8599935d-12dd-4450-80b8-37300c834876}</uid>
-                    <type>2</type>
-                    <declaration>+ setupUi()</declaration>
-                   </MClassMember>
-                  </item>
-                 </qlist>
-                </members>
                </MClass>
               </instance>
              </target>
@@ -2619,7 +1947,7 @@
                          <object>{72e2f8f1-a739-4d7e-8f5d-ab17e47839fe}</object>
                          <a>{df211a91-8c74-4bd6-bf05-22537ff50216}</a>
                          <b>{32e0c6f0-2140-4d33-a654-d4b40952907a}</b>
-                         <name>setRemotValue(PrimaryTable, &amp;QString const, &amp;QString const)</name>
+                         <name>setValue(PrimaryTable, &amp;QString const, &amp;QString const)</name>
                         </DRelation>
                        </base-DRelation>
                        <custom-relation>Message</custom-relation>
@@ -2734,7 +2062,7 @@
                          <object>{d0c1a143-a6b9-41cb-958d-f53a764b5214}</object>
                          <a>{5dc7c5de-e61e-4118-9686-b78ce2daac7b}</a>
                          <b>{537cddd7-aa17-4890-9068-e5a8415b4f06}</b>
-                         <name>localValue(PrimaryTable, &amp;QString const)</name>
+                         <name>setRemoteValue(PrimaryTable, &amp;QString const)</name>
                         </DRelation>
                        </base-DRelation>
                        <custom-relation>Message</custom-relation>
@@ -4531,7 +3859,7 @@
                                <uid>{72e2f8f1-a739-4d7e-8f5d-ab17e47839fe}</uid>
                               </MElement>
                              </base-MElement>
-                             <name>setRemotValue(PrimaryTable, &amp;QString const, &amp;QString const)</name>
+                             <name>setValue(PrimaryTable, &amp;QString const, &amp;QString const)</name>
                              <a>{c1fbcb19-8ecf-4f6a-8bec-0faec66ff6a7}</a>
                              <b>{f290a5e1-4aec-4aca-9aec-888c41d46b89}</b>
                             </MRelation>
@@ -4676,7 +4004,7 @@
                                <uid>{d0c1a143-a6b9-41cb-958d-f53a764b5214}</uid>
                               </MElement>
                              </base-MElement>
-                             <name>localValue(PrimaryTable, &amp;QString const)</name>
+                             <name>setRemoteValue(PrimaryTable, &amp;QString const)</name>
                              <a>{0cee8528-172c-4f91-a93a-4ab54f6dc011}</a>
                              <b>{e41a21c6-3e19-4992-b112-581aabc0da34}</b>
                             </MRelation>
