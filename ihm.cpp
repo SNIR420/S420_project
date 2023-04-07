@@ -50,16 +50,19 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     ui->forceSpinBox->setFont(roboto);
     ui->hauteurSpinBox->setFont(roboto);
     ui->vitesseSpinBox->setFont(roboto);
+    ui->periodeSpinBox->setFont(roboto);
 
     ui->angleText->setFont(poppins);
     ui->forceText->setFont(poppins);
     ui->hauteurText->setFont(poppins);
     ui->vitesseText->setFont(poppins);
+    ui->periodeText->setFont(poppins);
 
     auto lineEditAngle = ui->angleSpinBox->findChild<QLineEdit*>();
     auto lineEditForce = ui->forceSpinBox->findChild<QLineEdit*>();
     auto lineEditHauteur = ui->hauteurSpinBox->findChild<QLineEdit*>();
     auto lineEditVitesse = ui->vitesseSpinBox->findChild<QLineEdit*>();
+    auto lineEditPeriode = ui->periodeSpinBox->findChild<QLineEdit*>();
 
     lineEditAngle->setReadOnly(true);
     lineEditAngle->setFocusPolicy(Qt::NoFocus);
@@ -73,6 +76,9 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     lineEditVitesse->setReadOnly(true);
     lineEditVitesse->setFocusPolicy(Qt::NoFocus);
 
+    lineEditPeriode->setReadOnly(true);
+    lineEditPeriode->setFocusPolicy(Qt::NoFocus);
+
     connect(lineEditAngle, &QLineEdit::selectionChanged, [=](){
         if (lineEditAngle->hasSelectedText())    lineEditAngle->deselect();
     });
@@ -85,14 +91,21 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     connect(lineEditVitesse, &QLineEdit::selectionChanged, [=](){
         if (lineEditVitesse->hasSelectedText())    lineEditVitesse->deselect();
     });
+    connect(lineEditPeriode, &QLineEdit::selectionChanged, [=](){
+        if (lineEditPeriode->hasSelectedText())    lineEditPeriode->deselect();
+    });
+
     connect(ui->angleSpinBox, &QSpinBox::valueChanged, [=]() {
         setUiAngleVent(ui->angleSpinBox->value());
     });
     connect(ui->angleSpinBox, &MySpinBox::ButtonReleased, [=]() {
         sendSwa();
     });
+    connect(ui->forceSpinBox, &MySpinBox::valueChanged, [=]() {
+        setUiTws(ui->forceSpinBox->value());
+    });
     connect(ui->forceSpinBox, &MySpinBox::ButtonReleased, [=]() {
-        setTws(ui->forceSpinBox->value());
+        sendTws();
     });
     connect(ui->hauteurSpinBox, &MyDoubleSpinBox::ButtonReleased, [=]() {
         setHauteurVague(ui->hauteurSpinBox->value());
@@ -100,7 +113,12 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     connect(ui->vitesseSpinBox, &MyDoubleSpinBox::ButtonReleased, [=]() {
         setVitesseVague(ui->vitesseSpinBox->value());
     });
+    connect(ui->periodeSpinBox, &MyDoubleSpinBox::ButtonReleased, [=]() {
+        setPeriodeVague(ui->periodeSpinBox->value());
+    });
 
+    connect(ui->progressBar, &MyProgressBar::pressed, this, &IHM::onProgressBarPressed);
+    connect(ui->progressBar, &MyProgressBar::pressReleased, this, &IHM::sendTws);
     connect(ui->graphicsViewYaw, &MyGraphicsView::pressed, this, &IHM::onGraphicsViewPressed);
     connect(ui->graphicsViewYaw, &MyGraphicsView::pressReleased, this, &IHM::sendSwa);
     m_modbusserver = new Modbus_SRV(":/S420-6-API.csv", this);
@@ -113,6 +131,7 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     m_modbusserver->setTws(ui->forceSpinBox->value());
     m_modbusserver->setSwa(ui->angleSpinBox->value());
     setVitesseVague(ui->vitesseSpinBox->value());
+    setPeriodeVague(ui->periodeSpinBox->value());
 }
 
 void IHM::onGraphicsViewPressed(const QPoint& pos){
@@ -126,6 +145,22 @@ void IHM::onGraphicsViewPressed(const QPoint& pos){
         angle += 360;
     }
     ui->angleSpinBox->setValue(angle);
+}
+
+void IHM::onProgressBarPressed(const QPoint& pos){
+    MyProgressBar* progressBar = ui->progressBar;
+    int value = progressBar->minimum() + (pos.x() * (progressBar->maximum()+1 - progressBar->minimum())) / progressBar->width(); // Calcule la nouvelle valeur de la `QProgressBar` en fonction des coordonnées de la souris sur l'axe x
+    if(value > progressBar->maximum())  value = 70;
+    ui->forceSpinBox->setValue(value);
+    setUiTws(value);
+}
+
+void IHM::sendTws(){
+    m_modbusserver->setTws(ui->forceSpinBox->value());
+}
+
+void IHM::setPeriodeVague(float periode){
+    m_modbusserver->setIntervague(periode);
 }
 
 void IHM::setUiAngleVent(int angleDeg){
@@ -182,24 +217,23 @@ void IHM::sendSwa(){
     m_modbusserver->setSwa(ui->angleSpinBox->value());
 }
 
-void IHM::setTws(int tws){
+void IHM::setUiTws(int tws){
     if(tws < 15){
-        ui->progressBar->setStyleSheet("QProgressBar { background-color: #404040; border-radius: 15px; border: 4px solid black;} QProgressBar::chunk {border-radius: 9px; background-color: #00FF00;}");
+        ui->progressBar->setStyleSheet("QProgressBar { background-color: #404040; border-radius: 5px; border: 4px solid black;} QProgressBar::chunk {border-radius: 3px; background-color: #00FF00;}");
     }
     else if(tws < 30){
-        ui->progressBar->setStyleSheet("QProgressBar { background-color: #404040; border-radius: 15px; border: 4px solid black;} QProgressBar::chunk {border-radius: 9px; background-color: #7FFF00;}");
+        ui->progressBar->setStyleSheet("QProgressBar { background-color: #404040; border-radius: 5px; border: 4px solid black;} QProgressBar::chunk {border-radius: 3px; background-color: #7FFF00;}");
     }
     else if(tws < 45){
-        ui->progressBar->setStyleSheet("QProgressBar { background-color: #404040; border-radius: 15px; border: 4px solid black;} QProgressBar::chunk {border-radius: 9px; background-color: #FFFF00;}");
+        ui->progressBar->setStyleSheet("QProgressBar { background-color: #404040; border-radius: 5px; border: 4px solid black;} QProgressBar::chunk {border-radius: 3px; background-color: #FFFF00;}");
     }
     else if(tws < 60){
-        ui->progressBar->setStyleSheet("QProgressBar { background-color: #404040; border-radius: 15px; border: 4px solid black;} QProgressBar::chunk {border-radius: 9px; background-color: #FF7700;}");
+        ui->progressBar->setStyleSheet("QProgressBar { background-color: #404040; border-radius: 5px; border: 4px solid black;} QProgressBar::chunk {border-radius: 3px; background-color: #FF7700;}");
     }
     else{
-        ui->progressBar->setStyleSheet("QProgressBar { background-color: #404040; border-radius: 15px; border: 4px solid black;} QProgressBar::chunk {border-radius: 9px; background-color: #FF0000;}");
+        ui->progressBar->setStyleSheet("QProgressBar { background-color: #404040; border-radius: 5px; border: 4px solid black;} QProgressBar::chunk {border-radius: 3px; background-color: #FF0000;}");
     }
     ui->progressBar->setValue(tws);
-    m_modbusserver->setTws(tws);
 }
 
 void IHM::setHauteurVague(float hauteur){
@@ -217,6 +251,11 @@ void IHM::updateBoatRowPitch()
     rowImageItem->setRotation(m_modbusserver->getTangage());
     sceneRow->update();
     scenePitch->update();
+    if (m_modbusserver->getClientConnected() > 0) {
+        ui->pbuClient->setStyleSheet("QPushButton { image: url(:/images/icon_plug_on.png);  background-color: #00FF00;}");
+    } else {
+        ui->pbuClient->setStyleSheet("QPushButton {	image: url(:/images/icon_plug_off.png); background-color: #4D4D4D;}");
+    }
 }
 
 void IHM::resizeEvent(QResizeEvent *event){

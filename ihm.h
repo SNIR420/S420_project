@@ -27,11 +27,14 @@ public:
 private slots:
     void setHauteurVague(float hauteur);
     void setVitesseVague(double vitesse);
-    void setTws(int tws);
+    void setPeriodeVague(float periode);
     void updateBoatRowPitch();
-    void setUiAngleVent(int angleDeg);
     void onGraphicsViewPressed(const QPoint& pos);
+    void onProgressBarPressed(const QPoint& pos);
     void sendSwa();
+    void setUiAngleVent(int angleDeg);
+    void sendTws();
+    void setUiTws(int tws);
 private:
     Ui::IHM *ui;
     QGraphicsScene *scene;
@@ -47,6 +50,7 @@ private:
     QPixmap pitchImage;
     QPixmap windImage;
     QTimer *timeChange;
+    bool blurEnabled = false;
 protected:
     void resizeEvent(QResizeEvent *event)   override;
 };
