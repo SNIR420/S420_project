@@ -25,6 +25,7 @@
  */
 
 #include "qamabstractserver.h"
+#include <QDebug>
 
 /*! Constructeur. */
 
@@ -92,3 +93,18 @@ void QamAbstractServer::networkInfo(const QString& message )
 {
 	emit info( message ) ;
 }
+
+void QamAbstractServer::clientDisconnected()
+{
+    m_numOfClients = m_numOfClients-1;
+}
+
+void QamAbstractServer::clientConnected()
+{
+    m_numOfClients = m_numOfClients+1;
+}
+
+int QamAbstractServer::numberOfClientConnected(){
+    return m_numOfClients;
+}
+

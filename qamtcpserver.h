@@ -48,21 +48,22 @@
 
 class QamTcpServer : public QTcpServer
 {
-	Q_OBJECT
+    Q_OBJECT
 
-  public:
-	explicit QamTcpServer(QamAbstractServer* server, QObject* parent = 0 ) ;
-	void start(int listenPort = 4000 ) ;
+public:
+    explicit QamTcpServer(QamAbstractServer* server, QObject* parent = 0 ) ;
+    void start(int listenPort = 4000 ) ;
 
-  public slots :
-	void sockClose() ;
+public slots :
+    void sockClose() ;
+    int getClientConnected();
 
-  protected:
-	virtual void incomingConnection(qintptr socketDescriptor ) ;
+protected:
+    virtual void incomingConnection(qintptr socketDescriptor ) ;
 
-  private:
-	int					m_port ;
-	QamAbstractServer*	m_dataServer ;
+private:
+    int					m_port ;
+    QamAbstractServer*	m_dataServer ;
 } ;
 
 #endif // QAMTCPSERVER_H

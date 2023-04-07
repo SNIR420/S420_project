@@ -49,20 +49,19 @@
 
 class QamTcpConnection : public QThread
 {
-	Q_OBJECT
+    Q_OBJECT
 
-  public:
-	explicit QamTcpConnection(qintptr id, QamAbstractServer* server, QObject* parent = 0 ) ;
-	void run() ;
+public:
+    explicit QamTcpConnection(qintptr id, QamAbstractServer* server, QObject* parent = 0 ) ;
+    void run() ;
 
-  private slots:
-	void readyRead() ;
-	void disconnected() ;
-
-  private:
-	QTcpSocket*			m_socket ;				// socket cliente
-	qintptr				m_socketDescriptor ;
-	QamAbstractServer*	m_dataServer ;			// serveur métier
+private slots:
+    void readyRead() ;
+    void disconnected() ;
+private:
+    QTcpSocket*			m_socket ;				// socket cliente
+    qintptr				m_socketDescriptor ;
+    QamAbstractServer*	m_dataServer ;			// serveur métier
 } ;
 
 #endif // QAMTCPCONNECTION_H

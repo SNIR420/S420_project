@@ -142,31 +142,39 @@ Soit une classe Qt d'usage disposant :
 
 class QamAbstractServer : public QObject
 {
-	Q_OBJECT
+    Q_OBJECT
 
-  public:
-	explicit QamAbstractServer(QObject* parent = 0 ) ;
-
+public:
+    explicit QamAbstractServer(QObject* parent = 0 ) ;
     virtual void setServerAvailable(bool serverAvailable ) ;
+    int numberOfClientConnected();
 
-  public slots:
-  	/*! \internal OBSOLETE : méthode remplacée par responseToClientRequest() */
-	virtual QByteArray responseToRequest(QByteArray& request ) ;
-	virtual QByteArray responseToClientRequest(QByteArray& request ) ;
-  	/*! \internal OBSOLETE : méthode remplacée par responseFromServer() */
-	virtual void response(QByteArray response ) ;
-	virtual void responseFromServer(QByteArray response ) ;
-	virtual void networkInfo(const QString& message ) ;
-	
-  signals:
-	/*! Signal de demande d'émission d'une requête (mode client). */
-	void request(QByteArray request ) ;
-	/*! Indicateur de données reçues. */
-	void received(const QByteArray& data ) ;
-	/*! Indicateur de données émises. */
-	void sent(const QByteArray& data ) ;
-	/*! Indicateur de message d'information. */
-	void info(const QString& message ) ;
+public slots:
+    /*! \internal OBSOLETE : méthode remplacée par responseToClientRequest() */
+    virtual QByteArray responseToRequest(QByteArray& request ) ;
+    virtual QByteArray responseToClientRequest(QByteArray& request ) ;
+    /*! \internal OBSOLETE : méthode remplacée par responseFromServer() */
+    virtual void response(QByteArray response ) ;
+    virtual void responseFromServer(QByteArray response ) ;
+    virtual void networkInfo(const QString& message ) ;
+
+
+    //Vérifier quand un client se connecte ou se déconnecte
+    void clientDisconnected();
+    void clientConnected();
+
+signals:
+    /*! Signal de demande d'émission d'une requête (mode client). */
+    void request(QByteArray request ) ;
+    /*! Indicateur de données reçues. */
+    void received(const QByteArray& data ) ;
+    /*! Indicateur de données émises. */
+    void sent(const QByteArray& data ) ;
+    /*! Indicateur de message d'information. */
+    void info(const QString& message ) ;
+
+private:
+    int m_numOfClients = 0;
 } ;
 
 #endif // QAMABSTRACTSERVER_H

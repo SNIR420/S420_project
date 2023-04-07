@@ -35,7 +35,7 @@
 
 QamTcpServer::QamTcpServer(QamAbstractServer* server, QObject* parent )
 	: QTcpServer(parent)
-	, m_port( 4000 )
+    , m_port(502)
 	, m_dataServer( server )
 {
 }
@@ -73,8 +73,10 @@ void QamTcpServer::incomingConnection(qintptr socketDescriptor )
 {
 	QamTcpConnection* tcpConnection = new QamTcpConnection(socketDescriptor, m_dataServer, this ) ;
 
-	connect( tcpConnection, SIGNAL(finished()),
-			 tcpConnection, SLOT(deleteLater()) ) ;
-
+    connect(tcpConnection, SIGNAL(finished()), tcpConnection, SLOT(deleteLater()) ) ;
 	tcpConnection->start() ;
+}
+
+int QamTcpServer::getClientConnected(){
+    return m_dataServer->numberOfClientConnected();
 }

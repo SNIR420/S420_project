@@ -44,7 +44,7 @@ QamModbusMap::QamModbusMap(Mode mode, QObject* parent )
 	, m_port( 502 )
 	, m_desc( "" )
 	, m_isServerAvailable( false )
-	, m_mbapTi( 0 )
+    , m_mbapTi( 0 )
 	, m_mbapPi( 0 )
 	, m_mbapUi( 0xFF )
 {

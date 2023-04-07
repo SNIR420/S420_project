@@ -55,13 +55,13 @@ void QamTcpConnection::run()
 		return ;
 	}
 
-	connect( m_socket,	SIGNAL(readyRead()),
-			 this,		SLOT(readyRead()), Qt::DirectConnection ) ;
-	connect( m_socket,	SIGNAL(disconnected()),
-			 this,		SLOT(disconnected()) ) ;
+    connect(m_socket, SIGNAL(readyRead()), this, SLOT(readyRead()), Qt::DirectConnection ) ;
+    connect(m_socket, SIGNAL(disconnected()), this, SLOT(disconnected()) ) ;
 
 	m_dataServer->networkInfo( QString("Client %1 connected").arg(m_socketDescriptor) ) ;
-
+    if (m_dataServer) {
+        m_dataServer->clientConnected();
+    }
 	exec() ;
 }
 
@@ -85,8 +85,10 @@ void QamTcpConnection::readyRead()
 
 void QamTcpConnection::disconnected()
 {
-	m_dataServer->networkInfo( QString("Client %1 disconnected").arg(m_socketDescriptor) ) ;
-
-	m_socket->deleteLater() ;
+    m_dataServer->networkInfo( QString("Client %1 disconnected").arg(m_socketDescriptor) ) ;
+    m_socket->deleteLater() ;
+    if (m_dataServer) {
+        m_dataServer->clientDisconnected();
+    }
 	exit( 0 ) ;
 }
