@@ -1,5 +1,5 @@
 #include "modbus_srv.h"
-#include "qamtcpserver.h"
+#include <QTcpSocket>
 #include <QDebug>
 
 Modbus_SRV::Modbus_SRV(const QString& configFile, QObject* parent )
@@ -7,15 +7,15 @@ Modbus_SRV::Modbus_SRV(const QString& configFile, QObject* parent )
     , m_configFile(configFile)
 {
     // cartographie Modbus
-    m_map    = new QamModbusMap( QamModbusMap::ServerMode, this ) ;
-    m_map->setVerbose( false ) ;
+    m_map    = new QamModbusMap(QamModbusMap::ServerMode, this ) ;
+    m_map->setVerbose(false) ;
     connect( m_map, SIGNAL(info(QString,QString)), this, SLOT(info(QString,QString)) ) ;
     m_map->loadMap( configFile ) ;
 
     // server TCP
 
     m_server = new QamTcpServer( m_map, this ) ;
-    m_server->start(4000);
+    m_server->start(502);
 }
 
 float Modbus_SRV::getPosazimut()
@@ -25,7 +25,8 @@ float Modbus_SRV::getPosazimut()
 
 float Modbus_SRV::getRoulis(){
     m_table = QamModbusMap::HoldingRegister ;
-    return m_map->value(m_table, "cons-roulis").toFloat();
+    QString res = m_map->value(m_table, "lect-roulis");
+    return res.toFloat();
 }
 
 float Modbus_SRV::getTangage()
@@ -82,7 +83,7 @@ void Modbus_SRV::setRoulis(float SRouLis)
 {
     m_table = QamModbusMap::HoldingRegister ;
     QString value = QString::number(SRouLis);
-    m_map->setValue(m_table, "cons-roulis", value);
+    m_map->setValue(m_table, "lect-roulis", value);
 }
 
 void Modbus_SRV::setTangage(float STanGage)
@@ -108,6 +109,10 @@ void Modbus_SRV::setVitvague(float SVitVague)
 void Modbus_SRV::setSwa(int SSwa)
 {
     GSwa=SSwa;
+}
+
+int Modbus_SRV::getClientConnected(){
+    return m_server->getClientConnected();
 }
 
 void Modbus_SRV::info(const QString& src, const QString& msg )

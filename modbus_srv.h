@@ -2,8 +2,8 @@
 #define MODBUS_SRV_H
 
 #include <QObject>
-#include <QamModbusMap.h>
-#include <qamtcpserver.h>
+#include "qammodbusmap.h"
+#include "qamtcpserver.h"
 
 class Modbus_SRV : public QObject
 {
@@ -29,6 +29,7 @@ public:
     void setTws(float STws);
     void setPosazimut(float SPosazimut);
     void setSwa(int SSwa);
+    int getClientConnected();
 
 public slots:
     void info(const QString& src, const QString& msg ) ;
