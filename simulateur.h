@@ -13,7 +13,6 @@
 #define envergure 2.0 // mètres
 #define Longueur 4.0  // mètres
 #define Y 0.0         // mètres
-#define vaguePeriode 10.0  // secondes
 
 class Simulateur : public QObject
 {

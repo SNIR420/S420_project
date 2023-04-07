@@ -17,32 +17,20 @@ Simulateur::Simulateur(QString pol_location, Modbus_SRV* modbusserver, QObject *
 void Simulateur::setRoulis(){
     m_t1 = m_t1.currentTime() ;
 
-    /*cout << "result sin : " << sin(2.0*PI*getVaguePeriode() * m_t0.secsTo(t1)
-                                   - (2.0*PI / getInterVague()) * (Y + envergure/2.0) * sin(getAngleAzimut())) ;
-    cout << "\tdeltaT : " << t0.secsTo(t1) << endl ;*/
+    double ze = getVagueAmplitude() * sin(2.0*PI/getVaguePeriode() * (m_t0.msecsTo(m_t1)/1000.0) - (2.0*PI / getInterVague()) * (cos(getAngleAzimut()) * m_speed * 1852.0 / 3600.0 * m_t0.msecsTo(m_t1)/1000.0 + envergure/2.0 * sin(getAngleAzimut()))) ;
+    double zd = getVagueAmplitude() * sin(2.0*PI/getVaguePeriode() * (m_t0.msecsTo(m_t1)/1000.0) - (2.0*PI / getInterVague()) * (cos(getAngleAzimut()) * m_speed * 1852.0 / 3600.0 * m_t0.msecsTo(m_t1)/1000.0 - envergure/2.0 * sin(getAngleAzimut()))) ;
 
-    double ze = getVagueAmplitude() * sin(2.0*PI/getVaguePeriode() * (m_t0.msecsTo(m_t1)/1000.0)
-                                          - (2.0*PI / getInterVague()) * (cos(getAngleAzimut()) * m_speed * 1852.0 / 3600.0 * m_t0.msecsTo(m_t1)/1000.0 + envergure/2.0 * sin(getAngleAzimut()))) ;
-
-    double zd = getVagueAmplitude() * sin(2.0*PI/getVaguePeriode() * (m_t0.msecsTo(m_t1)/1000.0)
-                                          - (2.0*PI / getInterVague()) * (cos(getAngleAzimut()) * m_speed * 1852.0 / 3600.0 * m_t0.msecsTo(m_t1)/1000.0 - envergure/2.0 * sin(getAngleAzimut()))) ;
-
-    if ((ze - zd)/envergure <= 1 && (ze - zd)/envergure >= -1)
-        m_roulis = asin((ze - zd)/envergure) ;
+    if ((ze - zd)/envergure <= 1 && (ze - zd)/envergure >= -1)  m_roulis = asin((ze - zd)/envergure) ;
     else m_roulis = PI/2.0 * ((ze - zd)/envergure)/(abs((ze - zd)/envergure)) ;
 }
 
 void Simulateur::setTangage(){
     m_t1 = m_t1.currentTime() ;
 
-    double zc = getVagueAmplitude() * sin(2.0*PI/getVaguePeriode() * (m_t0.msecsTo(m_t1)/1000.0)
-                                          - (2.0*PI / getInterVague()) * (cos(getAngleAzimut()) * m_speed * 1852.0 / 3600.0 * m_t0.msecsTo(m_t1)/1000.0 + Longueur/2.0 * cos(getAngleAzimut()))) ;
+    double zc = getVagueAmplitude() * sin(2.0*PI/getVaguePeriode() * (m_t0.msecsTo(m_t1)/1000.0) - (2.0*PI / getInterVague()) * (cos(getAngleAzimut()) * m_speed * 1852.0 / 3600.0 * m_t0.msecsTo(m_t1)/1000.0 + Longueur/2.0 * cos(getAngleAzimut()))) ;
+    double za = getVagueAmplitude() * sin(2.0*PI/getVaguePeriode() * (m_t0.msecsTo(m_t1)/1000.0) - (2.0*PI / getInterVague()) * (cos(getAngleAzimut()) * m_speed * 1852.0 / 3600.0 * m_t0.msecsTo(m_t1)/1000.0 - Longueur/2.0 * cos(getAngleAzimut()))) ;
 
-    double za = getVagueAmplitude() * sin(2.0*PI/getVaguePeriode() * (m_t0.msecsTo(m_t1)/1000.0)
-                                          - (2.0*PI / getInterVague()) * (cos(getAngleAzimut()) * m_speed * 1852.0 / 3600.0 * m_t0.msecsTo(m_t1)/1000.0 - Longueur/2.0 * cos(getAngleAzimut()))) ;
-
-    if ((zc - za)/Longueur <= 1 && (zc - za)/Longueur >= -1)
-        m_tangage = asin((zc - za)/Longueur) ;
+    if ((zc - za)/Longueur <= 1 && (zc - za)/Longueur >= -1)    m_tangage = asin((zc - za)/Longueur) ;
     else m_tangage = PI/2.0 * ((zc - za)/Longueur)/(abs((zc - za)/Longueur)) ;
 }
 
@@ -55,7 +43,7 @@ double Simulateur::getVagueAmplitude(){
 }
 
 double Simulateur::getVaguePeriode(){
-    return vaguePeriode ;
+    return m_modbusServer->getIntervague() ;
 }
 
 double Simulateur::getVagueVitesse(){
@@ -69,9 +57,6 @@ void Simulateur::setSpeed(){ // utilise la classe polaire pour obtenir la vitess
     else{
         m_speed = polaire->getMaxSpeed(180-(getTwa()%180), getTws()) ;
     }
-    /*qDebug() << "Speed :" << m_speed;
-    qDebug() << "TWS :" << m_modbusServer->getTws();
-    qDebug() << "TWA :" << m_modbusServer->getSwa();*/
 }
 
 double Simulateur::getAngleAzimut(){
@@ -100,12 +85,6 @@ void Simulateur::calcul(){
     m_modbusServer->setTangage(m_tangage*180.0/PI);
     setVitesseAzimut(); // inutile pour l'instant
     setSpeed();
-    /*qDebug() << "roulis    : " << round(m_roulis*180.0/PI*10.0)/10.0 << "°";
-    qDebug() << "tangage   : " << round(m_tangage*180.0/PI*10.0)/10.0 << "°";
-    qDebug() << "vitesse   : " << m_speed << " nd";
-    qDebug() << "delta thé : " << round(m_t0.msecsTo(m_t1)/100.0)/10.0 << "s  \t" << m_t0.msecsTo(m_t1) << "ms";
-    qDebug() << "x = " << m_x << "  y = " << m_y;
-    qDebug() << "angle azimut : " << m_angleAzimut*180/PI << "°";*/
 }
 
 Simulateur::~Simulateur(){}
