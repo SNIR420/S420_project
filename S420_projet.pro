@@ -1,4 +1,4 @@
-QT       += core gui network serialbus charts
+QT       += quick core gui network serialbus charts
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,6 +25,7 @@ HEADERS += \
     ihm.h \
     mydoublespinbox.h \
     mygraphicsview.h \
+    myprogressbar.h \
     myspinbox.h \
     simulateur.h \
     modbus_srv.h \
@@ -84,6 +85,8 @@ RESOURCES += \
     images/Vue_cote_boat.png \
     images/Vue_top_boat.png \
     images/Vue_back_boat.png \
+    images/icon_plug_on.png \
+    images/icon_plug_off.png \
     images/wind.png \
     font/RobotoMono.ttf \
     font/Poppins.ttf
