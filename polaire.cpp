@@ -79,3 +79,9 @@ double Polaire::getMaxSpeed(double twa, double tws) {
 
     return m_polaireData[x][y];
 }
+
+double Polaire::getMaxRatio(double twa, double tws) {
+    qDebug() << getMaxSpeed(twa, tws) * 0.7;
+    return getMaxSpeed(twa, tws) * 0.7;
+}
+
