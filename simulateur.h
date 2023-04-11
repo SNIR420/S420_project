@@ -10,15 +10,14 @@
 #define PI 3.14159256
 #define envergure 2.0 // mètres
 #define Longueur 4.0  // mètres
-#define Y 0.0         // mètres
 
 #define vagueAmplitude 3.0 // mètres
-#define vaguePeriode 3.0  // secondes
+#define vaguePeriode 10.0  // secondes
 
 #define vagueVitesse 3.0 // mètres par secondes
 
-#define TWS 0.2   //noeuds
-#define TWA 1.02  //degrés
+#define TWS 10   //noeuds
+#define TWA 150  //degrés
 
 class Simulateur : public QObject
 {
@@ -42,19 +41,22 @@ private:
 
     double m_speed ;
 
-    double m_vagueAmplitude ;
     double m_vagueVitesse ;
     double m_vaguePeriode ;
 
-    double m_angleAzimut ;
+    int m_angleAzimut ;
+
+    int m_bome ;
+
+    double m_ratio ;
 
 
 public:
     explicit Simulateur(QObject *parent = nullptr, QString cheminPolaire = "Class404.pol");
     ~Simulateur();
 
-    double getTwa();
-    double getTws();
+    int getTwa();
+    int getTws();
     double getAngleBome();
     double getSpeed(); //du bateau
 
@@ -74,6 +76,11 @@ public:
     void setVitesseAzimut() ;
 
     void setSpeed() ;
+
+    void setVagueVitesse(double s_vagueVitesse){ m_vagueVitesse = s_vagueVitesse ; }
+    void setVaguePeriode(double s_vaguePeriode){ m_vaguePeriode = s_vaguePeriode ; }
+
+    double getRatio();
 
 
 signals:
