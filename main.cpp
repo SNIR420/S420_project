@@ -2,6 +2,10 @@
 
 #include <QApplication>
 #include <QScreen>
+#include <QFile>
+#include <QTextStream>
+#include <QStringList>
+#include <QDebug>
 
 int main(int argc, char *argv[])
 {
