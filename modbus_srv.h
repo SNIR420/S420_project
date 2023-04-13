@@ -36,7 +36,6 @@ public slots:
 
 private:
     float GVitAzimut;
-    //float GRoulis;
     float GTangage;
     float GPosazimut;
     float GHautvague;
@@ -47,7 +46,6 @@ private:
     float SHautvague;
     float SVitvague;
     float SIntervague;
-    //float SRoulis;
     float STangage;
     float SVitazimut;
     float STws;
