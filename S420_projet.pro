@@ -88,5 +88,11 @@ RESOURCES += \
     images/icon_plug_on.png \
     images/icon_plug_off.png \
     images/wind.png \
+    images/Bome.png \
     font/RobotoMono.ttf \
     font/Poppins.ttf
+
+contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
+    ANDROID_PACKAGE_SOURCE_DIR = \
+        $$PWD/android
+}
