@@ -35,6 +35,8 @@ private slots:
     void setUiAngleVent(int angleDeg);
     void sendTws();
     void setUiTws(int tws);
+    void sendBome();
+    void setUiBome(int bome);
 private:
     Ui::IHM *ui;
     QGraphicsScene *scene;
@@ -43,14 +45,17 @@ private:
     Simulateur *m_simulateur;
     Modbus_SRV *m_modbusserver;
     QGraphicsPixmapItem *centerImageItem;
+    QGraphicsPixmapItem *bomeImageItem;
     QGraphicsPixmapItem *rowImageItem;
     QGraphicsPixmapItem *pitchImageItem;
     QPixmap centerImage;
+    QPixmap bomeImage;
     QPixmap rowImage;
     QPixmap pitchImage;
     QPixmap windImage;
     QTimer *timeChange;
-    bool blurEnabled = false;
+    bool isUsedTwa = false;
+    bool isUsedBome = false;
 protected:
     void resizeEvent(QResizeEvent *event)   override;
 };

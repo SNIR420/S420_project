@@ -13,7 +13,17 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     centerImageItem->setTransformOriginPoint(centerImage.width() / 2, centerImage.height() / 2); // Définir l'origine au centre de l'image
     centerImageItem->setData(Qt::UserRole, "centerImage");
     centerImageItem->setTransformationMode(Qt::SmoothTransformation);
+    centerImageItem->setZValue(1);
     scene->addItem(centerImageItem);
+
+    bomeImage = QPixmap(":/images/Bome.png");
+    bomeImageItem = new QGraphicsPixmapItem(bomeImage);
+    bomeImageItem->setPos((ui->graphicsViewYaw->width() - bomeImage.width()) / 2, (ui->graphicsViewYaw->height() - bomeImage.height()) / 2);
+    bomeImageItem->setTransformOriginPoint(bomeImage.width()/2, bomeImage.height()/2); // Définir l'origine au centre de l'image
+    bomeImageItem->setData(Qt::UserRole, "bomeImage");
+    bomeImageItem->setTransformationMode(Qt::SmoothTransformation);
+    bomeImageItem->setZValue(2);
+    scene->addItem(bomeImageItem);
     ui->graphicsViewYaw->setScene(scene);
 
     //Init ROW
@@ -42,8 +52,8 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
 
     QFontDatabase::addApplicationFont(":/font/RobotoMono.ttf");
     QFontDatabase::addApplicationFont(":/font/Poppins.ttf");
-    QFont roboto("Roboto Mono", 14, QFont::Bold);
-    QFont poppins("Poppins", 12, QFont::Bold);
+    QFont roboto("Roboto Mono", 13, QFont::Bold);
+    QFont poppins("Poppins", 11, QFont::Bold);
     roboto.setStyleStrategy(QFont::PreferAntialias);
     poppins.setStyleStrategy(QFont::PreferAntialias);
     ui->angleSpinBox->setFont(roboto);
@@ -63,6 +73,7 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     auto lineEditHauteur = ui->hauteurSpinBox->findChild<QLineEdit*>();
     auto lineEditVitesse = ui->vitesseSpinBox->findChild<QLineEdit*>();
     auto lineEditPeriode = ui->periodeSpinBox->findChild<QLineEdit*>();
+    auto lineEditBome = ui->bomeSpinBox->findChild<QLineEdit*>();
 
     lineEditAngle->setReadOnly(true);
     lineEditAngle->setFocusPolicy(Qt::NoFocus);
@@ -79,6 +90,9 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     lineEditPeriode->setReadOnly(true);
     lineEditPeriode->setFocusPolicy(Qt::NoFocus);
 
+    lineEditBome->setReadOnly(true);
+    lineEditBome->setFocusPolicy(Qt::NoFocus);
+
     connect(lineEditAngle, &QLineEdit::selectionChanged, [=](){
         if (lineEditAngle->hasSelectedText())    lineEditAngle->deselect();
     });
@@ -94,6 +108,9 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     connect(lineEditPeriode, &QLineEdit::selectionChanged, [=](){
         if (lineEditPeriode->hasSelectedText())    lineEditPeriode->deselect();
     });
+    connect(lineEditBome, &QLineEdit::selectionChanged, [=](){
+        if (lineEditBome->hasSelectedText())    lineEditBome->deselect();
+    });
 
     connect(ui->angleSpinBox, &QSpinBox::valueChanged, [=]() {
         setUiAngleVent(ui->angleSpinBox->value());
@@ -106,6 +123,9 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     });
     connect(ui->forceSpinBox, &MySpinBox::ButtonReleased, [=]() {
         sendTws();
+    });
+    connect(ui->bomeSpinBox, &MySpinBox::valueChanged, [=]() {
+        setUiBome(ui->bomeSpinBox->value());
     });
     connect(ui->hauteurSpinBox, &MyDoubleSpinBox::ButtonReleased, [=]() {
         setHauteurVague(ui->hauteurSpinBox->value());
@@ -136,15 +156,33 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
 
 void IHM::onGraphicsViewPressed(const QPoint& pos){
     MyGraphicsView* view = ui->graphicsViewYaw;
-    QPointF center = view->mapToScene(view->rect().center());
+    QPointF center = view->mapToScene(view->rect().center().x(), view->rect().center().y() - bomeImage.width()/3);
     QPointF clickPos = view->mapToScene(pos);
     QPointF vector = clickPos - center;
-    int angle = 1;
-    angle = atan2(vector.y(), vector.x()) * 180 / M_PI + 90;
-    if (angle < 0) {
-        angle += 360;
+    //QRectF zoneEdit = centerImageItem->boundingRect().adjusted(-50, -30, 50, 50);
+    if (isUsedBome == true || (isUsedTwa == false && centerImageItem->contains(centerImageItem->mapFromScene(clickPos)))) {
+        isUsedBome = true;
+        int angle = 0;
+        if(clickPos.y() < center.y()){
+            angle = atan2(vector.y(), vector.x()) * 180 / M_PI + 90;
+        }
+        else{
+            angle = atan2(vector.y(), vector.x()) * 180 / M_PI - 90;
+        }
+        ui->bomeSpinBox->setValue(angle);
     }
-    ui->angleSpinBox->setValue(angle);
+    else{
+        if(isUsedBome == false) {
+        center = view->mapToScene(view->rect().center());
+        isUsedTwa = true;
+        int angle = 1;
+        angle = atan2(vector.y(), vector.x()) * 180 / M_PI + 90;
+        if (angle < 0) {
+            angle += 360;
+        }
+        ui->angleSpinBox->setValue(angle);
+        }
+    }
 }
 
 void IHM::onProgressBarPressed(const QPoint& pos){
@@ -161,6 +199,16 @@ void IHM::sendTws(){
 
 void IHM::setPeriodeVague(float periode){
     m_modbusserver->setIntervague(periode);
+}
+
+void IHM::setUiBome(int bome){
+    bomeImageItem->setRotation(bome);
+    bomeImageItem->setTransformationMode(Qt::SmoothTransformation);
+    scene->update();
+}
+
+void IHM::sendBome(){
+    //m_modbusserver->setTws(ui->forceSpinBox->value());
 }
 
 void IHM::setUiAngleVent(int angleDeg){
@@ -215,6 +263,8 @@ void IHM::setUiAngleVent(int angleDeg){
 
 void IHM::sendSwa(){
     m_modbusserver->setSwa(ui->angleSpinBox->value());
+    isUsedTwa = false;
+    isUsedBome = false;
 }
 
 void IHM::setUiTws(int tws){
@@ -256,6 +306,8 @@ void IHM::updateBoatRowPitch()
     } else {
         ui->pbuClient->setStyleSheet("QPushButton {	image: url(:/images/icon_plug_off.png); background-color: #4D4D4D;}");
     }
+    /*qDebug() << m_modbusserver->getRoulis();
+    qDebug() << m_modbusserver->getTangage();*/
 }
 
 void IHM::resizeEvent(QResizeEvent *event){
@@ -274,6 +326,12 @@ void IHM::resizeEvent(QResizeEvent *event){
     centerImageItem->setPixmap(scaledCenterImage);
     centerImageItem->setPos((ui->graphicsViewYaw->scene()->width() - scaledCenterImage.width())/2, (ui->graphicsViewYaw->scene()->height() - scaledCenterImage.height())/2);
     centerImageItem->setData(Qt::UserRole, "centerImage");
+
+    QPixmap scaledBomeImage = bomeImage.scaled(QSize(bomeImage.height() * scaleFactor, bomeImage.width() * scaleFactor), Qt::KeepAspectRatio, Qt::SmoothTransformation);    // Redimensionnement de l'item pixmap
+    bomeImageItem->setPixmap(scaledBomeImage);
+    bomeImageItem->setPos((ui->graphicsViewYaw->scene()->width() - scaledBomeImage.width())/2, (ui->graphicsViewYaw->scene()->height() - scaledBomeImage.height())/2);
+    bomeImageItem->setData(Qt::UserRole, "bomeImage");
+    bomeImageItem->setTransformOriginPoint(scaledBomeImage.width()/2, 60*scaleFactor);
 
     scaleFactorX = static_cast<qreal>(ui->graphicsViewRow->width()) / static_cast<qreal>(rowImage.width());
     scaleFactorY = static_cast<qreal>(ui->graphicsViewRow->height()) / static_cast<qreal>(rowImage.height());
@@ -298,6 +356,27 @@ void IHM::resizeEvent(QResizeEvent *event){
     pitchImageItem->setPos((ui->graphicsViewPitch->scene()->width() - scaledPitchImage.width())/2, (ui->graphicsViewPitch->scene()->height() - scaledPitchImage.height())/2);
     pitchImageItem->setData(Qt::UserRole, "pitchImage");
     pitchImageItem->setTransformOriginPoint(scaledPitchImage.width()/2, scaledPitchImage.height()-(1*scaleFactor));
+
+    scaleFactorX = static_cast<qreal>(event->size().width()) / static_cast<qreal>(ui->angleSpinBox->width());
+    scaleFactorY = static_cast<qreal>(event->size().height()) / static_cast<qreal>(ui->angleSpinBox->height());
+    scaleFactor = qMin(scaleFactorX, scaleFactorY);
+    QFont roboto("Roboto Mono", 8+scaleFactor*1.02, QFont::Bold);
+    QFont poppins("Poppins", 8+scaleFactor*1.02, QFont::Bold);
+    roboto.setStyleStrategy(QFont::PreferAntialias);
+    poppins.setStyleStrategy(QFont::PreferAntialias);
+    ui->angleSpinBox->setFont(roboto);
+    ui->forceSpinBox->setFont(roboto);
+    ui->hauteurSpinBox->setFont(roboto);
+    ui->vitesseSpinBox->setFont(roboto);
+    ui->periodeSpinBox->setFont(roboto);
+    ui->bomeSpinBox->setFont(roboto);
+
+    ui->angleText->setFont(poppins);
+    ui->forceText->setFont(poppins);
+    ui->hauteurText->setFont(poppins);
+    ui->vitesseText->setFont(poppins);
+    ui->periodeText->setFont(poppins);
+    ui->bomeText->setFont(poppins);
 }
 
 IHM::~IHM()
