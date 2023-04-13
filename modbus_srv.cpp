@@ -1,5 +1,5 @@
 #include "modbus_srv.h"
-#include <QTcpSocket>
+#include "qamtcpserver.h"
 #include <QDebug>
 
 Modbus_SRV::Modbus_SRV(const QString& configFile, QObject* parent )
@@ -7,8 +7,9 @@ Modbus_SRV::Modbus_SRV(const QString& configFile, QObject* parent )
     , m_configFile(configFile)
 {
     // cartographie Modbus
-    m_map    = new QamModbusMap(QamModbusMap::ServerMode, this ) ;
-    m_map->setVerbose(false) ;
+    m_map    = new QamModbusMap( QamModbusMap::ServerMode, this ) ;
+    m_map->setVerbose( false ) ;
+    //qDebug() << m_map->host();
     connect( m_map, SIGNAL(info(QString,QString)), this, SLOT(info(QString,QString)) ) ;
     m_map->loadMap( configFile ) ;
 
@@ -25,18 +26,19 @@ float Modbus_SRV::getPosazimut()
 
 float Modbus_SRV::getRoulis(){
     m_table = QamModbusMap::HoldingRegister ;
-    QString res = m_map->value(m_table, "lect-roulis");
-    return res.toFloat();
+    return m_map->value(m_table, "lect-roulis").toFloat();
 }
 
 float Modbus_SRV::getTangage()
 {
-    return GTangage;
+    m_table = QamModbusMap::HoldingRegister ;
+    return m_map->value(m_table, "lect-tangage").toFloat();
 }
 
 float Modbus_SRV::getVitazimut()
 {
-    return GVitAzimut;
+    m_table = QamModbusMap::HoldingRegister ;
+    return m_map->value(m_table, "lect-vitazimut").toFloat();
 }
 
 float Modbus_SRV::getHautvague()
@@ -46,7 +48,8 @@ float Modbus_SRV::getHautvague()
 
 float Modbus_SRV::getIntervague()
 {
-    return GIntervague;
+    m_table = QamModbusMap::HoldingRegister ;
+    return m_map->value(m_table, "cons-intervague").toFloat();
 }
 
 float Modbus_SRV::getTws()
@@ -61,7 +64,8 @@ float Modbus_SRV::getVitvague()
 
 float Modbus_SRV::getSwa()
 {
-    return GSwa;
+    m_table = QamModbusMap::HoldingRegister ;
+    return m_map->value(m_table, "cons-swa").toFloat();
 }
 
 void Modbus_SRV::setHautvague( float SHautVague)
@@ -71,7 +75,9 @@ void Modbus_SRV::setHautvague( float SHautVague)
 
 void Modbus_SRV::setIntervague(float SInterVague)
 {
-    GIntervague=SInterVague;
+    m_table = QamModbusMap::HoldingRegister ;
+    QString value = QString::number(SInterVague);
+    m_map->setValue(m_table, "cons-intervague", value);
 }
 
 void Modbus_SRV::setPosazimut(float SPosAzimut)
@@ -88,7 +94,9 @@ void Modbus_SRV::setRoulis(float SRouLis)
 
 void Modbus_SRV::setTangage(float STanGage)
 {
-    GTangage=STanGage;
+    m_table = QamModbusMap::HoldingRegister ;
+    QString value = QString::number(STanGage);
+    m_map->setValue(m_table, "lect-tangage", value);
 }
 
 void Modbus_SRV::setTws(float STws)
@@ -98,7 +106,9 @@ void Modbus_SRV::setTws(float STws)
 
 void Modbus_SRV::setVitazimut(float SVitAzimut)
 {
-    GVitAzimut=SVitAzimut;
+    m_table = QamModbusMap::HoldingRegister ;
+    QString value = QString::number(SVitAzimut);
+    m_map->setValue(m_table, "lect-vitazimut", value);
 }
 
 void Modbus_SRV::setVitvague(float SVitVague)
@@ -108,11 +118,9 @@ void Modbus_SRV::setVitvague(float SVitVague)
 
 void Modbus_SRV::setSwa(int SSwa)
 {
-    GSwa=SSwa;
-}
-
-int Modbus_SRV::getClientConnected(){
-    return m_server->getClientConnected();
+    m_table = QamModbusMap::HoldingRegister ;
+    QString value = QString::number(SSwa);
+    m_map->setValue(m_table, "cons-swa", value);
 }
 
 void Modbus_SRV::info(const QString& src, const QString& msg )
@@ -120,3 +128,6 @@ void Modbus_SRV::info(const QString& src, const QString& msg )
     qDebug() << qPrintable( src ) << ": " << qPrintable( msg )  ;
 }
 
+int Modbus_SRV::getClientConnected(){
+    return m_server->getClientConnected();
+}
