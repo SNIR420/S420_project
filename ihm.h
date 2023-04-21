@@ -13,6 +13,7 @@
 #include <QPropertyAnimation>
 #include <QObject>
 #include <QMouseEvent>
+#include <QGraphicsOpacityEffect>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class IHM; }
@@ -53,9 +54,8 @@ private:
     QPixmap rowImage;
     QPixmap pitchImage;
     QPixmap windImage;
-    QTimer *timeChange;
-    bool isUsedTwa = false;
-    bool isUsedBome = false;
+    //bool isUsedTwa = false;
+    //bool isUsedBome = false;
 protected:
     void resizeEvent(QResizeEvent *event)   override;
 };
