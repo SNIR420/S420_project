@@ -5,14 +5,15 @@ Simulateur::Simulateur(QObject *parent, QString cheminPolaire)
 {
     m_x = 0 ;
     m_y = 0 ;
-    m_angleAzimut = 45 ;
+    m_angleAzimut = 0 ;
     m_polaire = Polaire(cheminPolaire) ;
     m_vagueVitesse = vagueVitesse ;
     m_vaguePeriode = vaguePeriode ;
     m_bome = 145 ;
+    m_bome = getTwa() + 180 % 360 ;
     setBeaufort();
     //setWave(m_beaufort);
-    m_vagueAmplitude = 0.1 ;
+    m_vagueAmplitude = 2.0 ;
 
     QTimer *timer = new QTimer(this) ;
     connect(timer, &QTimer::timeout, this, &Simulateur::calcul) ;    //connect le timeout() du timer à une fonction qui calcule roulis, tangage et vitesse azimut
@@ -24,10 +25,10 @@ void Simulateur::setRoulis(){
     m_t1 = m_t1.currentTime() ;
     if (getVagueVitesse() == 0) { m_roulis = 0 ; return ; }
 
-    double ze = m_vagueAmplitude * sin(2.0*PI/getVaguePeriode() * (m_t0.msecsTo(m_t1)/1000.0)
+    double ze = getVagueAmplitude() * sin(2.0*PI/getVaguePeriode() * (m_t0.msecsTo(m_t1)/1000.0)
         - (2.0*PI / getInterVague()) * (m_y + envergure/2.0 * sin(getAngleAzimut()*PI/180.0))) ;
 
-    double zd = m_vagueAmplitude * sin(2.0*PI/getVaguePeriode() * (m_t0.msecsTo(m_t1)/1000.0)
+    double zd = getVagueAmplitude() * sin(2.0*PI/getVaguePeriode() * (m_t0.msecsTo(m_t1)/1000.0)
         - (2.0*PI / getInterVague()) * (m_y - envergure/2.0 * sin(getAngleAzimut()*PI/180.0))) ;
 
     if ((ze - zd)/envergure <= 1 && (ze - zd)/envergure >= -1)
@@ -39,10 +40,10 @@ void Simulateur::setTangage(){
     m_t1 = m_t1.currentTime() ;
     if (getVagueVitesse() == 0) { m_tangage = 0 ; return ; }
 
-    double zc = m_vagueAmplitude * sin(2.0*PI/getVaguePeriode() * (m_t0.msecsTo(m_t1)/1000.0)
+    double zc = getVagueAmplitude() * sin(2.0*PI/getVaguePeriode() * (m_t0.msecsTo(m_t1)/1000.0)
         - (2.0*PI / getInterVague()) * (m_y + Longueur/2.0 * cos(getAngleAzimut()*PI/180.0))) ;
 
-    double za = m_vagueAmplitude * sin(2.0*PI/getVaguePeriode() * (m_t0.msecsTo(m_t1)/1000.0)
+    double za = getVagueAmplitude() * sin(2.0*PI/getVaguePeriode() * (m_t0.msecsTo(m_t1)/1000.0)
         - (2.0*PI / getInterVague()) * (m_y - Longueur/2.0 * cos(getAngleAzimut()*PI/180.0))) ;
 
     if ((zc - za)/Longueur <= 1 && (zc - za)/Longueur >= -1)
@@ -75,7 +76,6 @@ double Simulateur::getVagueVitesse(){
 }
 
 void Simulateur::setSpeed(){ // utilise la classe polaire pour obtenir la vitesse
-    //m_speed = 11.5 ;
     m_speed = m_polaire.getSpeedRatio(getTwa(), getTws(), getRatio()) ;
 }
 
@@ -122,11 +122,13 @@ void Simulateur::calcul(){
     qDebug() << "vitesse   :" << m_speed << "nd" ;
     qDebug() << "temps     :" << round(m_t0.msecsTo(m_t1)/100.0)/10.0 << "s  \t" << m_t0.msecsTo(m_t1) << "ms" ;
     qDebug() << "x =" << m_x << "  y =" << m_y ;
-    //qDebug() << "angle azimut :" << m_angleAzimut << "°" ;
+    qDebug() << "angle azimut :" << m_angleAzimut << "°" ;
     //qDebug() << "ratio :" << getRatio() ;
-    qDebug() << "beaufort :" << m_beaufort ;
-    qDebug() << "vagueAmplitude :" << getVagueAmplitude() ;
+    //qDebug() << "beaufort :" << m_beaufort ;
+    //qDebug() << "vagueAmplitude :" << getVagueAmplitude() ;
     //qDebug() << "vagueVitesse :" << getVagueVitesse() << "/ vaguePeriode :" << getVaguePeriode() ;
+    qDebug() << "twa :" << getTwa()  << "°" ;
+    qDebug() << "angle bome :" << m_bome ;
 }
 
 void Simulateur::setWave(int force){
