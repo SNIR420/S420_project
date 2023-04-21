@@ -89,6 +89,7 @@ RESOURCES += \
     images/icon_plug_off.png \
     images/wind.png \
     images/Bome.png \
+    images/cloud.png \
     font/RobotoMono.ttf \
     font/Poppins.ttf
 
