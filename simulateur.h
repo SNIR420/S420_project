@@ -17,7 +17,7 @@
 #define vagueVitesse 3.0 // mètres par secondes
 
 #define TWS 10   //noeuds
-#define TWA 150  //degrés
+#define TWA 160  //degrés
 
 class Simulateur : public QObject
 {
@@ -25,7 +25,7 @@ class Simulateur : public QObject
 
 private:
     double m_angleVentJeu ; // System Wind Angle
-    double m_tws ;
+    int m_tws ;
     int m_beaufort ;  // de 0 à 12
 
     double m_roulis ;
@@ -49,6 +49,8 @@ private:
     int m_bome ;
 
     double m_ratio ;
+
+    double m_vagueAmplitude ;
 
 
 public:
@@ -81,6 +83,8 @@ public:
     void setVaguePeriode(double s_vaguePeriode){ m_vaguePeriode = s_vaguePeriode ; }
 
     double getRatio();
+
+    void setBeaufort() ;
 
 
 signals:
