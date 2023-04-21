@@ -1,5 +1,4 @@
 #include "modbus_srv.h"
-#include "qamtcpserver.h"
 #include <QDebug>
 
 Modbus_SRV::Modbus_SRV(const QString& configFile, QObject* parent )
@@ -9,14 +8,13 @@ Modbus_SRV::Modbus_SRV(const QString& configFile, QObject* parent )
     // cartographie Modbus
     m_map    = new QamModbusMap( QamModbusMap::ServerMode, this ) ;
     m_map->setVerbose( false ) ;
-    //qDebug() << m_map->host();
     connect( m_map, SIGNAL(info(QString,QString)), this, SLOT(info(QString,QString)) ) ;
     m_map->loadMap( configFile ) ;
 
     // server TCP
 
     m_server = new QamTcpServer( m_map, this ) ;
-    m_server->start(502);
+    m_server->start(5000);
 }
 
 float Modbus_SRV::getPosazimut()
@@ -46,6 +44,12 @@ float Modbus_SRV::getHautvague()
     return GHautvague;
 }
 
+float Modbus_SRV::getBom()
+{
+    m_table = QamModbusMap::HoldingRegister ;
+    return m_map->value(m_table, "lect-bome").toFloat();
+}
+
 float Modbus_SRV::getIntervague()
 {
     m_table = QamModbusMap::HoldingRegister ;
@@ -57,6 +61,10 @@ float Modbus_SRV::getTws()
     return GTws;
 }
 
+float Modbus_SRV::getTwa()
+{
+    return GTwa;
+}
 float Modbus_SRV::getVitvague()
 {
     return GVitvague;
@@ -66,6 +74,16 @@ float Modbus_SRV::getSwa()
 {
     m_table = QamModbusMap::HoldingRegister ;
     return m_map->value(m_table, "cons-swa").toFloat();
+}
+
+void Modbus_SRV::setBom(int SBom)
+{
+    GBom=SBom;
+}
+
+void Modbus_SRV::setTwa(int STwa)
+{
+    GTwa=STwa;
 }
 
 void Modbus_SRV::setHautvague( float SHautVague)

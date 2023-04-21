@@ -20,6 +20,8 @@ public:
     float getIntervague();
     float getTws();
     float getSwa();
+    float getTwa();
+    float getBom();
     void setHautvague( float SHautvague);
     void setVitvague(float SVitvague);
     void setIntervague(float SIntervague);
@@ -29,6 +31,8 @@ public:
     void setTws(float STws);
     void setPosazimut(float SPosazimut);
     void setSwa(int SSwa);
+    void setTwa(int STwa);
+    void setBom(int SBom);
     int getClientConnected();
 
 public slots:
@@ -36,6 +40,7 @@ public slots:
 
 private:
     float GVitAzimut;
+    //float GRoulis;
     float GTangage;
     float GPosazimut;
     float GHautvague;
@@ -43,19 +48,23 @@ private:
     float GIntervague;
     float GTws;
     int GSwa;
+    int GTwa;
+    int GBom;
     float SHautvague;
     float SVitvague;
     float SIntervague;
+    //float SRoulis;
     float STangage;
     float SVitazimut;
     float STws;
     float SPosazimut;
     int SSwa;
+    int STwa;
+    int SBom;
     QamModbusMap*				m_map ;
     QamModbusMap::PrimaryTable	m_table ;
     QamTcpServer*				m_server ;
     QString m_configFile;
-
 };
 
 #endif // MODBUS_SRV_H
