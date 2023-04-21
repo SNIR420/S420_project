@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1170</width>
-    <height>661</height>
+    <width>1230</width>
+    <height>608</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -25,6 +25,831 @@
 }</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0" rowspan="2">
+    <layout class="QVBoxLayout" name="inputLayout">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetMinimumSize</enum>
+     </property>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_6">
+       <property name="sizeConstraint">
+        <enum>QLayout::SetDefaultConstraint</enum>
+       </property>
+       <item>
+        <widget class="QLabel" name="angleText">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>160</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>160</width>
+           <height>22</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Poppins</family>
+           <pointsize>9</pointsize>
+           <bold>true</bold>
+           <stylestrategy>PreferDefault</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: white;
+}</string>
+         </property>
+         <property name="text">
+          <string>Angle Vent</string>
+         </property>
+         <property name="textFormat">
+          <enum>Qt::AutoText</enum>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::NoTextInteraction</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="MySpinBox" name="angleSpinBox">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>160</width>
+           <height>27</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>160</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Roboto Mono</family>
+           <pointsize>12</pointsize>
+           <bold>true</bold>
+           <underline>false</underline>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QSpinBox{
+    border-radius: 10px;
+    font-family: &quot;Roboto Mono&quot;;
+	background-color: #ffffff;
+	color: black;
+}
+
+QSpinBox:up-button {
+    subcontrol-position: left;
+	height: 27px;
+	width: 27px;
+	image: url(:/images/icon_plus.png);
+}
+
+QSpinBox:down-button {
+    subcontrol-position: right;
+	height: 27px;
+	width: 27px;
+	image: url(:/images/icon_minus.png);
+}</string>
+         </property>
+         <property name="wrapping">
+          <bool>true</bool>
+         </property>
+         <property name="frame">
+          <bool>false</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="buttonSymbols">
+          <enum>QAbstractSpinBox::UpDownArrows</enum>
+         </property>
+         <property name="accelerated">
+          <bool>true</bool>
+         </property>
+         <property name="keyboardTracking">
+          <bool>true</bool>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+         <property name="maximum">
+          <number>360</number>
+         </property>
+         <property name="displayIntegerBase">
+          <number>10</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <widget class="QLabel" name="forceText">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>160</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>160</width>
+           <height>22</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Poppins</family>
+           <pointsize>9</pointsize>
+           <bold>true</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: white;
+}</string>
+         </property>
+         <property name="text">
+          <string>Force Vent</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::NoTextInteraction</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="MySpinBox" name="forceSpinBox">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>160</width>
+           <height>27</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>160</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Roboto Mono</family>
+           <pointsize>12</pointsize>
+           <bold>true</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QSpinBox{
+    border-radius: 10px;
+    font-family: &quot;Roboto Mono&quot;;
+	background-color: #ffffff;
+	color: black;
+}
+
+QSpinBox:up-button {
+    subcontrol-position: left;
+	height: 27px;
+	width: 27px;
+	image: url(:/images/icon_plus.png);
+}
+
+QSpinBox:down-button {
+    subcontrol-position: right;
+	height: 27px;
+	width: 27px;
+	image: url(:/images/icon_minus.png);
+}</string>
+         </property>
+         <property name="wrapping">
+          <bool>true</bool>
+         </property>
+         <property name="frame">
+          <bool>false</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="accelerated">
+          <bool>true</bool>
+         </property>
+         <property name="suffix">
+          <string> kn</string>
+         </property>
+         <property name="maximum">
+          <number>70</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="QLabel" name="hauteurText">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>160</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>160</width>
+           <height>22</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Poppins</family>
+           <pointsize>9</pointsize>
+           <bold>true</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: white;
+}</string>
+         </property>
+         <property name="text">
+          <string>Hauteur Vague</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::NoTextInteraction</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="MyDoubleSpinBox" name="hauteurSpinBox">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>160</width>
+           <height>27</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>160</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Roboto Mono</family>
+           <pointsize>12</pointsize>
+           <bold>true</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QDoubleSpinBox{
+    border-radius: 12px;
+    font-family: &quot;Roboto Mono&quot;;
+	background-color: #ffffff;
+	color: black;
+}
+
+QDoubleSpinBox:up-button {
+    subcontrol-position: left;
+	height: 35px;
+	width: 35px;
+	image: url(:/images/icon_plus.png);
+}
+
+QDoubleSpinBox:down-button {
+    subcontrol-position: right;
+	height: 35px;
+	width: 35px;
+	image: url(:/images/icon_minus.png);
+}</string>
+         </property>
+         <property name="wrapping">
+          <bool>true</bool>
+         </property>
+         <property name="frame">
+          <bool>false</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="accelerated">
+          <bool>true</bool>
+         </property>
+         <property name="suffix">
+          <string> m</string>
+         </property>
+         <property name="decimals">
+          <number>1</number>
+         </property>
+         <property name="maximum">
+          <double>20.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>0.100000000000000</double>
+         </property>
+         <property name="value">
+          <double>0.300000000000000</double>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QLabel" name="vitesseText">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>160</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>160</width>
+           <height>22</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Poppins</family>
+           <pointsize>9</pointsize>
+           <bold>true</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: white;
+}</string>
+         </property>
+         <property name="text">
+          <string>Vitesse Vague</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::NoTextInteraction</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="MyDoubleSpinBox" name="vitesseSpinBox">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>160</width>
+           <height>27</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>160</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Roboto Mono</family>
+           <pointsize>12</pointsize>
+           <bold>true</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+          </font>
+         </property>
+         <property name="acceptDrops">
+          <bool>false</bool>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QDoubleSpinBox{
+    border-radius: 12px;
+    font-family: &quot;Roboto Mono&quot;;
+	background-color: #ffffff;
+	color: black;
+}
+
+QDoubleSpinBox:up-button {
+    subcontrol-position: left;
+	height: 35px;
+	width: 35px;
+	image: url(:/images/icon_plus.png);
+}
+
+QDoubleSpinBox:down-button {
+    subcontrol-position: right;
+	height: 35px;
+	width: 35px;
+	image: url(:/images/icon_minus.png);
+}</string>
+         </property>
+         <property name="wrapping">
+          <bool>true</bool>
+         </property>
+         <property name="frame">
+          <bool>false</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="readOnly">
+          <bool>false</bool>
+         </property>
+         <property name="buttonSymbols">
+          <enum>QAbstractSpinBox::UpDownArrows</enum>
+         </property>
+         <property name="accelerated">
+          <bool>true</bool>
+         </property>
+         <property name="suffix">
+          <string>m/s</string>
+         </property>
+         <property name="decimals">
+          <number>1</number>
+         </property>
+         <property name="minimum">
+          <double>-20.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>20.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>1.000000000000000</double>
+         </property>
+         <property name="value">
+          <double>2.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QLabel" name="periodeText">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>160</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>160</width>
+           <height>22</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Poppins</family>
+           <pointsize>9</pointsize>
+           <bold>true</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: white;
+}</string>
+         </property>
+         <property name="text">
+          <string>Inter Vague</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::NoTextInteraction</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="MyDoubleSpinBox" name="periodeSpinBox">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>160</width>
+           <height>27</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>160</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Roboto Mono</family>
+           <pointsize>12</pointsize>
+           <bold>true</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+          </font>
+         </property>
+         <property name="acceptDrops">
+          <bool>false</bool>
+         </property>
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QDoubleSpinBox{
+    border-radius: 12px;
+    font-family: &quot;Roboto Mono&quot;;
+	background-color: #ffffff;
+	color: black;
+}
+
+QDoubleSpinBox:up-button {
+    subcontrol-position: left;
+	height: 35px;
+	width: 35px;
+	image: url(:/images/icon_plus.png);
+}
+
+QDoubleSpinBox:down-button {
+    subcontrol-position: right;
+	height: 35px;
+	width: 35px;
+	image: url(:/images/icon_minus.png);
+}</string>
+         </property>
+         <property name="wrapping">
+          <bool>true</bool>
+         </property>
+         <property name="frame">
+          <bool>false</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="readOnly">
+          <bool>false</bool>
+         </property>
+         <property name="buttonSymbols">
+          <enum>QAbstractSpinBox::UpDownArrows</enum>
+         </property>
+         <property name="accelerated">
+          <bool>true</bool>
+         </property>
+         <property name="suffix">
+          <string>s</string>
+         </property>
+         <property name="decimals">
+          <number>1</number>
+         </property>
+         <property name="minimum">
+          <double>10.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>20.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>1.000000000000000</double>
+         </property>
+         <property name="value">
+          <double>10.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="bomeText">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>160</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>160</width>
+           <height>22</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Poppins</family>
+           <pointsize>9</pointsize>
+           <bold>true</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: white;
+}</string>
+         </property>
+         <property name="text">
+          <string>Angle Bome</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::NoTextInteraction</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="MySpinBox" name="bomeSpinBox">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>160</width>
+           <height>27</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>160</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Roboto Mono</family>
+           <pointsize>12</pointsize>
+           <bold>true</bold>
+           <underline>false</underline>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QSpinBox{
+    border-radius: 10px;
+    font-family: &quot;Roboto Mono&quot;;
+	background-color: #ffffff;
+	color: black;
+}
+
+QSpinBox:up-button {
+    subcontrol-position: left;
+	height: 27px;
+	width: 27px;
+	image: url(:/images/icon_plus.png);
+}
+
+QSpinBox:down-button {
+    subcontrol-position: right;
+	height: 27px;
+	width: 27px;
+	image: url(:/images/icon_minus.png);
+}</string>
+         </property>
+         <property name="wrapping">
+          <bool>false</bool>
+         </property>
+         <property name="frame">
+          <bool>false</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="buttonSymbols">
+          <enum>QAbstractSpinBox::NoButtons</enum>
+         </property>
+         <property name="accelerated">
+          <bool>true</bool>
+         </property>
+         <property name="keyboardTracking">
+          <bool>true</bool>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+         <property name="minimum">
+          <number>-30</number>
+         </property>
+         <property name="maximum">
+          <number>30</number>
+         </property>
+         <property name="displayIntegerBase">
+          <number>10</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
    <item row="0" column="1">
     <layout class="QHBoxLayout" name="graphicsLayout">
      <item>
@@ -42,8 +867,8 @@
          </property>
          <property name="minimumSize">
           <size>
-           <width>250</width>
-           <height>0</height>
+           <width>230</width>
+           <height>100</height>
           </size>
          </property>
          <property name="maximumSize">
@@ -66,7 +891,7 @@
          <property name="styleSheet">
           <string notr="true">QGraphicsView{
 	border-radius: 20px;
-	background: url(&quot;:/images/background.png&quot;);
+	background-color: #87CEEB;
 }</string>
          </property>
          <property name="verticalScrollBarPolicy">
@@ -106,8 +931,8 @@
          </property>
          <property name="minimumSize">
           <size>
-           <width>250</width>
-           <height>0</height>
+           <width>230</width>
+           <height>100</height>
           </size>
          </property>
          <property name="maximumSize">
@@ -119,7 +944,7 @@
          <property name="styleSheet">
           <string notr="true">QGraphicsView{
 	border-radius: 20px;
-	background: url(&quot;:/images/background.png&quot;);
+	background-color: #87CEEB;
 }</string>
          </property>
          <property name="verticalScrollBarPolicy">
@@ -170,7 +995,7 @@
          <property name="minimumSize">
           <size>
            <width>300</width>
-           <height>0</height>
+           <height>120</height>
           </size>
          </property>
          <property name="autoFillBackground">
@@ -265,821 +1090,6 @@ QProgressBar::chunk {
           </widget>
          </item>
         </layout>
-       </item>
-      </layout>
-     </item>
-    </layout>
-   </item>
-   <item row="0" column="0" rowspan="2">
-    <layout class="QVBoxLayout" name="inputLayout">
-     <property name="sizeConstraint">
-      <enum>QLayout::SetMinimumSize</enum>
-     </property>
-     <item>
-      <layout class="QVBoxLayout" name="angleLayout">
-       <property name="sizeConstraint">
-        <enum>QLayout::SetDefaultConstraint</enum>
-       </property>
-       <item>
-        <widget class="QLabel" name="angleText">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>175</width>
-           <height>25</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>175</width>
-           <height>42</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>Poppins</family>
-           <pointsize>12</pointsize>
-           <bold>true</bold>
-           <kerning>true</kerning>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLabel {
-	color: white;
-}</string>
-         </property>
-         <property name="text">
-          <string>Angle Vent</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-         <property name="textInteractionFlags">
-          <set>Qt::NoTextInteraction</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="MySpinBox" name="angleSpinBox">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>175</width>
-           <height>38</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>175</width>
-           <height>38</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>Roboto Mono</family>
-           <pointsize>14</pointsize>
-           <bold>true</bold>
-           <underline>false</underline>
-           <stylestrategy>PreferAntialias</stylestrategy>
-           <kerning>true</kerning>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="autoFillBackground">
-          <bool>false</bool>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QSpinBox{
-    border-radius: 16px;
-    font-family: &quot;Roboto Mono&quot;;
-	background-color: #ffffff;
-	color: black;
-}
-
-QSpinBox:up-button {
-    subcontrol-position: left;
-	height: 35px;
-	width: 35px;
-	image: url(:/images/icon_plus.png);
-}
-
-QSpinBox:down-button {
-    subcontrol-position: right;
-	height: 35px;
-	width: 35px;
-	image: url(:/images/icon_minus.png);
-}</string>
-         </property>
-         <property name="wrapping">
-          <bool>true</bool>
-         </property>
-         <property name="frame">
-          <bool>false</bool>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-         <property name="buttonSymbols">
-          <enum>QAbstractSpinBox::UpDownArrows</enum>
-         </property>
-         <property name="accelerated">
-          <bool>true</bool>
-         </property>
-         <property name="keyboardTracking">
-          <bool>true</bool>
-         </property>
-         <property name="suffix">
-          <string>°</string>
-         </property>
-         <property name="maximum">
-          <number>360</number>
-         </property>
-         <property name="displayIntegerBase">
-          <number>10</number>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QVBoxLayout" name="forceLayout">
-       <item>
-        <widget class="QLabel" name="forceText">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>175</width>
-           <height>25</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>175</width>
-           <height>42</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>Poppins</family>
-           <pointsize>12</pointsize>
-           <bold>true</bold>
-           <stylestrategy>PreferAntialias</stylestrategy>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLabel {
-	color: white;
-}</string>
-         </property>
-         <property name="text">
-          <string>Force Vent</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-         <property name="textInteractionFlags">
-          <set>Qt::NoTextInteraction</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="MySpinBox" name="forceSpinBox">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>175</width>
-           <height>38</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>175</width>
-           <height>38</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>Roboto Mono</family>
-           <pointsize>14</pointsize>
-           <bold>true</bold>
-           <stylestrategy>PreferAntialias</stylestrategy>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QSpinBox{
-    border-radius: 16px;
-    font-family: &quot;Roboto Mono&quot;;
-	background-color: #ffffff;
-	color: black;
-}
-
-QSpinBox:up-button {
-    subcontrol-position: left;
-	height: 35px;
-	width: 35px;
-	image: url(:/images/icon_plus.png);
-}
-
-QSpinBox:down-button {
-    subcontrol-position: right;
-	height: 35px;
-	width: 35px;
-	image: url(:/images/icon_minus.png);
-}</string>
-         </property>
-         <property name="wrapping">
-          <bool>true</bool>
-         </property>
-         <property name="frame">
-          <bool>false</bool>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-         <property name="accelerated">
-          <bool>true</bool>
-         </property>
-         <property name="suffix">
-          <string> kn</string>
-         </property>
-         <property name="maximum">
-          <number>70</number>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QVBoxLayout" name="hauteurLayout">
-       <item>
-        <widget class="QLabel" name="hauteurText">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>175</width>
-           <height>25</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>175</width>
-           <height>42</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>Poppins</family>
-           <pointsize>12</pointsize>
-           <bold>true</bold>
-           <stylestrategy>PreferAntialias</stylestrategy>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLabel {
-	color: white;
-}</string>
-         </property>
-         <property name="text">
-          <string>Hauteur Vague</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-         <property name="textInteractionFlags">
-          <set>Qt::NoTextInteraction</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="MyDoubleSpinBox" name="hauteurSpinBox">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>175</width>
-           <height>38</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>175</width>
-           <height>38</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>Roboto Mono</family>
-           <pointsize>14</pointsize>
-           <bold>true</bold>
-           <stylestrategy>PreferAntialias</stylestrategy>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QDoubleSpinBox{
-    border-radius: 16px;
-    font-family: &quot;Roboto Mono&quot;;
-	background-color: #ffffff;
-	color: black;
-}
-
-QDoubleSpinBox:up-button {
-    subcontrol-position: left;
-	height: 35px;
-	width: 35px;
-	image: url(:/images/icon_plus.png);
-}
-
-QDoubleSpinBox:down-button {
-    subcontrol-position: right;
-	height: 35px;
-	width: 35px;
-	image: url(:/images/icon_minus.png);
-}</string>
-         </property>
-         <property name="wrapping">
-          <bool>true</bool>
-         </property>
-         <property name="frame">
-          <bool>false</bool>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-         <property name="accelerated">
-          <bool>true</bool>
-         </property>
-         <property name="suffix">
-          <string> m</string>
-         </property>
-         <property name="decimals">
-          <number>1</number>
-         </property>
-         <property name="maximum">
-          <double>20.000000000000000</double>
-         </property>
-         <property name="singleStep">
-          <double>0.100000000000000</double>
-         </property>
-         <property name="value">
-          <double>0.300000000000000</double>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QVBoxLayout" name="vitesseLayout">
-       <item>
-        <widget class="QLabel" name="vitesseText">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>175</width>
-           <height>25</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>175</width>
-           <height>42</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>Poppins</family>
-           <pointsize>12</pointsize>
-           <bold>true</bold>
-           <stylestrategy>PreferAntialias</stylestrategy>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLabel {
-	color: white;
-}</string>
-         </property>
-         <property name="text">
-          <string>Vitesse Vague</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-         <property name="textInteractionFlags">
-          <set>Qt::NoTextInteraction</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="MyDoubleSpinBox" name="vitesseSpinBox">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>175</width>
-           <height>38</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>175</width>
-           <height>38</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>Roboto Mono</family>
-           <pointsize>14</pointsize>
-           <bold>true</bold>
-           <stylestrategy>PreferAntialias</stylestrategy>
-          </font>
-         </property>
-         <property name="acceptDrops">
-          <bool>false</bool>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="autoFillBackground">
-          <bool>false</bool>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QDoubleSpinBox{
-    border-radius: 16px;
-    font-family: &quot;Roboto Mono&quot;;
-	background-color: #ffffff;
-	color: black;
-}
-
-QDoubleSpinBox:up-button {
-    subcontrol-position: left;
-	height: 35px;
-	width: 35px;
-	image: url(:/images/icon_plus.png);
-}
-
-QDoubleSpinBox:down-button {
-    subcontrol-position: right;
-	height: 35px;
-	width: 35px;
-	image: url(:/images/icon_minus.png);
-}</string>
-         </property>
-         <property name="wrapping">
-          <bool>true</bool>
-         </property>
-         <property name="frame">
-          <bool>false</bool>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-         <property name="readOnly">
-          <bool>false</bool>
-         </property>
-         <property name="buttonSymbols">
-          <enum>QAbstractSpinBox::UpDownArrows</enum>
-         </property>
-         <property name="accelerated">
-          <bool>true</bool>
-         </property>
-         <property name="suffix">
-          <string>m/s</string>
-         </property>
-         <property name="decimals">
-          <number>1</number>
-         </property>
-         <property name="minimum">
-          <double>-20.000000000000000</double>
-         </property>
-         <property name="maximum">
-          <double>20.000000000000000</double>
-         </property>
-         <property name="singleStep">
-          <double>1.000000000000000</double>
-         </property>
-         <property name="value">
-          <double>2.000000000000000</double>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QVBoxLayout" name="periodeLayout">
-       <item>
-        <widget class="QLabel" name="periodeText">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>175</width>
-           <height>25</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>175</width>
-           <height>42</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>Poppins</family>
-           <pointsize>12</pointsize>
-           <bold>true</bold>
-           <stylestrategy>PreferAntialias</stylestrategy>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLabel {
-	color: white;
-}</string>
-         </property>
-         <property name="text">
-          <string>Inter Vague</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-         <property name="textInteractionFlags">
-          <set>Qt::NoTextInteraction</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="MyDoubleSpinBox" name="periodeSpinBox">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>175</width>
-           <height>38</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>175</width>
-           <height>38</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>Roboto Mono</family>
-           <pointsize>14</pointsize>
-           <bold>true</bold>
-           <stylestrategy>PreferAntialias</stylestrategy>
-          </font>
-         </property>
-         <property name="acceptDrops">
-          <bool>false</bool>
-         </property>
-         <property name="autoFillBackground">
-          <bool>false</bool>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QDoubleSpinBox{
-    border-radius: 16px;
-    font-family: &quot;Roboto Mono&quot;;
-	background-color: #ffffff;
-	color: black;
-}
-
-QDoubleSpinBox:up-button {
-    subcontrol-position: left;
-	height: 35px;
-	width: 35px;
-	image: url(:/images/icon_plus.png);
-}
-
-QDoubleSpinBox:down-button {
-    subcontrol-position: right;
-	height: 35px;
-	width: 35px;
-	image: url(:/images/icon_minus.png);
-}</string>
-         </property>
-         <property name="wrapping">
-          <bool>true</bool>
-         </property>
-         <property name="frame">
-          <bool>false</bool>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-         <property name="readOnly">
-          <bool>false</bool>
-         </property>
-         <property name="buttonSymbols">
-          <enum>QAbstractSpinBox::UpDownArrows</enum>
-         </property>
-         <property name="accelerated">
-          <bool>true</bool>
-         </property>
-         <property name="suffix">
-          <string>s</string>
-         </property>
-         <property name="decimals">
-          <number>1</number>
-         </property>
-         <property name="minimum">
-          <double>10.000000000000000</double>
-         </property>
-         <property name="maximum">
-          <double>20.000000000000000</double>
-         </property>
-         <property name="singleStep">
-          <double>1.000000000000000</double>
-         </property>
-         <property name="value">
-          <double>10.000000000000000</double>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QVBoxLayout" name="bomeLayout">
-       <item>
-        <widget class="QLabel" name="bomeText">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>175</width>
-           <height>25</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>175</width>
-           <height>42</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>Poppins</family>
-           <pointsize>12</pointsize>
-           <bold>true</bold>
-           <stylestrategy>PreferAntialias</stylestrategy>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLabel {
-	color: white;
-}</string>
-         </property>
-         <property name="text">
-          <string>Angle Bome</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-         <property name="textInteractionFlags">
-          <set>Qt::NoTextInteraction</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="MySpinBox" name="bomeSpinBox">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>175</width>
-           <height>38</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>175</width>
-           <height>38</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>Roboto Mono</family>
-           <pointsize>14</pointsize>
-           <bold>true</bold>
-           <underline>false</underline>
-           <stylestrategy>PreferAntialias</stylestrategy>
-           <kerning>true</kerning>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="autoFillBackground">
-          <bool>false</bool>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QSpinBox{
-    border-radius: 16px;
-    font-family: &quot;Roboto Mono&quot;;
-	background-color: #ffffff;
-	color: black;
-}
-
-QSpinBox:up-button {
-    subcontrol-position: left;
-	height: 35px;
-	width: 35px;
-	image: url(:/images/icon_plus.png);
-}
-
-QSpinBox:down-button {
-    subcontrol-position: right;
-	height: 35px;
-	width: 35px;
-	image: url(:/images/icon_minus.png);
-}</string>
-         </property>
-         <property name="wrapping">
-          <bool>false</bool>
-         </property>
-         <property name="frame">
-          <bool>false</bool>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-         <property name="buttonSymbols">
-          <enum>QAbstractSpinBox::UpDownArrows</enum>
-         </property>
-         <property name="accelerated">
-          <bool>true</bool>
-         </property>
-         <property name="keyboardTracking">
-          <bool>true</bool>
-         </property>
-         <property name="suffix">
-          <string>°</string>
-         </property>
-         <property name="minimum">
-          <number>-30</number>
-         </property>
-         <property name="maximum">
-          <number>30</number>
-         </property>
-         <property name="displayIntegerBase">
-          <number>10</number>
-         </property>
-        </widget>
        </item>
       </layout>
      </item>
