@@ -269,7 +269,7 @@ QSpinBox:down-button {
 }</string>
          </property>
          <property name="wrapping">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
          <property name="frame">
           <bool>false</bool>
@@ -387,7 +387,7 @@ QDoubleSpinBox:down-button {
 }</string>
          </property>
          <property name="wrapping">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
          <property name="frame">
           <bool>false</bool>
@@ -523,7 +523,7 @@ QDoubleSpinBox:down-button {
 }</string>
          </property>
          <property name="wrapping">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
          <property name="frame">
           <bool>false</bool>
@@ -665,7 +665,7 @@ QDoubleSpinBox:down-button {
 }</string>
          </property>
          <property name="wrapping">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
          <property name="frame">
           <bool>false</bool>
@@ -743,7 +743,7 @@ QDoubleSpinBox:down-button {
 }</string>
          </property>
          <property name="text">
-          <string>Angle Bome</string>
+          <string>Angle Bome (Rouge)</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
