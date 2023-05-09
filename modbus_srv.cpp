@@ -14,7 +14,7 @@ Modbus_SRV::Modbus_SRV(const QString& configFile, QObject* parent )
     // server TCP
 
     m_server = new QamTcpServer( m_map, this ) ;
-    m_server->start(5000);
+    m_server->start(502);
 }
 
 float Modbus_SRV::getPosazimut()
@@ -78,7 +78,9 @@ float Modbus_SRV::getSwa()
 
 void Modbus_SRV::setBom(int SBom)
 {
-    GBom=SBom;
+    m_table = QamModbusMap::HoldingRegister ;
+    QString value = QString::number(SBom);
+    m_map->setValue(m_table, "lect-bome", value);
 }
 
 void Modbus_SRV::setTwa(int STwa)
