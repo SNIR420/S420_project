@@ -24,6 +24,15 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     bomeImageItem->setTransformationMode(Qt::SmoothTransformation);
     bomeImageItem->setZValue(2);
     scene->addItem(bomeImageItem);
+
+    realBomeImage = QPixmap(":/images/Real_Bome.png");
+    realBomeImageItem = new QGraphicsPixmapItem(realBomeImage);
+    realBomeImageItem->setPos((ui->graphicsViewYaw->width() - realBomeImage.width()) / 2, (ui->graphicsViewYaw->height() - realBomeImage.height()) / 2);
+    realBomeImageItem->setTransformOriginPoint(realBomeImage.width()/2, realBomeImage.height()/2); // Définir l'origine au centre de l'image
+    realBomeImageItem->setData(Qt::UserRole, "realBomeImage");
+    realBomeImageItem->setTransformationMode(Qt::SmoothTransformation);
+    realBomeImageItem->setZValue(3);
+    scene->addItem(realBomeImageItem);
     ui->graphicsViewYaw->setScene(scene);
 
     //Init ROW
@@ -126,9 +135,7 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     connect(ui->forceSpinBox, &MySpinBox::ButtonReleased, [=]() {
         sendTws();
     });
-    connect(ui->bomeSpinBox, &MySpinBox::valueChanged, [=]() {
-        setUiBome(ui->bomeSpinBox->value());
-    });
+
     connect(ui->hauteurSpinBox, &MyDoubleSpinBox::ButtonReleased, [=]() {
         setHauteurVague(ui->hauteurSpinBox->value());
     });
@@ -143,6 +150,7 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     connect(ui->progressBar, &MyProgressBar::pressReleased, this, &IHM::sendTws);
     connect(ui->graphicsViewYaw, &MyGraphicsView::pressed, this, &IHM::onGraphicsViewPressed);
     connect(ui->graphicsViewYaw, &MyGraphicsView::pressReleased, this, &IHM::sendSwa);
+    connect(ui->pbuClient, &QPushButton::clicked, this, &IHM::debugMode);
     m_modbusserver = new Modbus_SRV(":/S420-6-API.csv", this);
     m_simulateur = new Simulateur(":/Class40.pol", m_modbusserver, this);
 
@@ -155,6 +163,42 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     m_modbusserver->setSwa(ui->angleSpinBox->value());
     setVitesseVague(ui->vitesseSpinBox->value());
     setPeriodeVague(ui->periodeSpinBox->value());
+}
+
+void IHM::debugMode(){
+    if(isEnabled == false){
+        isEnabled = true;
+        delete m_simulateur;
+        ui->periodeText->setText("Roulis (debug)");
+        ui->periodeSpinBox->setMinimum(-40.0);
+        ui->periodeSpinBox->setValue(0);
+        ui->periodeSpinBox->setMaximum(40.0);
+        ui->periodeSpinBox->setSuffix("°");
+
+        ui->vitesseText->setText("Tangage (debug)");
+        ui->vitesseSpinBox->setMinimum(-40.0);
+        ui->vitesseSpinBox->setValue(0);
+        ui->vitesseSpinBox->setMaximum(40.0);
+        ui->vitesseSpinBox->setSuffix("°");
+
+        m_modbusserver->setRoulis(0);
+        m_modbusserver->setTangage(0);
+    }
+    else{
+        isEnabled = false;
+        m_simulateur = new Simulateur(":/Class40.pol", m_modbusserver, this);
+        ui->periodeText->setText("Vitesse Vague");
+        ui->periodeSpinBox->setMinimum(-20.0);
+        ui->periodeSpinBox->setValue(2.0);
+        ui->periodeSpinBox->setMaximum(20.0);
+        ui->periodeSpinBox->setSuffix("m/s");
+
+        ui->vitesseText->setText("Inter Vague");
+        ui->vitesseSpinBox->setMinimum(10.0);
+        ui->vitesseSpinBox->setValue(10.0);
+        ui->vitesseSpinBox->setMaximum(20.0);
+        ui->vitesseSpinBox->setSuffix("s");
+    }
 }
 
 void IHM::onGraphicsViewPressed(const QPoint& pos){
@@ -183,7 +227,10 @@ void IHM::sendTws(){
 }
 
 void IHM::setPeriodeVague(float periode){
-    m_modbusserver->setIntervague(periode);
+    if(isEnabled == true){
+        m_modbusserver->setRoulis(periode);
+    }
+    else m_modbusserver->setIntervague(periode);
 }
 
 void IHM::setUiBome(int bome){
@@ -192,8 +239,10 @@ void IHM::setUiBome(int bome){
     scene->update();
 }
 
-void IHM::sendBome(){
-    //m_modbusserver->setTws(ui->forceSpinBox->value());
+void IHM::setUiRealBome(int realBome){
+    //realBomeImageItem->setRotation(realBome);
+    realBomeImageItem->setTransformationMode(Qt::SmoothTransformation);
+    scene->update();
 }
 
 void IHM::setUiAngleVent(int angleDeg){
@@ -248,6 +297,25 @@ void IHM::setUiAngleVent(int angleDeg){
 
 void IHM::sendSwa(){
     m_modbusserver->setSwa(ui->angleSpinBox->value());
+
+    int bomAngle = 0;
+    if(ui->angleSpinBox->value() >= 270 && ui->angleSpinBox->value() <= 360){
+        setUiBome(ui->angleSpinBox->value());
+        bomAngle = -1*(360 - ui->angleSpinBox->value());
+    }
+    else if(ui->angleSpinBox->value() >= 0 && ui->angleSpinBox->value() <= 90){
+        setUiBome(ui->angleSpinBox->value());
+        bomAngle = ui->angleSpinBox->value();
+    }
+    else if(ui->angleSpinBox->value() > 90 && ui->angleSpinBox->value() <= 180){
+        setUiBome(90);
+        bomAngle = 90;
+    }
+    else{
+        setUiBome(-90);
+        bomAngle = -90;
+    }
+    m_modbusserver->setBom(bomAngle);
     /*isUsedTwa = false;
     isUsedBome = false;*/
 }
@@ -276,15 +344,18 @@ void IHM::setHauteurVague(float hauteur){
 }
 
 void IHM::setVitesseVague(double vitesse){
-    if(vitesse <= 1) vitesse = 1;
-    m_modbusserver->setVitvague(vitesse);
+    if(isEnabled == true){
+        m_modbusserver->setTangage(vitesse);
+    }
+    else{
+        if(vitesse <= 1) vitesse = 1;
+        m_modbusserver->setVitvague(vitesse);
+    }
 }
 
 void IHM::updateBoatRowPitch()
 {
-    pitchImageItem->setRotation(m_modbusserver->getRoulis());
-    rowImageItem->setRotation(m_modbusserver->getTangage());
-    setUiBome(m_modbusserver->getBom());
+    setUiRealBome(m_modbusserver->getBom());
     ui->bomeSpinBox->setValue(m_modbusserver->getBom());
     sceneRow->update();
     scenePitch->update();
@@ -293,8 +364,42 @@ void IHM::updateBoatRowPitch()
     } else {
         ui->pbuClient->setStyleSheet("QPushButton {	image: url(:/images/icon_plug_off.png); background-color: #4D4D4D;}");
     }
-    /*qDebug() << m_modbusserver->getRoulis();
-    qDebug() << m_modbusserver->getTangage();*/
+    if(isEnabled == true){
+        // Rechercher le QGraphicsTextItem existant dans la scène
+        QGraphicsTextItem *textItem = nullptr;
+        QList<QGraphicsItem *> items = scene->items();
+        for (QGraphicsItem *item : items) {
+            if (QGraphicsTextItem *ti = dynamic_cast<QGraphicsTextItem *>(item)) {
+                textItem = ti;
+                break;
+            }
+        }
+        // Si le QGraphicsTextItem n'existe pas encore, le créer
+        if (textItem == nullptr) {
+            textItem = new QGraphicsTextItem();
+            QPointF pos = ui->graphicsViewYaw->mapToScene(QPoint(10, 1));
+            textItem->setPos(pos);
+            scene->addItem(textItem);
+        }
+
+        QString text = "=[VENT]=\n\ntws: %1\ntwa: %2\nswa: %3\n\n=[BATEAU]=\n\nroulis: %4\ntangage: %5\nvit.azimut: %6\npos.azimut: %7\n\n=[VAGUE]=\n\nhauteur: %8\nvitesse: %9\ninter-vague: %10\n";
+        textItem->setFont(QFont("Arial", 9));
+        textItem->setPlainText(text.arg(QString::number(m_modbusserver->getTws()), QString::number(m_modbusserver->getTwa()), QString::number(m_modbusserver->getSwa()), QString::number(m_modbusserver->getRoulis()), QString::number(m_modbusserver->getTangage()), QString::number(m_modbusserver->getVitazimut()), QString::number(m_modbusserver->getPosazimut()), QString::number(m_modbusserver->getHautvague()), QString::number(m_modbusserver->getVitvague()), QString::number(m_modbusserver->getIntervague())));
+        m_modbusserver->setTangage(ui->vitesseSpinBox->value());
+        m_modbusserver->setRoulis(ui->periodeSpinBox->value());
+        pitchImageItem->setRotation(ui->vitesseSpinBox->value());
+        rowImageItem->setRotation(ui->periodeSpinBox->value());
+    }
+    else{
+        pitchImageItem->setRotation(m_modbusserver->getRoulis());
+        rowImageItem->setRotation(m_modbusserver->getTangage());
+        QList<QGraphicsItem *> items = scene->items();
+        for (QGraphicsItem *item : items) {
+            if (QGraphicsTextItem *ti = dynamic_cast<QGraphicsTextItem *>(item)) {
+                delete ti;
+            }
+        }
+    }
 }
 
 void IHM::resizeEvent(QResizeEvent *event){
@@ -318,7 +423,13 @@ void IHM::resizeEvent(QResizeEvent *event){
     bomeImageItem->setPixmap(scaledBomeImage);
     bomeImageItem->setPos((ui->graphicsViewYaw->scene()->width() - scaledBomeImage.width())/2, (ui->graphicsViewYaw->scene()->height() - scaledBomeImage.height())/2);
     bomeImageItem->setData(Qt::UserRole, "bomeImage");
-    bomeImageItem->setTransformOriginPoint(scaledBomeImage.width()/2, 60*scaleFactor);
+    bomeImageItem->setTransformOriginPoint(scaledBomeImage.width()/2, 55*scaleFactor);
+
+    QPixmap scaledRealBomeImage = realBomeImage.scaled(QSize(realBomeImage.height() * scaleFactor, realBomeImage.width() * scaleFactor), Qt::KeepAspectRatio, Qt::SmoothTransformation);    // Redimensionnement de l'item pixmap
+    realBomeImageItem->setPixmap(scaledRealBomeImage);
+    realBomeImageItem->setPos((ui->graphicsViewYaw->scene()->width() - scaledRealBomeImage.width())/2, (ui->graphicsViewYaw->scene()->height() - scaledRealBomeImage.height())/2);
+    realBomeImageItem->setData(Qt::UserRole, "realBomeImage");
+    realBomeImageItem->setTransformOriginPoint(scaledRealBomeImage.width()/2, 55*scaleFactor);
 
     scaleFactorX = static_cast<qreal>(event->size().width()) / static_cast<qreal>(pitchImage.width());
     scaleFactorY = static_cast<qreal>(event->size().height()) / static_cast<qreal>(pitchImage.height());
