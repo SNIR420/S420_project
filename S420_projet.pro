@@ -68,8 +68,7 @@ DISTFILES += \
     android/gradlew.bat \
     android/res/values/libs.xml \
     android/res/values/libs.xml \
-    android/res/values/libs.xml \
-    s420_uml.qmodel
+    android/res/values/libs.xml
 
 contains(ANDROID_TARGET_ARCH,arm64-v8a) {
     ANDROID_PACKAGE_SOURCE_DIR = \
@@ -92,7 +91,8 @@ RESOURCES += \
     images/Real_Bome.png \
     images/cloud.png \
     font/RobotoMono.ttf \
-    font/Poppins.ttf
+    font/Poppins.ttf \
+    s420_uml.qmodel
 
 contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
     ANDROID_PACKAGE_SOURCE_DIR = \
