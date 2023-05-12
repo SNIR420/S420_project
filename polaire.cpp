@@ -33,10 +33,13 @@ Polaire::Polaire(QString polFilePath)
     file.close();
 
     // Afficher les données Polaire
-    for (int i = 0; i < m_polaireData.size(); ++i) {
+    for (int i = 1; i < m_polaireData.size(); ++i) {
         QVector<double> row = m_polaireData[i];
-        for (int j = 0; j < row.size(); ++j) {
-            qDebug() << "m_polaireData[" << i << "][" << j << "] = " << row[j];
+        for (int j = 1; j < row.size(); ++j) {
+            //qDebug() << "m_polaireData[" << i << "][" << j << "] = " << row[j];
+            if(vitesseMax < row[j]){
+                vitesseMax = row[j];
+            }
         }
     }
 
@@ -80,8 +83,18 @@ double Polaire::getMaxSpeed(double twa, double tws) {
     return m_polaireData[x][y];
 }
 
-double Polaire::getMaxRatio(double twa, double tws) {
-    qDebug() << getMaxSpeed(twa, tws) * 0.7;
-    return getMaxSpeed(twa, tws) * 0.7;
+double Polaire::getMaxGite(double twa, double tws) {
+    return (getMaxSpeed(twa, tws)* 30) / getAbsoluteMaxSpeed();
 }
+double Polaire::getGiteRatio(double twa, double tws, double ratio){
+
+    double gite = getMaxGite(twa,tws)*ratio;
+    return gite;
+}
+
+double Polaire::getAbsoluteMaxSpeed(){
+    //cette fonction doit me retourner la vitesse max de la Polaire
+    return vitesseMax;
+}
+
 
