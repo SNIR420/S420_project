@@ -50,17 +50,6 @@ private:
     int GSwa;
     int GTwa;
     int GBom;
-    float SHautvague;
-    float SVitvague;
-    float SIntervague;
-    //float SRoulis;
-    float STangage;
-    float SVitazimut;
-    float STws;
-    float SPosazimut;
-    int SSwa;
-    int STwa;
-    int SBom;
     QamModbusMap*				m_map ;
     QamModbusMap::PrimaryTable	m_table ;
     QamTcpServer*				m_server ;
