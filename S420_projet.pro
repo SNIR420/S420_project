@@ -87,6 +87,7 @@ RESOURCES += \
     images/icon_plug_on.png \
     images/icon_plug_off.png \
     images/wind.png \
+    images/Safran.png \
     images/Bome.png \
     images/Real_Bome.png \
     images/cloud.png \
