@@ -48,6 +48,11 @@ double Polaire::getMaxSpeed(double twa, double tws) {
     int x = -1, y = -1;
     int i, j, k = 0;
 
+    if (tws == 0) return 0.0 ;
+    if (tws > 0.0 && tws < 4.0) tws = 4.0 ;
+
+    if (twa == 0) return 0.0 ;
+
     for(i = 0; i < m_polaireData.size(); i++) {
         if(m_polaireData[i][0] == twa) { // Trouver la ligne correspondant à l'angle d'attaque (twa)
             x = i;
