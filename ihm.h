@@ -26,19 +26,25 @@ public:
     IHM(QWidget *parent = nullptr);
     ~IHM();
 private slots:
-    void setHauteurVague(float hauteur);
-    void setVitesseVague(double vitesse);
-    void setPeriodeVague(float periode);
-    void updateBoatRowPitch();
+    void debugMode();
+
     void onGraphicsViewPressed(const QPoint& pos);
     void onProgressBarPressed(const QPoint& pos);
+
     void sendSwa();
-    void setUiAngleVent(int angleDeg);
     void sendTws();
-    void setUiTws(int tws);
+
+    void setHauteurVague(float hauteur);
+    void setPeriodeVague(float periode);
+    void setVitesseVague(double vitesse);
+
+    void setUiAngleVent(int angleDeg);
     void setUiBome(int bome);
-    void setUiRealBome(int realBome);
-    void debugMode();
+    void setUiRealBome();
+    void setUiTws(int tws);
+
+    void updateBoatRowPitch();
+
 private:
     Ui::IHM *ui;
     QGraphicsScene *scene;
@@ -51,16 +57,17 @@ private:
     QGraphicsPixmapItem *realBomeImageItem;
     QGraphicsPixmapItem *rowImageItem;
     QGraphicsPixmapItem *pitchImageItem;
+    QGraphicsPixmapItem *safranImageItem;
     QPixmap centerImage;
     QPixmap bomeImage;
     QPixmap realBomeImage;
     QPixmap rowImage;
     QPixmap pitchImage;
     QPixmap windImage;
+    QPixmap safranImage;
     QGraphicsTextItem *textItem;
+    QGraphicsTextItem *textSpeedItem;
     bool isEnabled = false;
-    //bool isUsedTwa = false;
-    //bool isUsedBome = false;
 protected:
     void resizeEvent(QResizeEvent *event)   override;
 };

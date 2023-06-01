@@ -33,6 +33,16 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     realBomeImageItem->setTransformationMode(Qt::SmoothTransformation);
     realBomeImageItem->setZValue(3);
     scene->addItem(realBomeImageItem);
+
+    safranImage = QPixmap(":/images/Safran.png");
+    safranImageItem = new QGraphicsPixmapItem(safranImage);
+    safranImageItem->setPos((ui->graphicsViewYaw->width() - safranImage.width()) / 2, (ui->graphicsViewYaw->height() - safranImage.height()) / 2);
+    safranImageItem->setTransformOriginPoint(safranImage.width()/2, safranImage.height()/2); // Définir l'origine au centre de l'image
+    safranImageItem->setData(Qt::UserRole, "safranImage");
+    safranImageItem->setTransformationMode(Qt::SmoothTransformation);
+    safranImageItem->setZValue(0);
+    scene->addItem(safranImageItem);
+
     ui->graphicsViewYaw->setScene(scene);
 
     //Init ROW
@@ -57,6 +67,10 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     pitchImageItem->setTransformOriginPoint(pitchImage.width()/2, pitchImage.height()-20); // Définir l'origine au centre de l'image
     pitchImageItem->setData(Qt::UserRole, "pitchImage");
     pitchImageItem->setTransformationMode(Qt::SmoothTransformation);
+
+    textSpeedItem = new QGraphicsTextItem();
+    textSpeedItem->setPos(ui->graphicsViewPitch->width()/2, ui->graphicsViewPitch->height()/2);
+    scenePitch->addItem(textSpeedItem);
     scenePitch->addItem(pitchImageItem);
     ui->graphicsViewPitch->setScene(scenePitch);
 
@@ -206,12 +220,12 @@ void IHM::onGraphicsViewPressed(const QPoint& pos){
     QPointF center = view->mapToScene(view->rect().center());
     QPointF clickPos = view->mapToScene(pos);
     QPointF vector = clickPos - center;
-    int angle = 1;
+    int angle = -1;
     angle = atan2(vector.y(), vector.x()) * 180 / M_PI + 90;
-    if (angle < 0) {
-        angle += 360;
+    if (angle > 0) {
+        angle -= 360;
     }
-    ui->angleSpinBox->setValue(angle);
+    ui->angleSpinBox->setValue(-1*angle);
 }
 
 void IHM::onProgressBarPressed(const QPoint& pos){
@@ -239,8 +253,23 @@ void IHM::setUiBome(int bome){
     scene->update();
 }
 
-void IHM::setUiRealBome(int realBome){
-    //realBomeImageItem->setRotation(realBome);
+void IHM::setUiRealBome(){
+    float angleReel = 360-m_modbusserver->getBom();
+    float angle;
+    //270 360 - 0 90 -- 90 à 270 pas de mouvement
+    if(angleReel >= 270 && angleReel <= 360){
+        angle = (360-m_modbusserver->getBom())+m_modbusserver->getBomError();
+    }
+    else if(angleReel >= 0 && angleReel <= 90){
+        angle = (360-m_modbusserver->getBom())+m_modbusserver->getBomError();
+    }
+    else if(angleReel > 90 && angleReel <= 180){
+        angle = 90;
+    }
+    else{
+        angle = 270;
+    }
+    realBomeImageItem->setRotation(angle);
     realBomeImageItem->setTransformationMode(Qt::SmoothTransformation);
     scene->update();
 }
@@ -267,7 +296,7 @@ void IHM::setUiAngleVent(int angleDeg){
     QPixmap scaledWindImage = windImage.scaled(QSize(windImage.height() * scaleFactor, windImage.width() * scaleFactor), Qt::KeepAspectRatio, Qt::SmoothTransformation);    // Redimensionnement de l'item pixmap
     topLeftImageItem = new QGraphicsPixmapItem(scaledWindImage);
 
-    double angleRad = qDegreesToRadians(angleDeg);
+    double angleRad = qDegreesToRadians(180-angleDeg);
 
     // Calcule les coordonées selon le cos/sin de l'angle en radian
 
@@ -284,7 +313,7 @@ void IHM::setUiAngleVent(int angleDeg){
     topLeftImageItem->setTransformOriginPoint((scaledWindImage.width()/2), (scaledWindImage.height()/2)); // Définir l'origine de rotation au coin supérieur gauche de l'image
 
     // Faire tourner l'image selon l'angle donné
-    topLeftImageItem->setRotation(angleDeg);
+    topLeftImageItem->setRotation(180-angleDeg);
 
     topLeftImageItem->setTransformationMode(Qt::SmoothTransformation);
 
@@ -298,26 +327,19 @@ void IHM::setUiAngleVent(int angleDeg){
 void IHM::sendSwa(){
     m_modbusserver->setSwa(ui->angleSpinBox->value());
 
-    int bomAngle = 0;
-    if(ui->angleSpinBox->value() >= 270 && ui->angleSpinBox->value() <= 360){
-        setUiBome(ui->angleSpinBox->value());
-        bomAngle = -1*(360 - ui->angleSpinBox->value());
+    if(360-ui->angleSpinBox->value() >= 270 && 360-ui->angleSpinBox->value() <= 360){
+        setUiBome(360-ui->angleSpinBox->value());
     }
-    else if(ui->angleSpinBox->value() >= 0 && ui->angleSpinBox->value() <= 90){
-        setUiBome(ui->angleSpinBox->value());
-        bomAngle = ui->angleSpinBox->value();
+    else if(360-ui->angleSpinBox->value() >= 0 && 360-ui->angleSpinBox->value() <= 90){
+        setUiBome(360-ui->angleSpinBox->value());
     }
-    else if(ui->angleSpinBox->value() > 90 && ui->angleSpinBox->value() <= 180){
-        setUiBome(90);
-        bomAngle = 90;
+    else if(360-ui->angleSpinBox->value() > 90 && 360-ui->angleSpinBox->value() <= 180){
+        setUiBome(-270);
     }
     else{
-        setUiBome(-90);
-        bomAngle = -90;
+        setUiBome(270);
     }
-    m_modbusserver->setBom(bomAngle);
-    /*isUsedTwa = false;
-    isUsedBome = false;*/
+    //qDebug() << 360-bomAngle;
 }
 
 void IHM::setUiTws(int tws){
@@ -355,10 +377,13 @@ void IHM::setVitesseVague(double vitesse){
 
 void IHM::updateBoatRowPitch()
 {
-    setUiRealBome(m_modbusserver->getBom());
-    ui->bomeSpinBox->setValue(m_modbusserver->getBom());
+    ui->bomeSpinBox->setValue(-(m_modbusserver->getBom()-m_modbusserver->getBomError()));
     sceneRow->update();
     scenePitch->update();
+    m_modbusserver->setBom(ui->angleSpinBox->value());
+    setUiRealBome();
+    sendSwa();
+    if(m_modbusserver->getVitazimut() > 0.1) m_modbusserver->setVitazimut(0.01);
     if (m_modbusserver->getClientConnected() > 0) {
         ui->pbuClient->setStyleSheet("QPushButton { image: url(:/images/icon_plug_on.png);  background-color: #00FF00;}");
     } else {
@@ -387,18 +412,35 @@ void IHM::updateBoatRowPitch()
         textItem->setPlainText(text.arg(QString::number(m_modbusserver->getTws()), QString::number(m_modbusserver->getTwa()), QString::number(m_modbusserver->getSwa()), QString::number(m_modbusserver->getRoulis()), QString::number(m_modbusserver->getTangage()), QString::number(m_modbusserver->getVitazimut()), QString::number(m_modbusserver->getPosazimut()), QString::number(m_modbusserver->getHautvague()), QString::number(m_modbusserver->getVitvague()), QString::number(m_modbusserver->getIntervague())));
         m_modbusserver->setTangage(ui->vitesseSpinBox->value());
         m_modbusserver->setRoulis(ui->periodeSpinBox->value());
+        m_modbusserver->setVitazimut(0);
         pitchImageItem->setRotation(ui->vitesseSpinBox->value());
         rowImageItem->setRotation(ui->periodeSpinBox->value());
     }
     else{
         pitchImageItem->setRotation(m_modbusserver->getRoulis());
         rowImageItem->setRotation(m_modbusserver->getTangage());
+        if(m_modbusserver->getSafran() >= 0){
+            float angle = (m_modbusserver->getSafran()*45)/2;
+            safranImageItem->setRotation(angle);
+            safranImageItem->setTransformationMode(Qt::SmoothTransformation);
+            m_modbusserver->setVitazimut(0.01);
+        }
+        else if(m_modbusserver->getSafran() < 0){
+            float angle = (m_modbusserver->getSafran()*45)/2;
+            safranImageItem->setRotation(angle);
+            safranImageItem->setTransformationMode(Qt::SmoothTransformation);
+            m_modbusserver->setVitazimut(-1*0.01);
+        }
         QList<QGraphicsItem *> items = scene->items();
         for (QGraphicsItem *item : items) {
             if (QGraphicsTextItem *ti = dynamic_cast<QGraphicsTextItem *>(item)) {
                 delete ti;
             }
         }
+        QString textSpeed = "%1 kn";
+        textSpeedItem->setFont(QFont("Arial", 18));
+        textSpeedItem->setPlainText(textSpeed.arg(QString::number(m_modbusserver->getSpeed())));
+
     }
 }
 
@@ -431,6 +473,12 @@ void IHM::resizeEvent(QResizeEvent *event){
     realBomeImageItem->setData(Qt::UserRole, "realBomeImage");
     realBomeImageItem->setTransformOriginPoint(scaledRealBomeImage.width()/2, 55*scaleFactor);
 
+    QPixmap scaledSafranImage = safranImage.scaled(QSize(safranImage.height() * scaleFactor, safranImage.width() * scaleFactor), Qt::KeepAspectRatio, Qt::SmoothTransformation);    // Redimensionnement de l'item pixmap
+    safranImageItem->setPixmap(scaledSafranImage);
+    safranImageItem->setPos((ui->graphicsViewYaw->scene()->width() - scaledSafranImage.width())/2, (ui->graphicsViewYaw->scene()->height() + ((-5*scaleFactor)+scaledCenterImage.height()))/2);
+    safranImageItem->setData(Qt::UserRole, "safranImage");
+    safranImageItem->setTransformOriginPoint(scaledSafranImage.width()/2, scaleFactor*3);
+
     scaleFactorX = static_cast<qreal>(event->size().width()) / static_cast<qreal>(pitchImage.width());
     scaleFactorY = static_cast<qreal>(event->size().height()) / static_cast<qreal>(pitchImage.height());
     scaleFactor = qMin(scaleFactorX, scaleFactorY);
@@ -443,6 +491,8 @@ void IHM::resizeEvent(QResizeEvent *event){
     pitchImageItem->setPos((ui->graphicsViewPitch->scene()->width() - scaledPitchImage.width())/2, (ui->graphicsViewPitch->scene()->height() - scaledPitchImage.height())/2);
     pitchImageItem->setData(Qt::UserRole, "pitchImage");
     pitchImageItem->setTransformOriginPoint(scaledPitchImage.width()/2, scaledPitchImage.height()-(1*scaleFactor));
+
+    textSpeedItem->setPos(ui->graphicsViewPitch->width()/2, ui->graphicsViewPitch->height()/2);
 
     scaleFactorX = static_cast<qreal>(ui->graphicsViewRow->width()) / static_cast<qreal>(rowImage.width());
     scaleFactorY = static_cast<qreal>(ui->graphicsViewRow->height()) / static_cast<qreal>(rowImage.height());
