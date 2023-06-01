@@ -22,6 +22,9 @@ public:
     float getSwa();
     float getTwa();
     float getBom();
+    float getSafran();
+    float getSpeed();
+    float getBomError();
     void setHautvague( float SHautvague);
     void setVitvague(float SVitvague);
     void setIntervague(float SIntervague);
@@ -33,6 +36,7 @@ public:
     void setSwa(int SSwa);
     void setTwa(int STwa);
     void setBom(int SBom);
+    void setSpeed(float SSpeed);
     int getClientConnected();
 
 public slots:
@@ -40,13 +44,13 @@ public slots:
 
 private:
     float GVitAzimut;
-    //float GRoulis;
     float GTangage;
     float GPosazimut;
     float GHautvague;
     float GVitvague;
     float GIntervague;
     float GTws;
+    float GSpeed;
     int GSwa;
     int GTwa;
     int GBom;

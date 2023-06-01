@@ -50,6 +50,13 @@ float Modbus_SRV::getBom()
     return m_map->value(m_table, "lect-bome").toFloat();
 }
 
+
+float Modbus_SRV::getBomError()
+{
+    m_table = QamModbusMap::HoldingRegister ;
+    return m_map->value(m_table, "cons-difbotwa").toFloat(); // réel = simulateur - erreur
+}
+
 float Modbus_SRV::getIntervague()
 {
     m_table = QamModbusMap::HoldingRegister ;
@@ -59,6 +66,11 @@ float Modbus_SRV::getIntervague()
 float Modbus_SRV::getTws()
 {
     return GTws;
+}
+
+float Modbus_SRV::getSpeed()
+{
+    return GSpeed;
 }
 
 float Modbus_SRV::getTwa()
@@ -124,6 +136,11 @@ void Modbus_SRV::setTws(float STws)
     GTws=STws;
 }
 
+void Modbus_SRV::setSpeed(float SSpeed)
+{
+    GSpeed=SSpeed;
+}
+
 void Modbus_SRV::setVitazimut(float SVitAzimut)
 {
     m_table = QamModbusMap::HoldingRegister ;
@@ -141,6 +158,12 @@ void Modbus_SRV::setSwa(int SSwa)
     m_table = QamModbusMap::HoldingRegister ;
     QString value = QString::number(SSwa);
     m_map->setValue(m_table, "cons-swa", value);
+}
+
+float Modbus_SRV::getSafran()
+{
+    m_table = QamModbusMap::HoldingRegister ;
+    return m_map->value(m_table, "cons-gouv").toFloat();
 }
 
 void Modbus_SRV::info(const QString& src, const QString& msg )
