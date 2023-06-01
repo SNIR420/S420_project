@@ -85,6 +85,7 @@ void Simulateur::calcul(){
     m_modbusServer->setTangage(m_tangage*180.0/PI);
     setVitesseAzimut(); // inutile pour l'instant
     setSpeed();
+    m_modbusServer->setSpeed(m_speed);
 }
 
 Simulateur::~Simulateur(){}
