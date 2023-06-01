@@ -50,7 +50,7 @@
                          <object>{1eb718cc-8aca-46d1-894e-ac6760b601ae}</object>
                          <name>IHM</name>
                          <pos>x:-235;y:325</pos>
-                         <rect>x:-130;y:-265;w:260;h:530</rect>
+                         <rect>x:-130;y:-190;w:260;h:380</rect>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
@@ -70,12 +70,11 @@
                          </base-DElement>
                          <object>{b639a996-18f1-46c1-b259-58cd309430b9}</object>
                          <name>Modbus_SRV</name>
-                         <pos>x:215;y:325</pos>
-                         <rect>x:-145;y:-340;w:290;h:680</rect>
+                         <pos>x:65;y:325</pos>
+                         <rect>x:-45;y:-45;w:90;h:90</rect>
                          <visual-role>8</visual-role>
                         </DObject>
                        </base-DObject>
-                       <show-all-members>true</show-all-members>
                       </DClass>
                      </instance>
                     </item>
@@ -134,6 +133,15 @@
                          <object>{8d087675-97d0-4c12-b682-df67c3515cbc}</object>
                          <a>{ba79216e-8eb1-400e-8542-6360bd7b9f61}</a>
                          <b>{80e760be-e660-49df-9925-4f00fe87522f}</b>
+                         <points>
+                          <qlist>
+                           <item>
+                            <DRelation--IntermediatePoint>
+                             <pos>x:-35;y:325</pos>
+                            </DRelation--IntermediatePoint>
+                           </item>
+                          </qlist>
+                         </points>
                         </DRelation>
                        </base-DRelation>
                        <a>
@@ -164,24 +172,15 @@
                          <object>{d87de6d1-2439-4c2b-89de-2fc4b4aa21aa}</object>
                          <a>{ba79216e-8eb1-400e-8542-6360bd7b9f61}</a>
                          <b>{80e760be-e660-49df-9925-4f00fe87522f}</b>
-                        </DRelation>
-                       </base-DRelation>
-                      </DDependency>
-                     </instance>
-                    </item>
-                    <item>
-                     <instance type="DDependency">
-                      <DDependency>
-                       <base-DRelation>
-                        <DRelation>
-                         <base-DElement>
-                          <DElement>
-                           <uid>{2f36c609-1296-4460-b8a5-6795aae971a8}</uid>
-                          </DElement>
-                         </base-DElement>
-                         <object>{01c7dca4-fa3f-45b5-8156-81c884adc59d}</object>
-                         <a>{8ed4bd27-941a-48e6-8909-4e7d3696dfc5}</a>
-                         <b>{80e760be-e660-49df-9925-4f00fe87522f}</b>
+                         <points>
+                          <qlist>
+                           <item>
+                            <DRelation--IntermediatePoint>
+                             <pos>x:-40;y:340</pos>
+                            </DRelation--IntermediatePoint>
+                           </item>
+                          </qlist>
+                         </points>
                         </DRelation>
                        </base-DRelation>
                       </DDependency>
@@ -247,7 +246,7 @@
                          </base-DElement>
                          <object>{e5c64291-5d31-4a85-9e14-61fc9ed27de4}</object>
                          <name>IHM</name>
-                         <pos>x:-325;y:-80</pos>
+                         <pos>x:65;y:445</pos>
                          <rect>x:-40;y:-45;w:80;h:90</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -274,7 +273,7 @@
                           <qlist>
                            <item>
                             <DRelation--IntermediatePoint>
-                             <pos>x:-325;y:15</pos>
+                             <pos>x:-45;y:450</pos>
                             </DRelation--IntermediatePoint>
                            </item>
                           </qlist>
@@ -296,7 +295,7 @@
                          </base-DElement>
                          <object>{597be164-d67c-469c-bc71-32f93dce7c88}</object>
                          <name>QTimer</name>
-                         <pos>x:-220;y:-90</pos>
+                         <pos>x:65;y:120</pos>
                          <rect>x:-40;y:-35;w:80;h:70</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>6</visual-role>
@@ -317,7 +316,7 @@
                          </base-DElement>
                          <object>{33a0055b-98f2-4c07-9ce3-b35b64e47cdc}</object>
                          <name>QWidget</name>
-                         <pos>x:-115;y:-90</pos>
+                         <pos>x:65;y:215</pos>
                          <rect>x:-40;y:-35;w:80;h:70</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>6</visual-role>
@@ -343,7 +342,7 @@
                           <qlist>
                            <item>
                             <DRelation--IntermediatePoint>
-                             <pos>x:-120;y:-5</pos>
+                             <pos>x:-45;y:215</pos>
                             </DRelation--IntermediatePoint>
                            </item>
                           </qlist>
@@ -351,27 +350,6 @@
                         </DRelation>
                        </base-DRelation>
                       </DInheritance>
-                     </instance>
-                    </item>
-                    <item>
-                     <instance type="DClass">
-                      <DClass>
-                       <base-DObject>
-                        <DObject>
-                         <base-DElement>
-                          <DElement>
-                           <uid>{eba04f61-1e2a-4ecd-a33c-c787b0c54e2c}</uid>
-                          </DElement>
-                         </base-DElement>
-                         <object>{c82e4575-413b-42a3-9cd9-8b0f68d11893}</object>
-                         <name>QThread</name>
-                         <pos>x:345;y:-90</pos>
-                         <rect>x:-40;y:-35;w:80;h:70</rect>
-                         <auto-sized>false</auto-sized>
-                         <visual-role>6</visual-role>
-                        </DObject>
-                       </base-DObject>
-                      </DClass>
                      </instance>
                     </item>
                     <item>
@@ -393,33 +371,6 @@
                         </DObject>
                        </base-DObject>
                       </DClass>
-                     </instance>
-                    </item>
-                    <item>
-                     <instance type="DInheritance">
-                      <DInheritance>
-                       <base-DRelation>
-                        <DRelation>
-                         <base-DElement>
-                          <DElement>
-                           <uid>{c3521c5a-0c30-49f3-94a7-f71e9605a717}</uid>
-                          </DElement>
-                         </base-DElement>
-                         <object>{fd4c383e-4676-4541-8687-5ed443c20ac0}</object>
-                         <a>{80e760be-e660-49df-9925-4f00fe87522f}</a>
-                         <b>{eba04f61-1e2a-4ecd-a33c-c787b0c54e2c}</b>
-                         <points>
-                          <qlist>
-                           <item>
-                            <DRelation--IntermediatePoint>
-                             <pos>x:345;y:-30</pos>
-                            </DRelation--IntermediatePoint>
-                           </item>
-                          </qlist>
-                         </points>
-                        </DRelation>
-                       </base-DRelation>
-                      </DInheritance>
                      </instance>
                     </item>
                     <item>
@@ -503,114 +454,6 @@
                      </instance>
                     </item>
                     <item>
-                     <instance type="DInheritance">
-                      <DInheritance>
-                       <base-DRelation>
-                        <DRelation>
-                         <base-DElement>
-                          <DElement>
-                           <uid>{3caa1f64-0fc3-4baf-b112-deb18818f629}</uid>
-                          </DElement>
-                         </base-DElement>
-                         <object>{dd8ead4c-f5e2-4dab-bac4-cba29b58a20e}</object>
-                         <a>{80e760be-e660-49df-9925-4f00fe87522f}</a>
-                         <b>{ccfbb5c6-0e66-4973-a245-10f46566a7fc}</b>
-                         <points>
-                          <qlist>
-                           <item>
-                            <DRelation--IntermediatePoint>
-                             <pos>x:295;y:-150</pos>
-                            </DRelation--IntermediatePoint>
-                           </item>
-                           <item>
-                            <DRelation--IntermediatePoint>
-                             <pos>x:565;y:-150</pos>
-                            </DRelation--IntermediatePoint>
-                           </item>
-                          </qlist>
-                         </points>
-                        </DRelation>
-                       </base-DRelation>
-                      </DInheritance>
-                     </instance>
-                    </item>
-                    <item>
-                     <instance type="DAssociation">
-                      <DAssociation>
-                       <base-DRelation>
-                        <DRelation>
-                         <base-DElement>
-                          <DElement>
-                           <uid>{cbb367cb-c94c-4568-b37c-04f89dac7e8a}</uid>
-                          </DElement>
-                         </base-DElement>
-                         <object>{eabe8cd2-5238-4afe-abb4-b82ce1e0c3ea}</object>
-                         <a>{ba79216e-8eb1-400e-8542-6360bd7b9f61}</a>
-                         <b>{8ed4bd27-941a-48e6-8909-4e7d3696dfc5}</b>
-                         <points>
-                          <qlist>
-                           <item>
-                            <DRelation--IntermediatePoint>
-                             <pos>x:-250;y:760</pos>
-                            </DRelation--IntermediatePoint>
-                           </item>
-                           <item>
-                            <DRelation--IntermediatePoint>
-                             <pos>x:730;y:755</pos>
-                            </DRelation--IntermediatePoint>
-                           </item>
-                          </qlist>
-                         </points>
-                        </DRelation>
-                       </base-DRelation>
-                       <a>
-                        <DAssociationEnd>
-                         <cradinality>1</cradinality>
-                         <navigable>true</navigable>
-                         <kind>2</kind>
-                        </DAssociationEnd>
-                       </a>
-                       <b>
-                        <DAssociationEnd>
-                         <cradinality>- m_simulateur</cradinality>
-                        </DAssociationEnd>
-                       </b>
-                      </DAssociation>
-                     </instance>
-                    </item>
-                    <item>
-                     <instance type="DDependency">
-                      <DDependency>
-                       <base-DRelation>
-                        <DRelation>
-                         <base-DElement>
-                          <DElement>
-                           <uid>{388a31b2-eb9c-4c36-8bec-c5d40a227914}</uid>
-                          </DElement>
-                         </base-DElement>
-                         <object>{b6d7a592-4988-457e-82a6-b9e446e2d144}</object>
-                         <a>{ba79216e-8eb1-400e-8542-6360bd7b9f61}</a>
-                         <b>{8ed4bd27-941a-48e6-8909-4e7d3696dfc5}</b>
-                         <points>
-                          <qlist>
-                           <item>
-                            <DRelation--IntermediatePoint>
-                             <pos>x:-250;y:760</pos>
-                            </DRelation--IntermediatePoint>
-                           </item>
-                           <item>
-                            <DRelation--IntermediatePoint>
-                             <pos>x:730;y:755</pos>
-                            </DRelation--IntermediatePoint>
-                           </item>
-                          </qlist>
-                         </points>
-                        </DRelation>
-                       </base-DRelation>
-                      </DDependency>
-                     </instance>
-                    </item>
-                    <item>
                      <instance type="DDependency">
                       <DDependency>
                        <base-DRelation>
@@ -627,7 +470,7 @@
                           <qlist>
                            <item>
                             <DRelation--IntermediatePoint>
-                             <pos>x:-225;y:-5</pos>
+                             <pos>x:-35;y:125</pos>
                             </DRelation--IntermediatePoint>
                            </item>
                           </qlist>
@@ -662,27 +505,6 @@
                         </DRelation>
                        </base-DRelation>
                       </DDependency>
-                     </instance>
-                    </item>
-                    <item>
-                     <instance type="DClass">
-                      <DClass>
-                       <base-DObject>
-                        <DObject>
-                         <base-DElement>
-                          <DElement>
-                           <uid>{5cc39b86-9699-4690-9344-b0fc6df6f570}</uid>
-                          </DElement>
-                         </base-DElement>
-                         <object>{007448ec-0e89-42f4-88de-76c89febb8b8}</object>
-                         <name>QamModbusMap</name>
-                         <pos>x:225;y:-90</pos>
-                         <rect>x:-55;y:-35;w:110;h:70</rect>
-                         <auto-sized>false</auto-sized>
-                         <visual-role>5</visual-role>
-                        </DObject>
-                       </base-DObject>
-                      </DClass>
                      </instance>
                     </item>
                     <item>
@@ -738,122 +560,6 @@
                      </instance>
                     </item>
                     <item>
-                     <instance type="DInheritance">
-                      <DInheritance>
-                       <base-DRelation>
-                        <DRelation>
-                         <base-DElement>
-                          <DElement>
-                           <uid>{e6fb00f8-1807-4d6d-87b8-6b300b2ca99a}</uid>
-                          </DElement>
-                         </base-DElement>
-                         <object>{94306066-5f21-4e71-8589-17752a4f43ad}</object>
-                         <a>{5cc39b86-9699-4690-9344-b0fc6df6f570}</a>
-                         <b>{72bdaaad-1c14-4b0c-9f51-0ad476b04b0c}</b>
-                         <points>
-                          <qlist>
-                           <item>
-                            <DRelation--IntermediatePoint>
-                             <pos>x:220;y:-185</pos>
-                            </DRelation--IntermediatePoint>
-                           </item>
-                          </qlist>
-                         </points>
-                        </DRelation>
-                       </base-DRelation>
-                      </DInheritance>
-                     </instance>
-                    </item>
-                    <item>
-                     <instance type="DClass">
-                      <DClass>
-                       <base-DObject>
-                        <DObject>
-                         <base-DElement>
-                          <DElement>
-                           <uid>{af378694-936e-4c14-baba-45463398da80}</uid>
-                          </DElement>
-                         </base-DElement>
-                         <object>{62b2d6c0-c0e7-4a4b-b6e7-5518d009cf5b}</object>
-                         <name>QamTcpServer</name>
-                         <pos>x:100;y:-90</pos>
-                         <rect>x:-45;y:-35;w:90;h:70</rect>
-                         <auto-sized>false</auto-sized>
-                         <visual-role>5</visual-role>
-                        </DObject>
-                       </base-DObject>
-                      </DClass>
-                     </instance>
-                    </item>
-                    <item>
-                     <instance type="DAssociation">
-                      <DAssociation>
-                       <base-DRelation>
-                        <DRelation>
-                         <base-DElement>
-                          <DElement>
-                           <uid>{424927f3-d08d-43bf-a315-90eef4bdb7a6}</uid>
-                          </DElement>
-                         </base-DElement>
-                         <object>{9114d3cb-f0b0-4c2a-9baf-eb136c2eefc1}</object>
-                         <a>{80e760be-e660-49df-9925-4f00fe87522f}</a>
-                         <b>{5cc39b86-9699-4690-9344-b0fc6df6f570}</b>
-                         <points>
-                          <qlist>
-                           <item>
-                            <DRelation--IntermediatePoint>
-                             <pos>x:230;y:-45</pos>
-                            </DRelation--IntermediatePoint>
-                           </item>
-                          </qlist>
-                         </points>
-                        </DRelation>
-                       </base-DRelation>
-                       <a>
-                        <DAssociationEnd>
-                         <cradinality>1</cradinality>
-                         <navigable>true</navigable>
-                         <kind>2</kind>
-                        </DAssociationEnd>
-                       </a>
-                      </DAssociation>
-                     </instance>
-                    </item>
-                    <item>
-                     <instance type="DAssociation">
-                      <DAssociation>
-                       <base-DRelation>
-                        <DRelation>
-                         <base-DElement>
-                          <DElement>
-                           <uid>{68c471cc-f340-4784-af5f-162c5810e9ee}</uid>
-                          </DElement>
-                         </base-DElement>
-                         <object>{66de99ed-77ef-40d6-b4e5-096008733c51}</object>
-                         <a>{80e760be-e660-49df-9925-4f00fe87522f}</a>
-                         <b>{af378694-936e-4c14-baba-45463398da80}</b>
-                         <points>
-                          <qlist>
-                           <item>
-                            <DRelation--IntermediatePoint>
-                             <pos>x:115;y:-50</pos>
-                            </DRelation--IntermediatePoint>
-                           </item>
-                          </qlist>
-                         </points>
-                        </DRelation>
-                       </base-DRelation>
-                       <a>
-                        <DAssociationEnd>
-                         <cradinality>1</cradinality>
-                         <navigable>true</navigable>
-                         <kind>2</kind>
-                        </DAssociationEnd>
-                       </a>
-                      </DAssociation>
-                     </instance>
-                    </item>
-                    <item>
                      <instance type="DClass">
                       <DClass>
                        <base-DObject>
@@ -872,65 +578,6 @@
                         </DObject>
                        </base-DObject>
                       </DClass>
-                     </instance>
-                    </item>
-                    <item>
-                     <instance type="DInheritance">
-                      <DInheritance>
-                       <base-DRelation>
-                        <DRelation>
-                         <base-DElement>
-                          <DElement>
-                           <uid>{1d2e1e58-94e3-49df-82e8-5bfd0ced03f4}</uid>
-                          </DElement>
-                         </base-DElement>
-                         <object>{30ce5439-5532-435a-8597-7ec17d9927fc}</object>
-                         <a>{af378694-936e-4c14-baba-45463398da80}</a>
-                         <b>{8e6e564c-2f30-4240-9904-7d163f75e739}</b>
-                         <points>
-                          <qlist>
-                           <item>
-                            <DRelation--IntermediatePoint>
-                             <pos>x:95;y:-280</pos>
-                            </DRelation--IntermediatePoint>
-                           </item>
-                          </qlist>
-                         </points>
-                        </DRelation>
-                       </base-DRelation>
-                      </DInheritance>
-                     </instance>
-                    </item>
-                    <item>
-                     <instance type="DDependency">
-                      <DDependency>
-                       <base-DRelation>
-                        <DRelation>
-                         <base-DElement>
-                          <DElement>
-                           <uid>{f63238a6-0867-48a0-90d2-ae157967762b}</uid>
-                          </DElement>
-                         </base-DElement>
-                         <object>{8fdd8559-5624-4587-9a66-ac0a633121ba}</object>
-                         <a>{af378694-936e-4c14-baba-45463398da80}</a>
-                         <b>{72bdaaad-1c14-4b0c-9f51-0ad476b04b0c}</b>
-                         <points>
-                          <qlist>
-                           <item>
-                            <DRelation--IntermediatePoint>
-                             <pos>x:125;y:-190</pos>
-                            </DRelation--IntermediatePoint>
-                           </item>
-                           <item>
-                            <DRelation--IntermediatePoint>
-                             <pos>x:190;y:-190</pos>
-                            </DRelation--IntermediatePoint>
-                           </item>
-                          </qlist>
-                         </points>
-                        </DRelation>
-                       </base-DRelation>
-                      </DDependency>
                      </instance>
                     </item>
                     <item>
@@ -985,48 +632,9 @@
                       </DInheritance>
                      </instance>
                     </item>
-                    <item>
-                     <instance type="DAssociation">
-                      <DAssociation>
-                       <base-DRelation>
-                        <DRelation>
-                         <base-DElement>
-                          <DElement>
-                           <uid>{8d6ec01e-3a34-4f24-bfeb-3bb4aeee66f2}</uid>
-                          </DElement>
-                         </base-DElement>
-                         <object>{5e09e01b-a163-4791-a057-6b433a0fafe9}</object>
-                         <a>{5cc39b86-9699-4690-9344-b0fc6df6f570}</a>
-                         <b>{258f0366-d3c4-4f77-841d-06ac9f5a34d7}</b>
-                         <points>
-                          <qlist>
-                           <item>
-                            <DRelation--IntermediatePoint>
-                             <pos>x:260;y:-180</pos>
-                            </DRelation--IntermediatePoint>
-                           </item>
-                           <item>
-                            <DRelation--IntermediatePoint>
-                             <pos>x:400;y:-180</pos>
-                            </DRelation--IntermediatePoint>
-                           </item>
-                          </qlist>
-                         </points>
-                        </DRelation>
-                       </base-DRelation>
-                       <a>
-                        <DAssociationEnd>
-                         <cradinality>1</cradinality>
-                         <navigable>true</navigable>
-                         <kind>2</kind>
-                        </DAssociationEnd>
-                       </a>
-                      </DAssociation>
-                     </instance>
-                    </item>
                    </qlist>
                   </elements>
-                  <last-modified>1683643651331</last-modified>
+                  <last-modified>1685008562117</last-modified>
                   <toolbarid>General</toolbarid>
                  </MDiagram>
                 </base-MDiagram>
@@ -1318,212 +926,142 @@
                  <qlist>
                   <item>
                    <MClassMember>
-                    <uid>{af01de31-fc88-4a77-ae0c-736f83ceeecb}</uid>
-                    <type>1</type>
-                    <declaration>- QGraphicsScene *scene</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{1977d55e-7d62-482c-818a-4effc8d6a434}</uid>
-                    <type>1</type>
-                    <declaration>- QGraphicsScene *sceneRow</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{f520ee3d-80f4-45d6-883e-2225c176e9cd}</uid>
-                    <type>1</type>
-                    <declaration>- QGraphicsScene *scenePitch</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{e3748d82-86d5-42dc-ab7f-127dea920c00}</uid>
+                    <uid>{fcb8b682-2e4b-4dbf-a0c0-54ddf3975cf8}</uid>
                     <type>1</type>
                     <declaration>- Simulateur *m_simulateur</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{949cb7bb-c528-43bd-a642-c9e4bcee4180}</uid>
+                    <uid>{5c88580a-a728-4428-9e40-72af108efaec}</uid>
                     <type>1</type>
                     <declaration>- Modbus_SRV *m_modbusserver</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{80def682-27ff-4b8d-b390-86c63085bd6c}</uid>
-                    <type>1</type>
-                    <declaration>- QGraphicsPixmapItem *centerImageItem</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{d3bc0191-292c-4b51-bf4c-d4eb04432d65}</uid>
-                    <type>1</type>
-                    <declaration>- QGraphicsPixmapItem *rowImageItem</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{1291c49d-a795-401d-9d35-8abb62a57263}</uid>
-                    <type>1</type>
-                    <declaration>- QGraphicsPixmapItem *pitchImageItem</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{f694b40a-8964-4f8c-aed2-acb84317b462}</uid>
+                    <uid>{a4860c67-df49-4fd1-9dad-a04cd4029a32}</uid>
                     <type>1</type>
                     <declaration>- QPixmap centerImage</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{378c2dec-bc9e-4dd8-99ed-9c0c6b5744b0}</uid>
-                    <type>1</type>
-                    <declaration>- QPixmap rowImage</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{5c415462-7c85-4ba4-bb72-0cb7dd18d7a5}</uid>
-                    <type>1</type>
-                    <declaration>- QPixmap pitchImage</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{c0266179-d9f4-446f-ba24-ecd50a791bac}</uid>
-                    <type>1</type>
-                    <declaration>- QPixmap windImage</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{df6096d8-62f3-4def-8469-8925b36a0913}</uid>
-                    <type>1</type>
-                    <declaration>- QGraphicsTextItem *textItem</declaration>
-                   </MClassMember>
-                  </item>
-                  <item>
-                   <MClassMember>
-                    <uid>{f07828b6-ff04-47c2-a8e9-eb8116d07e6c}</uid>
+                    <uid>{586f6d1f-7809-48df-bc30-8a597a89b3be}</uid>
                     <type>1</type>
                     <declaration>- bool isEnabled</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{6bee0218-c8cf-40da-b4dd-c9cb4fc6c237}</uid>
+                    <uid>{25bd7cb4-e9ae-492c-ad00-6ca8f8f17cf3}</uid>
                     <type>2</type>
                     <declaration>-$ void setHauteurVague(float hauteur)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{7a7c942a-7d8a-43f5-ae7c-204e865653b3}</uid>
+                    <uid>{906cef9a-e455-4d77-ab04-7fb64902fa4c}</uid>
                     <type>2</type>
                     <declaration>-$ void setVitesseVague(double vitesse)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{48cbbb2c-a420-4fba-9852-e527ca534477}</uid>
+                    <uid>{8bdb0583-0702-4e48-90f7-0e909952950d}</uid>
                     <type>2</type>
                     <declaration>-$ void setPeriodeVague(float  periode)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{254b9b89-b6d1-443b-be83-7c61a9fcdec0}</uid>
+                    <uid>{673d68c8-7127-4a42-be93-90f350051aa7}</uid>
                     <type>2</type>
                     <declaration>-$ void updateBoatRowPitch()</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{6c9708bf-f3ce-455f-a049-dfeee7689596}</uid>
+                    <uid>{dd00160e-79cf-4872-b63e-81589a220f07}</uid>
                     <type>2</type>
                     <declaration>-$ void onGraphicsViewPressed(const QPoint&amp;)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{0a824936-b1c9-42d1-b5c1-381b2d35b103}</uid>
+                    <uid>{99681c41-1f89-41fa-a6a0-28bd48f74e33}</uid>
                     <type>2</type>
                     <declaration>-$ void onProgressBarPressed(const QPoint&amp;)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{52f1bf7a-3745-4d2d-8c61-3b9095263eb6}</uid>
+                    <uid>{2dec7f6c-b709-4303-bf9d-64973bd95a76}</uid>
                     <type>2</type>
                     <declaration>-$ void sendSwa()</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{f38fdad2-10a6-4091-833c-d27825636f46}</uid>
+                    <uid>{444a7c0d-1113-4e86-a2a6-468b8acf7972}</uid>
                     <type>2</type>
                     <declaration>-$ void setUiAngleVent(int angleDeg)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{3121d9dc-1afa-46c8-b810-0731fc2ac72e}</uid>
+                    <uid>{39070741-8538-4b20-aa45-164d6de80fe0}</uid>
                     <type>2</type>
                     <declaration>-$ void sendTws()</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{6a6950d6-13e6-460a-a809-9c15e0888f18}</uid>
+                    <uid>{5f49e652-c960-4708-8856-7c25a6964d9e}</uid>
                     <type>2</type>
                     <declaration>-$ void setUiTws(int tws)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{c70ed24d-ab11-4428-8806-c71096ee8884}</uid>
+                    <uid>{dcc88837-8eb4-403d-af58-9eb2b6d19e3c}</uid>
                     <type>2</type>
                     <declaration>-$ void setUiBome(int bome)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{29f4647c-d43f-4911-9117-720d4b27663b}</uid>
+                    <uid>{18c9d4ab-564a-46c1-9ded-066380e3fe10}</uid>
                     <type>2</type>
                     <declaration>-$ void setUiRealBome(int realBome)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{6ed1f2f8-5573-4f15-9083-5d21968c5bd8}</uid>
+                    <uid>{8e1b95e1-55a4-439b-9811-bd9228e97d0a}</uid>
                     <type>2</type>
                     <declaration>-$ void debugMode()</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{d186347e-f37e-4864-adff-776e4ce1146b}</uid>
+                    <uid>{11df87b3-815b-4aed-bcc1-67848af0bb38}</uid>
                     <type>2</type>
                     <declaration>+IHM(QWidget *parent = nullptr)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{4066cf10-23ca-40bb-b0b6-8168da29050a}</uid>
+                    <uid>{6875caa4-a744-45a4-b42c-8683a1d5b341}</uid>
                     <type>2</type>
                     <declaration>+~IHM()</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{ba67bcc8-3fac-4c3b-b0d0-171911d73463}</uid>
+                    <uid>{b21b1e33-ae40-46b0-9394-8e5e4e170b95}</uid>
                     <type>2</type>
-                    <declaration>#void resizeEvent(QResizeEvent *event)</declaration>
+                    <declaration># void resizeEvent(QResizeEvent *event)</declaration>
                    </MClassMember>
                   </item>
                  </qlist>
@@ -1707,280 +1245,280 @@
                  <qlist>
                   <item>
                    <MClassMember>
-                    <uid>{9d14bae1-6057-4fe8-a019-ce343576d884}</uid>
+                    <uid>{f3baa764-5eb0-48ac-8011-64033f0192a4}</uid>
                     <type>1</type>
                     <declaration>- float GVitAzimut</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{39b45384-24fc-4a8a-8d22-5f7c598847dc}</uid>
+                    <uid>{c71fe318-99b3-4256-beb7-afcef651f847}</uid>
                     <type>1</type>
                     <declaration>- float GTangage</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{33fad000-5516-46ce-b38b-536186eebb73}</uid>
+                    <uid>{b979e29e-bef0-42e4-96b3-5be89137bbdd}</uid>
                     <type>1</type>
                     <declaration>- float GPosazimut</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{d6f87d2b-ce0e-4d81-b59f-b02bccea408b}</uid>
+                    <uid>{6ec94004-beca-4eb3-ad7e-a45a34784c8a}</uid>
                     <type>1</type>
                     <declaration>- float GHautvague</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{6a9babd9-8288-46ec-824d-7961dfaf3552}</uid>
+                    <uid>{97daafb7-5d9e-425a-8ec8-87faf4b79489}</uid>
                     <type>1</type>
                     <declaration>- float GVitvague</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{3695c379-01bc-4a30-a223-1bd2245239c2}</uid>
+                    <uid>{759065b0-05dd-48e3-9d6f-de023818bc1b}</uid>
                     <type>1</type>
                     <declaration>- float GIntervague</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{eaa9fff5-a655-406e-80d4-e5d5eca71142}</uid>
+                    <uid>{f8dc0270-f6d2-4671-b1fc-4d801d73879e}</uid>
                     <type>1</type>
                     <declaration>- float GTws</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{5c4b86c5-e89e-4a20-91f5-8571bb446379}</uid>
+                    <uid>{ea848e0f-151f-4367-8187-780ff679f9aa}</uid>
                     <type>1</type>
                     <declaration>- int GSwa</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{45655229-6c75-419b-aaa0-b7c438abd86b}</uid>
+                    <uid>{5fc8da7d-5eff-4e8e-ab30-e73fff417150}</uid>
                     <type>1</type>
                     <declaration>- int GTwa</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{1f2807ad-30f0-428b-b433-971ddce7f4b8}</uid>
+                    <uid>{44d0312c-433a-43da-9a8c-c81e8e73e1a6}</uid>
                     <type>1</type>
                     <declaration>- int GBom</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{e36455a6-0a3c-435e-a3c8-4086d0f0731d}</uid>
+                    <uid>{c6daf7d1-0870-4153-b57e-8969ea7f0827}</uid>
                     <type>1</type>
                     <declaration>- QamModbusMap* m_map</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{85dcdd79-5951-4f12-ac34-226c7530acf5}</uid>
+                    <uid>{4b5cb742-538e-4fa8-87fc-f49351a55759}</uid>
                     <type>1</type>
                     <declaration>- QamModbusMap::PrimaryTable m_table</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{afef5c8e-570d-4f88-9508-9f38e9b1646b}</uid>
+                    <uid>{48cb5491-adf4-4b95-8b4b-fe7f0369fe5b}</uid>
                     <type>1</type>
                     <declaration>- QamTcpServer* m_server</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{539b5bf1-1d67-4f9e-a4de-6fef8d9086ce}</uid>
+                    <uid>{a693c5ea-4c38-46a9-b87e-dfb9997cf0a4}</uid>
                     <type>1</type>
                     <declaration>- QString m_configFile</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{8a990eba-1c2c-49f6-b7d8-bcd19b840ff6}</uid>
+                    <uid>{f3feb7a7-668d-4180-9049-00d12490e585}</uid>
                     <type>2</type>
                     <declaration>+ explicit Modbus_SRV(QObject *parent = nullptr)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{a949cd95-281c-4d2b-ab7b-5281182afb5a}</uid>
+                    <uid>{af02a8f7-5f58-4bf1-8fb9-34613f9e2117}</uid>
                     <type>2</type>
                     <declaration>+ void stopServer()</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{29c58cc5-8e3c-4348-a0a0-b69a1d7aee92}</uid>
+                    <uid>{cb841405-c0d3-48d8-8e03-0a85c77fcfba}</uid>
                     <type>2</type>
                     <declaration>+ float getVitazimut( )</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{88eb9113-62cf-4353-95b1-b920aa47854d}</uid>
+                    <uid>{a280193d-7bdf-4fe6-b04f-8aae11007310}</uid>
                     <type>2</type>
                     <declaration>+ float getRoulis()</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{3348a926-848e-4084-ad0a-602bd666f3a3}</uid>
+                    <uid>{2bdb5e94-b2e3-45af-9c0c-9cf1ee79afa8}</uid>
                     <type>2</type>
                     <declaration>+ float getTangage( )</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{37b40587-0e99-4cf3-85ab-ec8e0004d7c3}</uid>
+                    <uid>{d91c2e3c-bfcf-42f9-8df4-7fac8ee8f697}</uid>
                     <type>2</type>
                     <declaration>+ float getPosazimut()</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{e6896f2d-0e05-4512-a3dc-1286e1d49bf4}</uid>
+                    <uid>{6a9c58a3-0fb2-4956-8853-99000c2772f4}</uid>
                     <type>2</type>
                     <declaration>+ float getHautvague()</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{3a11d7a6-a563-4e6c-b456-50ad85bd9867}</uid>
+                    <uid>{dfc13ea2-d41d-4c3e-9430-4986455c6346}</uid>
                     <type>2</type>
                     <declaration>+ float getVitvague()</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{a1bcfa12-2720-46c3-88f2-a70b2762db25}</uid>
+                    <uid>{71a9c1e2-f3b3-469a-b05f-17e971dc5cb3}</uid>
                     <type>2</type>
                     <declaration>+ float getIntervague()</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{d4649687-90da-4b52-88ff-190c6b25299d}</uid>
+                    <uid>{08a9bc4e-030f-49e2-b7cf-3a5de3e3c987}</uid>
                     <type>2</type>
                     <declaration>+ float getTws()</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{e1f483a2-45d8-42ff-be2a-a6e87642faa3}</uid>
+                    <uid>{d7edb089-8410-4e99-8ce7-65e98ad3c787}</uid>
                     <type>2</type>
                     <declaration>+ float getSwa()</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{0103b766-c8ed-413e-be9b-f6b570cc65d9}</uid>
+                    <uid>{070762f7-2110-4294-aace-56cd59664dba}</uid>
                     <type>2</type>
                     <declaration>+ float getTwa()</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{86e7fd1c-4a8e-4581-aaa5-3d9f12d5d932}</uid>
+                    <uid>{2882cf86-13b0-4c49-8212-ba8a9d6fe182}</uid>
                     <type>2</type>
                     <declaration>+ float getBom()</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{b4501846-5777-4c48-8145-503822eda260}</uid>
+                    <uid>{7c4b3e60-550d-483e-8510-e8fedfe7bfe6}</uid>
                     <type>2</type>
                     <declaration>+ void setHautvague( float SHautvague)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{016e3598-0be2-4e26-b8f0-dd277fa1f16d}</uid>
+                    <uid>{4b4b8549-c67f-4bb4-897f-10aca770832c}</uid>
                     <type>2</type>
                     <declaration>+ void setVitvague(float SVitvague)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{6c962432-199d-4cbc-9b7c-8ac084fc7243}</uid>
+                    <uid>{f0ebbe38-e5cd-492d-ad4b-b4e26034f165}</uid>
                     <type>2</type>
                     <declaration>+ void setIntervague(float SIntervague)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{df8f3119-c29b-4894-8a85-159566c90420}</uid>
+                    <uid>{38df73ae-943c-4dee-81f8-7134b442b0c3}</uid>
                     <type>2</type>
                     <declaration>+ void setRoulis(float SRoulis)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{4317424f-6d0b-4330-a820-4021c7b830d0}</uid>
+                    <uid>{587093cb-4938-4db5-b833-6d0fd2526b1d}</uid>
                     <type>2</type>
                     <declaration>+ void setTangage(float STangage)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{76198c52-155d-4636-96ca-16dc13d7df8e}</uid>
+                    <uid>{8e8d1183-59fb-4e4f-9ae7-356efbe4179e}</uid>
                     <type>2</type>
                     <declaration>+ void setVitazimut(float SVitazimut)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{f1fbc242-63bf-4f82-8d89-17ad0cafb2b2}</uid>
+                    <uid>{3b31b199-ae1c-4894-88f8-117ec35e6ce3}</uid>
                     <type>2</type>
                     <declaration>+ void setTws(float STws)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{8fe89c04-8623-44fa-8c1a-678af46e6205}</uid>
+                    <uid>{6bcb0cea-b663-4ce1-a205-1ee4c0df037f}</uid>
                     <type>2</type>
                     <declaration>+ void setPosazimut(float SPosazimut)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{31dc5303-920c-42a5-ba30-909e05feebdc}</uid>
+                    <uid>{0e097941-7f8e-4b64-9179-a3485d291ebf}</uid>
                     <type>2</type>
                     <declaration>+ void setSwa(float SSwa)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{c951e92e-28a9-4512-b95f-f0a819426a92}</uid>
+                    <uid>{34bdb149-dfba-44ee-a8d4-8136a0f28ec5}</uid>
                     <type>2</type>
                     <declaration>+ void setTwa(int STwa)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{7156b261-7439-4369-b0b3-2498f9a137db}</uid>
+                    <uid>{e4499900-f4a6-4968-90fb-ae2b50e07994}</uid>
                     <type>2</type>
                     <declaration>+ void setBom(int SBom)</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{fb7c0160-8f87-4a79-8ff9-d1f695a08845}</uid>
+                    <uid>{34aa1cfd-5af1-4b0b-94e1-1574108111db}</uid>
                     <type>2</type>
                     <declaration>+ int getClientConnected()</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{0e9fbe6f-420d-465c-aa95-4ace4ac7137a}</uid>
+                    <uid>{bc620715-6980-40c8-b476-023b1246821a}</uid>
                     <type>2</type>
                     <declaration>+$ void info(const QString&amp; src, const QString&amp; msg)</declaration>
                    </MClassMember>
@@ -2651,7 +2189,7 @@
                  <qlist>
                   <item>
                    <MClassMember>
-                    <uid>{c3f33eed-8d55-453f-891c-0c9f77fcb093}</uid>
+                    <uid>{5d257c6f-81c3-4479-96fc-4ff1098528d6}</uid>
                     <type>2</type>
                     <declaration>+ setupUi()</declaration>
                    </MClassMember>
