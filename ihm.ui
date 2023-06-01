@@ -162,6 +162,9 @@ QSpinBox:down-button {
          <property name="suffix">
           <string>°</string>
          </property>
+         <property name="minimum">
+          <number>0</number>
+         </property>
          <property name="maximum">
           <number>360</number>
          </property>
