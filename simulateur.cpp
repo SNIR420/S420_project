@@ -35,7 +35,7 @@ void Simulateur::setTangage(){
 }
 
 void Simulateur::setVitesseAzimut(){
-
+    m_vitesseAzimut = m_modbusServer->getSafran()*0.05 ;
 }
 
 double Simulateur::getVagueAmplitude(){
@@ -79,16 +79,24 @@ int Simulateur::getTwa(){
 double Simulateur::getRatio(){
     double bome_reel = m_modbusServer->getBom() - m_modbusServer->getBomError() ;
     double twa = m_modbusServer->getSwa() ;
+
     double ratio = 0 ;
+//ratio = (twa + 180.0 - bome_reel)/twa ;
 
-    //if (twa <= 90){
-        ratio = (twa + 180.0 - bome_reel)/twa ;
-    /*}
-    else if (twa <= 180.0){
+    if (twa >= 90 || twa <= 270){
+        if (abs(twa - bome_reel) >= 90){
+            ratio = 2 - (abs(twa - bome_reel))/90 ;
+        }
+        else{
+            ratio = 1 / ((abs(twa - bome_reel))/90) ;
+        }
+    }
+    else{
+        ratio = 1 - (180 - bome_reel)/(180 - abs(180 - twa)) ;
+    }
 
-    }*/
-    if (ratio < 0) ratio = -1*ratio ;
-    if (ratio > 1) ratio = ratio - floor(ratio) ;
+    if (ratio < 0) { qDebug() << "ratio :" << ratio ; ratio = -1 * ratio ; }
+    if (ratio > 1) { qDebug() << "ratio :" << ratio ; ratio = ratio - floor(ratio) ; }
 
     return ratio ;
 }
@@ -101,6 +109,7 @@ void Simulateur::calcul(){
     m_modbusServer->setRoulis(m_roulis*180.0/PI);
     m_modbusServer->setTangage(m_tangage*180.0/PI);
     setVitesseAzimut(); // inutile pour l'instant
+    m_modbusServer->setVitazimut(m_vitesseAzimut);
     setSpeed();
 }
 
