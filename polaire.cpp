@@ -66,13 +66,13 @@ double Polaire::getMaxSpeed(double twa, double tws) {
         }
     }
     if(x == -1 || y == -1){
-        for(j = 0; m_polaireData[j][0] <= twa; j++);
+        for(j = 0; m_polaireData[j][0] < twa; j++);
         double x1 = m_polaireData[j][0];
         double x2 = m_polaireData[j-1][0];
         for(k = 0; m_polaireData[0][k] <= tws; k++);
         double y2 = m_polaireData[0][k];
         double y1 = m_polaireData[0][k-1];
-        qDebug() << "x1: "<< x1 << "x2: " << x2 << "y1: " << y1 << "y2: " << y2 ;
+        //qDebug() << "x1: "<< x1 << "x2: " << x2 << "y1: " << y1 << "y2: " << y2 ;
         double test = (getMaxSpeed(x2, y1) - getMaxSpeed(x1, y1)) * (twa-x1)/ (x2-x1) + (getMaxSpeed(x1, y2) - getMaxSpeed(x1, y1)) * (tws-y1)/(y2-y1) + (getMaxSpeed(x2, y2) + getMaxSpeed(x1, y1) - getMaxSpeed(x2, y1) - getMaxSpeed(x1, y2)) * (twa-x1)/(x2-x1) * (tws-y1)/(y2-y1) + getMaxSpeed(x1, y1);
         return test;
     }
