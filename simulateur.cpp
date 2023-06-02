@@ -84,7 +84,7 @@ double Simulateur::getRatio(){
 //ratio = (twa + 180.0 - bome_reel)/twa ;
     if (bome_reel < 0) bome_reel = 180 - bome_reel ;
 
-    if (twa >= 90 || twa <= 270){
+    if (twa >= 90 && twa <= 270){
         if (abs(twa - bome_reel) >= 90){
             ratio = 2 - (abs(twa - bome_reel))/90 ;
         }
@@ -93,11 +93,13 @@ double Simulateur::getRatio(){
         }*/
     }
     else{
-        ratio = 1 - (180 - bome_reel)/(180 - abs(180 - twa)) ;
+        if (180 - abs(180 - twa) == 0) ratio = 0 ;
+        else ratio = 1 - (180 - bome_reel)/(180 - abs(180 - twa)) ;
     }
 
     if (ratio < 0) { qDebug() << "ratio :" << ratio ; ratio = -1 * ratio ; }
     if (ratio > 1) { qDebug() << "ratio :" << ratio ; ratio = ratio - floor(ratio) ; }
+    qDebug() << ratio ;
 
     return ratio ;
 }
