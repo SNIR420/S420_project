@@ -82,14 +82,15 @@ double Simulateur::getRatio(){
 
     double ratio = 0 ;
 //ratio = (twa + 180.0 - bome_reel)/twa ;
+    if (bome_reel < 0) bome_reel = 180 - bome_reel ;
 
     if (twa >= 90 || twa <= 270){
         if (abs(twa - bome_reel) >= 90){
             ratio = 2 - (abs(twa - bome_reel))/90 ;
         }
-        else{
+        /*else{
             ratio = 1 / ((abs(twa - bome_reel))/90) ;
-        }
+        }*/
     }
     else{
         ratio = 1 - (180 - bome_reel)/(180 - abs(180 - twa)) ;
