@@ -5,7 +5,7 @@ Simulateur::Simulateur(QObject *parent, QString cheminPolaire)
 {
     m_x = 0 ;
     m_y = 0 ;
-    m_angleAzimut = 0 ;
+    m_angleAzimut = 0.785398163 ;
     m_polaire = Polaire(cheminPolaire) ;
     m_vagueVitesse = vagueVitesse ;
     m_vaguePeriode = vaguePeriode ;
@@ -101,7 +101,6 @@ int Simulateur::getTwa(){
 
 double Simulateur::getRatio(){
     if (getTwa() < 90 || getTwa() > 270){
-    qDebug() << "if" ;
         return 1-(180.0-m_bome)/(180.0-abs(180.0-getTwa())) ;
     }
     else{
@@ -110,25 +109,39 @@ double Simulateur::getRatio(){
 }
 
 void Simulateur::calcul(){
+    setSpeed();
     m_x += sin(getAngleAzimut()*PI/180.0) * m_speed * 1852 / 3600 * 0.1 ; // 1852 et 3600 pour conversion noeuds/mètres
     m_y += cos(getAngleAzimut()*PI/180.0) * m_speed * 1852 / 3600 * 0.1 ; // 0.1s soit l'intervalle du timer
     setRoulis();
     setTangage();
     setVitesseAzimut(); // inutile pour l'instant
-    setSpeed();
     qDebug() << "";
-    qDebug() << "roulis    :" << round(m_roulis*180.0/PI*10.0)/10.0 << "°" ;
+    /*qDebug() << "roulis    :" << round(m_roulis*180.0/PI*10.0)/10.0 << "°" ;
     qDebug() << "tangage   :" << round(m_tangage*180.0/PI*10.0)/10.0 << "°" ;
     qDebug() << "vitesse   :" << m_speed << "nd" ;
     qDebug() << "temps     :" << round(m_t0.msecsTo(m_t1)/100.0)/10.0 << "s  \t" << m_t0.msecsTo(m_t1) << "ms" ;
     qDebug() << "x =" << m_x << "  y =" << m_y ;
-    qDebug() << "angle azimut :" << m_angleAzimut << "°" ;
+    qDebug() << "angle azimut :" << m_angleAzimut << "°" ;*/
+    //qDebug() << "vagueAmplitude :" << getVagueAmplitude() ;
     //qDebug() << "ratio :" << getRatio() ;
     //qDebug() << "beaufort :" << m_beaufort ;
     //qDebug() << "vagueAmplitude :" << getVagueAmplitude() ;
     //qDebug() << "vagueVitesse :" << getVagueVitesse() << "/ vaguePeriode :" << getVaguePeriode() ;
     qDebug() << "twa :" << getTwa()  << "°" ;
-    qDebug() << "angle bome :" << m_bome ;
+    qDebug() << "tws :" << getTws()  << "°" ;
+        qDebug() << "ratio :" << getRatio() ;
+        qDebug() << "gite max :" << m_polaire.getMaxGite(getTwa(), getTws()) ;
+    qDebug() << "gite ratio :" << m_polaire.getGiteRatio(getTwa(), getTws(), getRatio()) ;
+    //qDebug() << "angle bome :" << m_bome << "°" ;
+    //qDebug() << round(m_t0.msecsTo(m_t1)/100.0)/10.0 << "\t" << round(m_tangage*180.0/PI*10.0)/10.0 << "°" << "\t" << m_t0.msecsTo(m_t1) ;
+}
+
+void Simulateur::setAngleVentJeu(double twa){
+    m_angleVentJeu = twa ;
+}
+
+void Simulateur::setTws(double tws){
+    m_tws = tws ;
 }
 
 void Simulateur::setWave(int force){
@@ -219,14 +232,6 @@ void Simulateur::setWave(int force){
         m_vagueAmplitude = vagInf+((vagSup-vagInf)/(vitSup-vitInf)*(getTws()-vitInf))  ;
     }
     else m_vagueAmplitude = 0.1 ;
-}
-
-void Simulateur::setAngleVentJeu(double twa){
-    m_angleVentJeu = twa ;
-}
-
-void Simulateur::setTws(double tws){
-    m_tws = tws ;
 }
 
 void Simulateur::setBeaufort(){
