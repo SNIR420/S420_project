@@ -53,11 +53,9 @@ double Simulateur::getVagueVitesse(){
 void Simulateur::setSpeed(){ // utilise la classe polaire pour obtenir la vitesse
     if(m_modbusServer->getSwa() < 180){
         m_speed = polaire->getMaxSpeed(getTwa(), getTws()) ;
-        getRatio();
     }
     else{
         m_speed = polaire->getMaxSpeed(360-getTwa(), getTws()) ;
-        getRatio();
     }
 }
 
