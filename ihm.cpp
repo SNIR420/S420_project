@@ -254,20 +254,28 @@ void IHM::setUiBome(int bome){
 }
 
 void IHM::setUiRealBome(){
-    float angleReel = 360-m_modbusserver->getBom();
+    float angleReel = 360-ui->angleSpinBox->value();
     float angle;
     //270 360 - 0 90 -- 90 à 270 pas de mouvement
     if(angleReel >= 270 && angleReel <= 360){
         angle = (360-m_modbusserver->getBom())+m_modbusserver->getBomError();
+        ui->bomeSpinBox->setValue(360-angle);
+        //qDebug() << "1";
     }
     else if(angleReel >= 0 && angleReel <= 90){
         angle = (360-m_modbusserver->getBom())+m_modbusserver->getBomError();
+        ui->bomeSpinBox->setValue(-angle);
+        //qDebug() << "2";
     }
     else if(angleReel > 90 && angleReel <= 180){
         angle = 90;
+        ui->bomeSpinBox->setValue(-90);
+        //qDebug() << "3";
     }
     else{
         angle = 270;
+        ui->bomeSpinBox->setValue(90);
+        //qDebug() << "4";
     }
     realBomeImageItem->setRotation(angle);
     realBomeImageItem->setTransformationMode(Qt::SmoothTransformation);
@@ -339,7 +347,6 @@ void IHM::sendSwa(){
     else{
         setUiBome(270);
     }
-    //qDebug() << 360-bomAngle;
 }
 
 void IHM::setUiTws(int tws){
@@ -377,10 +384,15 @@ void IHM::setVitesseVague(double vitesse){
 
 void IHM::updateBoatRowPitch()
 {
-    ui->bomeSpinBox->setValue(-(m_modbusserver->getBom()-m_modbusserver->getBomError()));
     sceneRow->update();
     scenePitch->update();
-    m_modbusserver->setBom(ui->angleSpinBox->value());
+    //m_modbusserver->setBom(ui->angleSpinBox->value());
+    if(ui->angleSpinBox->value() >= 0 && ui->angleSpinBox->value() <=90){
+        m_modbusserver->setBom(ui->angleSpinBox->value());
+    }
+    else if(ui->angleSpinBox->value() >= 270 && ui->angleSpinBox->value() <=359){
+        m_modbusserver->setBom(ui->angleSpinBox->value()-360);
+    }
     setUiRealBome();
     sendSwa();
     if(m_modbusserver->getVitazimut() > 0.1) m_modbusserver->setVitazimut(0.01);
@@ -419,18 +431,12 @@ void IHM::updateBoatRowPitch()
     else{
         pitchImageItem->setRotation(m_modbusserver->getRoulis());
         rowImageItem->setRotation(m_modbusserver->getTangage());
-        if(m_modbusserver->getSafran() >= 0){
-            float angle = (m_modbusserver->getSafran()*45)/2;
-            safranImageItem->setRotation(angle);
-            safranImageItem->setTransformationMode(Qt::SmoothTransformation);
-            m_modbusserver->setVitazimut(0.01);
-        }
-        else if(m_modbusserver->getSafran() < 0){
-            float angle = (m_modbusserver->getSafran()*45)/2;
-            safranImageItem->setRotation(angle);
-            safranImageItem->setTransformationMode(Qt::SmoothTransformation);
-            m_modbusserver->setVitazimut(-1*0.01);
-        }
+
+        float angle = (m_modbusserver->getSafran()*45)/2;
+        safranImageItem->setRotation(angle);
+        safranImageItem->setTransformationMode(Qt::SmoothTransformation);
+        m_modbusserver->setVitazimut(0.05*m_modbusserver->getSafran());
+
         QList<QGraphicsItem *> items = scene->items();
         for (QGraphicsItem *item : items) {
             if (QGraphicsTextItem *ti = dynamic_cast<QGraphicsTextItem *>(item)) {

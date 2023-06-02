@@ -51,11 +51,13 @@ double Simulateur::getVagueVitesse(){
 }
 
 void Simulateur::setSpeed(){ // utilise la classe polaire pour obtenir la vitesse
-    if(m_modbusServer->getSwa() <= 180){
+    if(m_modbusServer->getSwa() < 180){
         m_speed = polaire->getMaxSpeed(getTwa(), getTws()) ;
+        getRatio();
     }
     else{
-        m_speed = polaire->getMaxSpeed(180-(getTwa()%180), getTws()) ;
+        m_speed = polaire->getMaxSpeed(360-getTwa(), getTws()) ;
+        getRatio();
     }
 }
 
@@ -74,6 +76,37 @@ double Simulateur::getTws(){
 
 int Simulateur::getTwa(){
     return m_modbusServer->getSwa();
+}
+
+double Simulateur::getRatio(){
+    double bome_reel = m_modbusServer->getBom() - m_modbusServer->getBomError() ;
+    qDebug() << "av:" << bome_reel ;
+    double twa = m_modbusServer->getSwa() ;
+
+    double ratio = 0 ;
+    //ratio = (twa + 180.0 - bome_reel)/twa ;
+    if (bome_reel < 0) bome_reel = 180 - bome_reel ;
+
+    qDebug() << "ar:" << bome_reel ;
+
+    if (twa >= 90 && twa <= 270){
+        if (abs(twa - bome_reel) >= 90){
+            ratio = 2 - (abs(twa - bome_reel))/90 ;
+        }
+        /*else{
+            ratio = 1 / ((abs(twa - bome_reel))/90) ;
+        }*/
+    }
+    else{
+        if (180 - abs(180 - twa) == 0) ratio = 0 ;
+        else ratio = 1 - (180 - bome_reel)/(180 - abs(180 - twa)) ;
+    }
+
+    if (ratio < 0) {/* qDebug() << "ratio :" << ratio ;*/ ratio = -1 * ratio ; }
+    if (ratio > 1) {/* qDebug() << "ratio :" << ratio ;*/ ratio = ratio - floor(ratio) ; }
+    qDebug() << ratio ;
+
+    return ratio ;
 }
 
 void Simulateur::calcul(){

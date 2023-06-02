@@ -166,7 +166,7 @@ QSpinBox:down-button {
           <number>0</number>
          </property>
          <property name="maximum">
-          <number>360</number>
+          <number>359</number>
          </property>
          <property name="displayIntegerBase">
           <number>10</number>
@@ -839,10 +839,10 @@ QSpinBox:down-button {
           <string>°</string>
          </property>
          <property name="minimum">
-          <number>-30</number>
+          <number>-90</number>
          </property>
          <property name="maximum">
-          <number>30</number>
+          <number>90</number>
          </property>
          <property name="displayIntegerBase">
           <number>10</number>

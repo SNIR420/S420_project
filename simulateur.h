@@ -56,6 +56,8 @@ public:
     void setVitesseAzimut() ;
 
     void setSpeed() ;
+
+    double getRatio();
 private slots:
     void calcul() ;
 };
