@@ -277,22 +277,22 @@ void IHM::setUiRealBome(){
     if(angleReel >= 270-m_modbusserver->getBomError() && angleReel <= 360){
         angle = (360-m_modbusserver->getSwa())+m_modbusserver->getBomError();
         ui->bomeSpinBox->setValue(360-angle);
-        qDebug() << "1";
+        //qDebug() << "1";
     }
     else if(angleReel >= 0 && angleReel <= 90+m_modbusserver->getBomError()){
         angle = (360-m_modbusserver->getSwa())-m_modbusserver->getBomError();
-        ui->bomeSpinBox->setValue(360-angle);
-        qDebug() << "2";
+        ui->bomeSpinBox->setValue(-angle);
+        //qDebug() << "2";
     }
     else if(angleReel > 90+m_modbusserver->getBomError() && angleReel <= 180){
         angle = 90;
         ui->bomeSpinBox->setValue(-90);
-        qDebug() << "3";
+        //qDebug() << "3";
     }
     else if(angleReel > 180 && angleReel < 270-m_modbusserver->getBomError()){
         angle = 270;
         ui->bomeSpinBox->setValue(90);
-        qDebug() << "4";
+        //qDebug() << "4";
     }
     realBomeImageItem->setRotation(angle);
     realBomeImageItem->setTransformationMode(Qt::SmoothTransformation);
@@ -414,10 +414,10 @@ void IHM::updateBoatRowPitch()
     sceneRow->update();
     scenePitch->update();
     //m_modbusserver->setBom(ui->angleSpinBox->value());
-    if(ui->angleSpinBox->value() >= 0 && ui->angleSpinBox->value() <=90){
+    if(ui->angleSpinBox->value() >= 0 && ui->angleSpinBox->value() <=80){
         m_modbusserver->setBom(ui->angleSpinBox->value());
     }
-    else if(ui->angleSpinBox->value() >= 270 && ui->angleSpinBox->value() <=359){
+    else if(ui->angleSpinBox->value() >= 280 && ui->angleSpinBox->value() <=359){
         m_modbusserver->setBom(ui->angleSpinBox->value()-360);
     }
     setUiRealBome();
@@ -446,14 +446,14 @@ void IHM::updateBoatRowPitch()
             scene->addItem(textItem);
         }
 
-        QString text = "=[VENT]=\n\ntws: %1\nswa: %2\n\n=[BATEAU]=\n\nroulis: %3\ntangage: %4\nvit.azimut: %5\nangle.azimut: %6\nerror bome: %7\n\n=[VAGUE]=\n\nhauteur: %8\nvitesse: %9\ninter-vague: %9\n";
+        QString text = "=[VENT]=\n\ntws: %1\nswa: %2\n\n=[BATEAU]=\n\nroulis: %3\ntangage: %4\nvit.azimut: %5\nangle.azimut: %6\nerror bome: %7\n\n=[VAGUE]=\n\nhauteur: %8\nvitesse: %9\ninter-vague: %10\n";
         textItem->setFont(QFont("Arial", 9));
         textItem->setPlainText(text.arg(QString::number(m_modbusserver->getTws()), QString::number(m_modbusserver->getSwa()), QString::number(m_modbusserver->getRoulis()), QString::number(m_modbusserver->getTangage()), QString::number(m_modbusserver->getVitazimut()), QString::number(m_modbusserver->getAngleAzimut()), QString::number(m_modbusserver->getBomError()), QString::number(m_modbusserver->getHautvague()), QString::number(m_modbusserver->getVitvague()), QString::number(m_modbusserver->getIntervague())));
         m_modbusserver->setTangage(ui->vitesseSpinBox->value());
         m_modbusserver->setRoulis(ui->periodeSpinBox->value());
         m_modbusserver->setVitazimut(0);
-        pitchImageItem->setRotation(ui->vitesseSpinBox->value());
-        rowImageItem->setRotation(ui->periodeSpinBox->value());
+        pitchImageItem->setRotation(ui->periodeSpinBox->value());
+        rowImageItem->setRotation(ui->vitesseSpinBox->value());
     }
     else{
         pitchImageItem->setRotation(m_modbusserver->getRoulis());

@@ -46,7 +46,7 @@ public slots:
 
 private:
     float GVitAzimut;
-    float GAngleAzimut;
+    float GAngleAzimut = 0;
     float GTangage;
     float GPosazimut;
     float GHautvague;
