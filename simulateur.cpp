@@ -68,8 +68,7 @@ double Simulateur::getInterVague(){
 }
 
 double Simulateur::getTws(){
-    if(m_modbusServer->getTws() >= 70)    return 69.9;
-    else return m_modbusServer->getTws() ;
+    return m_modbusServer->getTws() ;
 }
 
 int Simulateur::getTwa(){

@@ -58,7 +58,7 @@
          <property name="font">
           <font>
            <family>Poppins</family>
-           <pointsize>9</pointsize>
+           <pointsize>16</pointsize>
            <bold>true</bold>
            <stylestrategy>PreferDefault</stylestrategy>
            <kerning>true</kerning>
@@ -106,7 +106,7 @@
          <property name="font">
           <font>
            <family>Roboto Mono</family>
-           <pointsize>12</pointsize>
+           <pointsize>15</pointsize>
            <bold>true</bold>
            <underline>false</underline>
            <stylestrategy>PreferAntialias</stylestrategy>
@@ -200,7 +200,7 @@ QSpinBox:down-button {
          <property name="font">
           <font>
            <family>Poppins</family>
-           <pointsize>9</pointsize>
+           <pointsize>16</pointsize>
            <bold>true</bold>
            <stylestrategy>PreferAntialias</stylestrategy>
           </font>
@@ -244,7 +244,7 @@ QSpinBox:down-button {
          <property name="font">
           <font>
            <family>Roboto Mono</family>
-           <pointsize>12</pointsize>
+           <pointsize>15</pointsize>
            <bold>true</bold>
            <stylestrategy>PreferAntialias</stylestrategy>
           </font>
@@ -318,7 +318,7 @@ QSpinBox:down-button {
          <property name="font">
           <font>
            <family>Poppins</family>
-           <pointsize>9</pointsize>
+           <pointsize>16</pointsize>
            <bold>true</bold>
            <stylestrategy>PreferAntialias</stylestrategy>
           </font>
@@ -362,7 +362,7 @@ QSpinBox:down-button {
          <property name="font">
           <font>
            <family>Roboto Mono</family>
-           <pointsize>12</pointsize>
+           <pointsize>15</pointsize>
            <bold>true</bold>
            <stylestrategy>PreferAntialias</stylestrategy>
           </font>
@@ -445,7 +445,7 @@ QDoubleSpinBox:down-button {
          <property name="font">
           <font>
            <family>Poppins</family>
-           <pointsize>9</pointsize>
+           <pointsize>16</pointsize>
            <bold>true</bold>
            <stylestrategy>PreferAntialias</stylestrategy>
           </font>
@@ -489,7 +489,7 @@ QDoubleSpinBox:down-button {
          <property name="font">
           <font>
            <family>Roboto Mono</family>
-           <pointsize>12</pointsize>
+           <pointsize>15</pointsize>
            <bold>true</bold>
            <stylestrategy>PreferAntialias</stylestrategy>
           </font>
@@ -590,7 +590,7 @@ QDoubleSpinBox:down-button {
          <property name="font">
           <font>
            <family>Poppins</family>
-           <pointsize>9</pointsize>
+           <pointsize>16</pointsize>
            <bold>true</bold>
            <stylestrategy>PreferAntialias</stylestrategy>
           </font>
@@ -634,7 +634,7 @@ QDoubleSpinBox:down-button {
          <property name="font">
           <font>
            <family>Roboto Mono</family>
-           <pointsize>12</pointsize>
+           <pointsize>15</pointsize>
            <bold>true</bold>
            <stylestrategy>PreferAntialias</stylestrategy>
           </font>
@@ -735,7 +735,7 @@ QDoubleSpinBox:down-button {
          <property name="font">
           <font>
            <family>Poppins</family>
-           <pointsize>9</pointsize>
+           <pointsize>16</pointsize>
            <bold>true</bold>
            <stylestrategy>PreferAntialias</stylestrategy>
           </font>
@@ -746,7 +746,7 @@ QDoubleSpinBox:down-button {
 }</string>
          </property>
          <property name="text">
-          <string>Angle Bome (Rouge)</string>
+          <string>Angle Bome</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -782,7 +782,7 @@ QDoubleSpinBox:down-button {
          <property name="font">
           <font>
            <family>Roboto Mono</family>
-           <pointsize>12</pointsize>
+           <pointsize>15</pointsize>
            <bold>true</bold>
            <underline>false</underline>
            <stylestrategy>PreferAntialias</stylestrategy>

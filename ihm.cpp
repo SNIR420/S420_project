@@ -10,7 +10,7 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     centerImage = QPixmap(":/images/Vue_top_boat.png");
     centerImageItem = new QGraphicsPixmapItem(centerImage);
     centerImageItem->setPos((ui->graphicsViewYaw->width() - centerImage.width()) / 2, (ui->graphicsViewYaw->height() - centerImage.height()) / 2);
-    centerImageItem->setTransformOriginPoint(centerImage.width() / 2, centerImage.height() / 2); // Définir l'origine au centre de l'image
+    //centerImageItem->setTransformOriginPoint(centerImage.width() / 2, centerImage.height() / 2); // Définir l'origine au centre de l'image
     centerImageItem->setData(Qt::UserRole, "centerImage");
     centerImageItem->setTransformationMode(Qt::SmoothTransformation);
     centerImageItem->setZValue(1);
@@ -36,7 +36,7 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
 
     safranImage = QPixmap(":/images/Safran.png");
     safranImageItem = new QGraphicsPixmapItem(safranImage);
-    safranImageItem->setPos((ui->graphicsViewYaw->width() - safranImage.width()) / 2, (ui->graphicsViewYaw->height() - safranImage.height()) / 2);
+    //safranImageItem->setPos((ui->graphicsViewYaw->width() - safranImage.width()) / 2, (ui->graphicsViewYaw->height() - safranImage.height()) / 2);
     safranImageItem->setTransformOriginPoint(safranImage.width()/2, safranImage.height()/2); // Définir l'origine au centre de l'image
     safranImageItem->setData(Qt::UserRole, "safranImage");
     safranImageItem->setTransformationMode(Qt::SmoothTransformation);
@@ -76,8 +76,8 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
 
     QFontDatabase::addApplicationFont(":/font/RobotoMono.ttf");
     QFontDatabase::addApplicationFont(":/font/Poppins.ttf");
-    QFont roboto("Roboto Mono", 12, QFont::Bold);
-    QFont poppins("Poppins", 9, QFont::Bold);
+    QFont roboto("Roboto Mono", 15, QFont::Bold);
+    QFont poppins("Poppins", 12, QFont::Bold);
     roboto.setStyleStrategy(QFont::PreferAntialias);
     poppins.setStyleStrategy(QFont::PreferAntialias);
     ui->angleSpinBox->setFont(roboto);
@@ -195,8 +195,17 @@ void IHM::debugMode(){
         ui->vitesseSpinBox->setMaximum(40.0);
         ui->vitesseSpinBox->setSuffix("°");
 
+        ui->hauteurText->setText("Angle Azi. (debug)");
+        ui->hauteurSpinBox->setMinimum(0);
+        ui->hauteurSpinBox->setSingleStep(1);
+        ui->hauteurSpinBox->setMaximum(360);
+        ui->hauteurSpinBox->setValue(m_modbusserver->getAngleAzimut());
+        ui->hauteurSpinBox->setSuffix("°");
+        ui->hauteurSpinBox->setWrapping(true);
+
         m_modbusserver->setRoulis(0);
         m_modbusserver->setTangage(0);
+        textSpeedItem->setPlainText(QString::number(0,'f', 2));
     }
     else{
         isEnabled = false;
@@ -212,6 +221,14 @@ void IHM::debugMode(){
         ui->vitesseSpinBox->setValue(10.0);
         ui->vitesseSpinBox->setMaximum(20.0);
         ui->vitesseSpinBox->setSuffix("s");
+
+        ui->hauteurText->setText("Hauteur Vague");
+        ui->hauteurSpinBox->setMinimum(0);
+        ui->hauteurSpinBox->setValue(0.3);
+        ui->hauteurSpinBox->setSingleStep(0.1);
+        ui->hauteurSpinBox->setMaximum(20);
+        ui->hauteurSpinBox->setSuffix("m");
+        ui->hauteurSpinBox->setWrapping(false);
     }
 }
 
@@ -255,27 +272,27 @@ void IHM::setUiBome(int bome){
 
 void IHM::setUiRealBome(){
     float angleReel = 360-ui->angleSpinBox->value();
-    float angle;
+    float angle = 0;
     //270 360 - 0 90 -- 90 à 270 pas de mouvement
-    if(angleReel >= 270 && angleReel <= 360){
-        angle = (360-m_modbusserver->getBom())+m_modbusserver->getBomError();
+    if(angleReel >= 270-m_modbusserver->getBomError() && angleReel <= 360){
+        angle = (360-m_modbusserver->getSwa())+m_modbusserver->getBomError();
         ui->bomeSpinBox->setValue(360-angle);
-        //qDebug() << "1";
+        qDebug() << "1";
     }
-    else if(angleReel >= 0 && angleReel <= 90){
-        angle = (360-m_modbusserver->getBom())+m_modbusserver->getBomError();
-        ui->bomeSpinBox->setValue(-angle);
-        //qDebug() << "2";
+    else if(angleReel >= 0 && angleReel <= 90+m_modbusserver->getBomError()){
+        angle = (360-m_modbusserver->getSwa())-m_modbusserver->getBomError();
+        ui->bomeSpinBox->setValue(360-angle);
+        qDebug() << "2";
     }
-    else if(angleReel > 90 && angleReel <= 180){
+    else if(angleReel > 90+m_modbusserver->getBomError() && angleReel <= 180){
         angle = 90;
         ui->bomeSpinBox->setValue(-90);
-        //qDebug() << "3";
+        qDebug() << "3";
     }
-    else{
+    else if(angleReel > 180 && angleReel < 270-m_modbusserver->getBomError()){
         angle = 270;
         ui->bomeSpinBox->setValue(90);
-        //qDebug() << "4";
+        qDebug() << "4";
     }
     realBomeImageItem->setRotation(angle);
     realBomeImageItem->setTransformationMode(Qt::SmoothTransformation);
@@ -368,8 +385,18 @@ void IHM::setUiTws(int tws){
     ui->progressBar->setValue(tws);
 }
 
+void IHM::setAngleBoat(float angle) {
+
+    m_modbusserver->setAngleAzimut(angle);
+}
+
 void IHM::setHauteurVague(float hauteur){
-    m_modbusserver->setHautvague(hauteur);
+    if(isEnabled == true){
+        setAngleBoat(hauteur);
+    }
+    else{
+        m_modbusserver->setHautvague(hauteur);
+    }
 }
 
 void IHM::setVitesseVague(double vitesse){
@@ -419,9 +446,9 @@ void IHM::updateBoatRowPitch()
             scene->addItem(textItem);
         }
 
-        QString text = "=[VENT]=\n\ntws: %1\ntwa: %2\nswa: %3\n\n=[BATEAU]=\n\nroulis: %4\ntangage: %5\nvit.azimut: %6\npos.azimut: %7\n\n=[VAGUE]=\n\nhauteur: %8\nvitesse: %9\ninter-vague: %10\n";
+        QString text = "=[VENT]=\n\ntws: %1\nswa: %2\n\n=[BATEAU]=\n\nroulis: %3\ntangage: %4\nvit.azimut: %5\nangle.azimut: %6\nerror bome: %7\n\n=[VAGUE]=\n\nhauteur: %8\nvitesse: %9\ninter-vague: %9\n";
         textItem->setFont(QFont("Arial", 9));
-        textItem->setPlainText(text.arg(QString::number(m_modbusserver->getTws()), QString::number(m_modbusserver->getTwa()), QString::number(m_modbusserver->getSwa()), QString::number(m_modbusserver->getRoulis()), QString::number(m_modbusserver->getTangage()), QString::number(m_modbusserver->getVitazimut()), QString::number(m_modbusserver->getPosazimut()), QString::number(m_modbusserver->getHautvague()), QString::number(m_modbusserver->getVitvague()), QString::number(m_modbusserver->getIntervague())));
+        textItem->setPlainText(text.arg(QString::number(m_modbusserver->getTws()), QString::number(m_modbusserver->getSwa()), QString::number(m_modbusserver->getRoulis()), QString::number(m_modbusserver->getTangage()), QString::number(m_modbusserver->getVitazimut()), QString::number(m_modbusserver->getAngleAzimut()), QString::number(m_modbusserver->getBomError()), QString::number(m_modbusserver->getHautvague()), QString::number(m_modbusserver->getVitvague()), QString::number(m_modbusserver->getIntervague())));
         m_modbusserver->setTangage(ui->vitesseSpinBox->value());
         m_modbusserver->setRoulis(ui->periodeSpinBox->value());
         m_modbusserver->setVitazimut(0);
@@ -444,9 +471,8 @@ void IHM::updateBoatRowPitch()
             }
         }
         QString textSpeed = "%1 kn";
-        textSpeedItem->setFont(QFont("Arial", 18));
-        textSpeedItem->setPlainText(textSpeed.arg(QString::number(m_modbusserver->getSpeed())));
-
+        textSpeedItem->setFont(QFont("Poppins", 18));
+        textSpeedItem->setPlainText(textSpeed.arg(QString::number(m_modbusserver->getSpeed(),'f', 2)));
     }
 }
 
@@ -454,7 +480,7 @@ void IHM::resizeEvent(QResizeEvent *event){
     qreal scaleFactorX = static_cast<qreal>(event->size().width()) / static_cast<qreal>(centerImage.width());
     qreal scaleFactorY = static_cast<qreal>(event->size().height()) / static_cast<qreal>(centerImage.height());
     qreal scaleFactor = qMin(scaleFactorX, scaleFactorY);
-
+    factor = scaleFactor;
     QList<QGraphicsItem*> items = ui->graphicsViewYaw->scene()->items();
     for (QGraphicsItem *item : items) {
         if (item->type() == QGraphicsPixmapItem::Type && item->data(Qt::UserRole) == "centerImage") {
@@ -462,7 +488,7 @@ void IHM::resizeEvent(QResizeEvent *event){
         }
     }
 
-    QPixmap scaledCenterImage = centerImage.scaled(QSize(centerImage.height() * scaleFactor, centerImage.width() * scaleFactor), Qt::KeepAspectRatio, Qt::SmoothTransformation);    // Redimensionnement de l'item pixmap
+    scaledCenterImage = QPixmap(centerImage.scaled(QSize(centerImage.height() * scaleFactor, centerImage.width() * scaleFactor), Qt::KeepAspectRatio, Qt::SmoothTransformation));    // Redimensionnement de l'item pixmap
     centerImageItem->setPixmap(scaledCenterImage);
     centerImageItem->setPos((ui->graphicsViewYaw->scene()->width() - scaledCenterImage.width())/2, (ui->graphicsViewYaw->scene()->height() - scaledCenterImage.height())/2);
     centerImageItem->setData(Qt::UserRole, "centerImage");
@@ -479,7 +505,7 @@ void IHM::resizeEvent(QResizeEvent *event){
     realBomeImageItem->setData(Qt::UserRole, "realBomeImage");
     realBomeImageItem->setTransformOriginPoint(scaledRealBomeImage.width()/2, 55*scaleFactor);
 
-    QPixmap scaledSafranImage = safranImage.scaled(QSize(safranImage.height() * scaleFactor, safranImage.width() * scaleFactor), Qt::KeepAspectRatio, Qt::SmoothTransformation);    // Redimensionnement de l'item pixmap
+    scaledSafranImage = QPixmap(safranImage.scaled(QSize(safranImage.height() * scaleFactor, safranImage.width() * scaleFactor), Qt::KeepAspectRatio, Qt::SmoothTransformation));    // Redimensionnement de l'item pixmap
     safranImageItem->setPixmap(scaledSafranImage);
     safranImageItem->setPos((ui->graphicsViewYaw->scene()->width() - scaledSafranImage.width())/2, (ui->graphicsViewYaw->scene()->height() + ((-5*scaleFactor)+scaledCenterImage.height()))/2);
     safranImageItem->setData(Qt::UserRole, "safranImage");

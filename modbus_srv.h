@@ -25,6 +25,7 @@ public:
     float getSafran();
     float getSpeed();
     float getBomError();
+    float getAngleAzimut();
     void setHautvague( float SHautvague);
     void setVitvague(float SVitvague);
     void setIntervague(float SIntervague);
@@ -36,6 +37,7 @@ public:
     void setSwa(int SSwa);
     void setTwa(int STwa);
     void setBom(int SBom);
+    void setAngleAzimut(float SAngleAzimut);
     void setSpeed(float SSpeed);
     int getClientConnected();
 
@@ -44,6 +46,7 @@ public slots:
 
 private:
     float GVitAzimut;
+    float GAngleAzimut;
     float GTangage;
     float GPosazimut;
     float GHautvague;

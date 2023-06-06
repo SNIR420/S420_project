@@ -166,6 +166,16 @@ float Modbus_SRV::getSafran()
     return m_map->value(m_table, "cons-gouv").toFloat();
 }
 
+float Modbus_SRV::getAngleAzimut()
+{
+    return GAngleAzimut;
+}
+
+void Modbus_SRV::setAngleAzimut(float angle)
+{
+    GAngleAzimut=angle;
+}
+
 void Modbus_SRV::info(const QString& src, const QString& msg )
 {
     qDebug() << qPrintable( src ) << ": " << qPrintable( msg )  ;

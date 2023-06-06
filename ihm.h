@@ -42,6 +42,7 @@ private slots:
     void setUiBome(int bome);
     void setUiRealBome();
     void setUiTws(int tws);
+    void setAngleBoat(float angle);
 
     void updateBoatRowPitch();
 
@@ -65,6 +66,9 @@ private:
     QPixmap pitchImage;
     QPixmap windImage;
     QPixmap safranImage;
+    QPixmap scaledCenterImage;
+    QPixmap scaledSafranImage;
+    qreal factor;
     QGraphicsTextItem *textItem;
     QGraphicsTextItem *textSpeedItem;
     bool isEnabled = false;
