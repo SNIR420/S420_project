@@ -46,7 +46,7 @@ public slots:
 
 private:
     float GVitAzimut;
-    float GAngleAzimut = 0;
+    float GAngleAzimut;
     float GTangage;
     float GPosazimut;
     float GHautvague;
@@ -54,6 +54,7 @@ private:
     float GIntervague;
     float GTws;
     float GSpeed;
+    float GInterVague;
     int GSwa;
     int GTwa;
     int GBom;

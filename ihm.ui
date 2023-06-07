@@ -556,7 +556,10 @@ QDoubleSpinBox:down-button {
           <double>20.000000000000000</double>
          </property>
          <property name="singleStep">
-          <double>1.000000000000000</double>
+          <double>0.100000000000000</double>
+         </property>
+         <property name="stepType">
+          <enum>QAbstractSpinBox::DefaultStepType</enum>
          </property>
          <property name="value">
           <double>2.000000000000000</double>
@@ -701,7 +704,7 @@ QDoubleSpinBox:down-button {
           <double>1.000000000000000</double>
          </property>
          <property name="value">
-          <double>10.000000000000000</double>
+          <double>20.000000000000000</double>
          </property>
         </widget>
        </item>

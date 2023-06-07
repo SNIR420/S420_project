@@ -59,8 +59,7 @@ float Modbus_SRV::getBomError()
 
 float Modbus_SRV::getIntervague()
 {
-    m_table = QamModbusMap::HoldingRegister ;
-    return m_map->value(m_table, "cons-intervague").toFloat();
+    return GInterVague;
 }
 
 float Modbus_SRV::getTws()
@@ -107,9 +106,7 @@ void Modbus_SRV::setHautvague( float SHautVague)
 
 void Modbus_SRV::setIntervague(float SInterVague)
 {
-    m_table = QamModbusMap::HoldingRegister ;
-    QString value = QString::number(SInterVague);
-    m_map->setValue(m_table, "cons-intervague", value);
+    GInterVague=SInterVague;
 }
 
 void Modbus_SRV::setPosazimut(float SPosAzimut)

@@ -172,11 +172,14 @@ IHM::IHM(QWidget *parent): QWidget(parent), ui(new Ui::IHM)
     connect(timer, &QTimer::timeout, this, &IHM::updateBoatRowPitch) ;    //connect le timeout() du timer à une fonction qui calcule roulis, tangage et vitesse azimut
     timer->start(20);
 
-    m_modbusserver->setHautvague(ui->hauteurSpinBox->value());
-    m_modbusserver->setTws(ui->forceSpinBox->value());
-    m_modbusserver->setSwa(ui->angleSpinBox->value());
-    setVitesseVague(ui->vitesseSpinBox->value());
-    setPeriodeVague(ui->periodeSpinBox->value());
+    m_modbusserver->setHautvague(0.3);
+    m_modbusserver->setTws(0);
+    m_modbusserver->setSwa(0);
+    m_modbusserver->setAngleAzimut(0.0);
+    m_modbusserver->setRoulis(0.0);
+    m_modbusserver->setTangage(0.0);
+    setVitesseVague(2.0);
+    setPeriodeVague(20.0);
 }
 
 void IHM::debugMode(){
@@ -186,12 +189,14 @@ void IHM::debugMode(){
         ui->periodeText->setText("Roulis (debug)");
         ui->periodeSpinBox->setMinimum(-40.0);
         ui->periodeSpinBox->setValue(0);
+        ui->periodeSpinBox->setSingleStep(1);
         ui->periodeSpinBox->setMaximum(40.0);
         ui->periodeSpinBox->setSuffix("°");
 
         ui->vitesseText->setText("Tangage (debug)");
         ui->vitesseSpinBox->setMinimum(-40.0);
         ui->vitesseSpinBox->setValue(0);
+        ui->vitesseSpinBox->setSingleStep(1);
         ui->vitesseSpinBox->setMaximum(40.0);
         ui->vitesseSpinBox->setSuffix("°");
 
@@ -210,17 +215,19 @@ void IHM::debugMode(){
     else{
         isEnabled = false;
         m_simulateur = new Simulateur(":/Class40.pol", m_modbusserver, this);
-        ui->periodeText->setText("Vitesse Vague");
-        ui->periodeSpinBox->setMinimum(-20.0);
-        ui->periodeSpinBox->setValue(2.0);
+        ui->periodeText->setText("Inter Vague");
+        ui->periodeSpinBox->setMinimum(10.0);
+        ui->periodeSpinBox->setValue(20.0);
+        ui->periodeSpinBox->setSingleStep(1);
         ui->periodeSpinBox->setMaximum(20.0);
-        ui->periodeSpinBox->setSuffix("m/s");
+        ui->periodeSpinBox->setSuffix("s");
 
-        ui->vitesseText->setText("Inter Vague");
-        ui->vitesseSpinBox->setMinimum(10.0);
-        ui->vitesseSpinBox->setValue(10.0);
+        ui->vitesseText->setText("Vitesse Vague");
+        ui->vitesseSpinBox->setMinimum(-10.0);
+        ui->vitesseSpinBox->setValue(2.0);
+        ui->vitesseSpinBox->setSingleStep(0.1);
         ui->vitesseSpinBox->setMaximum(20.0);
-        ui->vitesseSpinBox->setSuffix("s");
+        ui->vitesseSpinBox->setSuffix("m/s");
 
         ui->hauteurText->setText("Hauteur Vague");
         ui->hauteurSpinBox->setMinimum(0);
@@ -229,6 +236,12 @@ void IHM::debugMode(){
         ui->hauteurSpinBox->setMaximum(20);
         ui->hauteurSpinBox->setSuffix("m");
         ui->hauteurSpinBox->setWrapping(false);
+
+        m_modbusserver->setHautvague(ui->hauteurSpinBox->value());
+        m_modbusserver->setTws(ui->forceSpinBox->value());
+        m_modbusserver->setSwa(ui->angleSpinBox->value());
+        setVitesseVague(ui->vitesseSpinBox->value());
+        setPeriodeVague(ui->periodeSpinBox->value());
     }
 }
 
@@ -413,12 +426,17 @@ void IHM::updateBoatRowPitch()
 {
     sceneRow->update();
     scenePitch->update();
-    //m_modbusserver->setBom(ui->angleSpinBox->value());
     if(ui->angleSpinBox->value() >= 0 && ui->angleSpinBox->value() <=80){
         m_modbusserver->setBom(ui->angleSpinBox->value());
     }
     else if(ui->angleSpinBox->value() >= 280 && ui->angleSpinBox->value() <=359){
         m_modbusserver->setBom(ui->angleSpinBox->value()-360);
+    }
+    else if(ui->angleSpinBox->value() >= 81 && ui->angleSpinBox->value() <=180){
+        m_modbusserver->setBom(80);
+    }
+    else if(ui->angleSpinBox->value() >= 181 && ui->angleSpinBox->value() <=279){
+        m_modbusserver->setBom(-80);
     }
     setUiRealBome();
     sendSwa();
@@ -447,7 +465,7 @@ void IHM::updateBoatRowPitch()
         }
 
         QString text = "=[VENT]=\n\ntws: %1\nswa: %2\n\n=[BATEAU]=\n\nroulis: %3\ntangage: %4\nvit.azimut: %5\nangle.azimut: %6\nerror bome: %7\n\n=[VAGUE]=\n\nhauteur: %8\nvitesse: %9\ninter-vague: %10\n";
-        textItem->setFont(QFont("Arial", 9));
+        textItem->setFont(QFont("Arial", 14));
         textItem->setPlainText(text.arg(QString::number(m_modbusserver->getTws()), QString::number(m_modbusserver->getSwa()), QString::number(m_modbusserver->getRoulis()), QString::number(m_modbusserver->getTangage()), QString::number(m_modbusserver->getVitazimut()), QString::number(m_modbusserver->getAngleAzimut()), QString::number(m_modbusserver->getBomError()), QString::number(m_modbusserver->getHautvague()), QString::number(m_modbusserver->getVitvague()), QString::number(m_modbusserver->getIntervague())));
         m_modbusserver->setTangage(ui->vitesseSpinBox->value());
         m_modbusserver->setRoulis(ui->periodeSpinBox->value());
@@ -539,7 +557,7 @@ void IHM::resizeEvent(QResizeEvent *event){
     rowImageItem->setData(Qt::UserRole, "rowImage");
     rowImageItem->setTransformOriginPoint(scaledRowImage.width()/2, scaledRowImage.height()-(5*scaleFactor));
 
-    QString size = QString::number(29+(scaleFactor*1.15));
+    QString size = QString::number(32+(scaleFactor*1.15));
     QString border = QString::number(11+(scaleFactor*0.75));
     QString styleSheetSpin = "QSpinBox{"
                          "border-radius: %2px;"

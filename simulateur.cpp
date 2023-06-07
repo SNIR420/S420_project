@@ -5,7 +5,7 @@ Simulateur::Simulateur(QString pol_location, Modbus_SRV* modbusserver, QObject *
 {
     m_x = 0 ;
     m_y = 0 ;
-    m_angleAzimut = 0.785398163 ;
+    m_angleAzimut = (m_modbusServer->getAngleAzimut()*PI)/180 ;
 
     QTimer *timer = new QTimer(this) ;
     connect(timer, &QTimer::timeout, this, &Simulateur::calcul) ;    //connect le timeout() du timer à une fonction qui calcule roulis, tangage et vitesse azimut
@@ -17,21 +17,35 @@ Simulateur::Simulateur(QString pol_location, Modbus_SRV* modbusserver, QObject *
 void Simulateur::setRoulis(){
     m_t1 = m_t1.currentTime() ;
 
+    /*qDebug() << "get :" << getAngleAzimut() ;
+    qDebug() << "modbus :" << m_modbusServer->getAngleAzimut() ;*/
+
     double ze = getVagueAmplitude() * sin(2.0*PI/getVaguePeriode() * (m_t0.msecsTo(m_t1)/1000.0) - (2.0*PI / getInterVague()) * (cos(getAngleAzimut()) * m_speed * 1852.0 / 3600.0 * m_t0.msecsTo(m_t1)/1000.0 + envergure/2.0 * sin(getAngleAzimut()))) ;
     double zd = getVagueAmplitude() * sin(2.0*PI/getVaguePeriode() * (m_t0.msecsTo(m_t1)/1000.0) - (2.0*PI / getInterVague()) * (cos(getAngleAzimut()) * m_speed * 1852.0 / 3600.0 * m_t0.msecsTo(m_t1)/1000.0 - envergure/2.0 * sin(getAngleAzimut()))) ;
 
     if ((ze - zd)/envergure <= 1 && (ze - zd)/envergure >= -1)  m_roulis = asin((ze - zd)/envergure) ;
     else m_roulis = PI/2.0 * ((ze - zd)/envergure)/(abs((ze - zd)/envergure)) ;
+
+    qDebug()<< "Amplitude: " << getVagueAmplitude();
+    qDebug()<< "Periode: " << getVaguePeriode();
+    qDebug()<< "InterVague: " << getInterVague();
+    qDebug() << "Angle: " << getAngleAzimut();
+    //qDebug() << "roulis :" << m_roulis ;
 }
 
 void Simulateur::setTangage(){
     m_t1 = m_t1.currentTime() ;
+
+    /*qDebug() << "get :" << getAngleAzimut() ;
+    qDebug() << "modbus :" << m_modbusServer->getAngleAzimut() ;*/
 
     double zc = getVagueAmplitude() * sin(2.0*PI/getVaguePeriode() * (m_t0.msecsTo(m_t1)/1000.0) - (2.0*PI / getInterVague()) * (cos(getAngleAzimut()) * m_speed * 1852.0 / 3600.0 * m_t0.msecsTo(m_t1)/1000.0 + Longueur/2.0 * cos(getAngleAzimut()))) ;
     double za = getVagueAmplitude() * sin(2.0*PI/getVaguePeriode() * (m_t0.msecsTo(m_t1)/1000.0) - (2.0*PI / getInterVague()) * (cos(getAngleAzimut()) * m_speed * 1852.0 / 3600.0 * m_t0.msecsTo(m_t1)/1000.0 - Longueur/2.0 * cos(getAngleAzimut()))) ;
 
     if ((zc - za)/Longueur <= 1 && (zc - za)/Longueur >= -1)    m_tangage = asin((zc - za)/Longueur) ;
     else m_tangage = PI/2.0 * ((zc - za)/Longueur)/(abs((zc - za)/Longueur)) ;
+
+    //qDebug() << "tangage :" << m_tangage ;
 }
 
 void Simulateur::setVitesseAzimut(){
@@ -60,7 +74,8 @@ void Simulateur::setSpeed(){ // utilise la classe polaire pour obtenir la vitess
 }
 
 double Simulateur::getAngleAzimut(){
-    return m_angleAzimut ;
+    //return (m_modbusServer->getAngleAzimut()*PI)/180 ;
+    return  (m_modbusServer->getAngleAzimut()*PI)/180 ;
 }
 
 double Simulateur::getInterVague(){
@@ -77,14 +92,14 @@ int Simulateur::getTwa(){
 
 double Simulateur::getRatio(){
     double bome_reel = m_modbusServer->getBom() - m_modbusServer->getBomError() ;
-    qDebug() << "av:" << bome_reel ;
+    //qDebug() << "av:" << bome_reel ;
     double twa = m_modbusServer->getSwa() ;
 
     double ratio = 0 ;
     //ratio = (twa + 180.0 - bome_reel)/twa ;
     if (bome_reel < 0) bome_reel = 180 - bome_reel ;
 
-    qDebug() << "ar:" << bome_reel ;
+    //qDebug() << "ar:" << bome_reel ;
 
     if (twa >= 90 && twa <= 270){
         if (abs(twa - bome_reel) >= 90){
@@ -101,7 +116,8 @@ double Simulateur::getRatio(){
 
     if (ratio < 0) {/* qDebug() << "ratio :" << ratio ;*/ ratio = -1 * ratio ; }
     if (ratio > 1) {/* qDebug() << "ratio :" << ratio ;*/ ratio = ratio - floor(ratio) ; }
-    qDebug() << ratio ;
+    //qDebug() << ratio ;
+    //qDebug() << "twa :" << twa << "\t" << "bome :" << bome_reel << "\t" << "ratio :" << ratio ;
 
     return ratio ;
 }
@@ -116,6 +132,12 @@ void Simulateur::calcul(){
     setVitesseAzimut(); // inutile pour l'instant
     setSpeed();
     m_modbusServer->setSpeed(m_speed);
+
+    /*double bome_reel = m_modbusServer->getBom() - m_modbusServer->getBomError() ;
+    double twa = m_modbusServer->getSwa() ;
+    //qDebug() << "av:" << bome_reel ;
+    if (bome_reel < 0) bome_reel = 180 - bome_reel ;*/
+
 }
 
 Simulateur::~Simulateur(){}
