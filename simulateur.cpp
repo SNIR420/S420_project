@@ -25,12 +25,6 @@ void Simulateur::setRoulis(){
 
     if ((ze - zd)/envergure <= 1 && (ze - zd)/envergure >= -1)  m_roulis = asin((ze - zd)/envergure) ;
     else m_roulis = PI/2.0 * ((ze - zd)/envergure)/(abs((ze - zd)/envergure)) ;
-
-    qDebug()<< "Amplitude: " << getVagueAmplitude();
-    qDebug()<< "Periode: " << getVaguePeriode();
-    qDebug()<< "InterVague: " << getInterVague();
-    qDebug() << "Angle: " << getAngleAzimut();
-    //qDebug() << "roulis :" << m_roulis ;
 }
 
 void Simulateur::setTangage(){
